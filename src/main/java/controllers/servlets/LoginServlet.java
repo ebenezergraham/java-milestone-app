@@ -1,4 +1,4 @@
-package login;
+package controllers.servlets;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,7 +33,8 @@ public class LoginServlet extends HttpServlet {
             response.sendRedirect("/");
         }else{
             System.out.println("Invalid credentials");
-            request.setAttribute("errorMessage", "Invalid credentials");
+            String errorMessage = "Invalid credentials";
+            request.setAttribute("Invalid credentials", errorMessage);
             request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
         }
     }
