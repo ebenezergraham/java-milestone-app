@@ -1,4 +1,3 @@
-
 package domain.model;
 
 import com.google.gson.annotations.Expose;

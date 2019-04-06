@@ -1,7 +1,10 @@
 package controllers.services;
 
+import domain.model.User;
+
 public class LoginService {
-    public boolean isUserValid(String user, String password){
-        return user.equals("mikasa") && password.equals("snk");
+    public static boolean isUserValid(String username, String password){
+        User user = UserService.getInstance().getUser();
+        return username.equals(user.getUsername()) && password.equals(user.getPassword());
     }
 }
