@@ -49,4 +49,18 @@ public class Project {
         this.milestones = milestones;
     }
 
+    public void addMilestone(Milestone newM){
+        this.milestones.add(newM);
+    }
+
+    public boolean deleteMilestone(Milestone delM){
+        return this.milestones.remove(delM);
+    }
+
+    public Milestone getMilestoneById(String id){
+        for (Milestone m:this.milestones) {
+            if(m.getId().equals(id)){return m;}
+        }
+        return null;
+    }
 }
