@@ -1,4 +1,5 @@
 <%--<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>--%>
+<%@ page isELIgnored="false"%>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
@@ -30,13 +31,14 @@
 </nav>
 
 <div class="container">
-  <h1>Login</h1>
+  <h1>Dashboard</h1>
+  <a href="/project/?title=kool">link</a> <p> Project 1 </p>>
 <%--  <p><font color="red"> ${errorMessage} </font></p>--%>
-  <form action="/login" method="post">
-    Enter Your Name <input type="text" name="name"/>
-    Enter Your Password <input type="password" name="password"/>
-    <input type="submit" value="Login"/>
-  </form>
+<%--  <form action="/login" method="post">--%>
+<%--    Enter Your Name <input type="text" name="name"/>--%>
+<%--    Enter Your Password <input type="password" name="password"/>--%>
+<%--    <input type="submit" value="Login"/>--%>
+<%--  </form>--%>
 </div>
 
 <footer class="footer">

@@ -1,4 +1,5 @@
 <%--<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>--%>
+<%@ page isELIgnored="false"%>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
@@ -31,7 +32,7 @@
 
 <div class="container">
   <h1>Login</h1>
-<%--  <p><font color="red"> ${errorMessage} </font></p>--%>
+  <p><font color="red"> ${errorMessage} </font></p>
   <form action="/login" method="post">
     Enter Your Name <input type="text" name="name"/>
     Enter Your Password <input type="password" name="password"/>

@@ -19,8 +19,8 @@
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
 <!--    To be removed once a suitable solution has been found-->
+<!--    <tomcat.version>8.5.23</tomcat.version>-->
     <tomcat.version>8.5.23</tomcat.version>
-<!--    <tomcat.version>9.0.17</tomcat.version>-->
   </properties>
 
   <dependencies>
@@ -36,6 +36,7 @@
       <artifactId>tomcat-embed-jasper</artifactId>
       <version>${tomcat.version}</version>
     </dependency>
+
     <!-- https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-jasper -->
     <dependency>
       <groupId>org.apache.tomcat</groupId>
@@ -83,11 +84,12 @@
       <version>3.10.1</version>
     </dependency>
 
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>jstl</artifactId>
-      <version>1.2</version>
-    </dependency>
+<!--TODO-->
+<!--    <dependency>-->
+<!--      <groupId>javax.servlet</groupId>-->
+<!--      <artifactId>jstl</artifactId>-->
+<!--      <version>1.2</version>-->
+<!--    </dependency>-->
 
     <dependency>
       <groupId>org.webjars</groupId>

@@ -1,4 +1,6 @@
-<%--<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>--%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page isELIgnored="false"%>
+
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
@@ -30,13 +32,27 @@
 </nav>
 
 <div class="container">
-  <h1>Login</h1>
+  <h1>Project ${title}</h1>
+  ${ml.title}
+  <c:forEach items="${allMilestones}" var="milestone">
+    <div class="card" style="width: 18rem;">
+      <img src="" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">${milestone.title}</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+  </c:forEach>
+
+
+
 <%--  <p><font color="red"> ${errorMessage} </font></p>--%>
-  <form action="/login" method="post">
-    Enter Your Name <input type="text" name="name"/>
-    Enter Your Password <input type="password" name="password"/>
-    <input type="submit" value="Login"/>
-  </form>
+<%--  <form action="/login" method="post">--%>
+<%--    Enter Your Name <input type="text" name="name"/>--%>
+<%--    Enter Your Password <input type="password" name="password"/>--%>
+<%--    <input type="submit" value="Login"/>--%>
+<%--  </form>--%>
 </div>
 
 <footer class="footer">
