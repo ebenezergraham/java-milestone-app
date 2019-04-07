@@ -7,84 +7,95 @@ import java.util.List;
 
 public class User {
 
-    @SerializedName("_id")
-    @Expose
-    private String id;
-    @SerializedName("email")
-    @Expose
-    private String email;
-    @SerializedName("password")
-    @Expose
-    private String password;
-    @SerializedName("username")
-    @Expose
-    private String username;
-    @SerializedName("projects")
-    @Expose
-    private List<Project> projects = null;
+  @SerializedName("_id")
+  @Expose
+  private String id;
+  @SerializedName("hash")
+  @Expose
+  private String hash;
+  @SerializedName("salt")
+  @Expose
+  private String salt;
+  @SerializedName("email")
+  @Expose
+  private String email;
+  @SerializedName("username")
+  @Expose
+  private String username;
+  @SerializedName("projects")
+  @Expose
+  private List<Project> projects = null;
 
-    /**
-     * No args constructor for use in serialization
-     * 
-     */
-    public User() {
-    }
+  /**
+   * No args constructor for use in serialization
+   */
+  public User() {
+  }
 
-    /**
-     * 
-     * @param id
-     * @param projects
-     * @param username
-     * @param email
-     * @param password
-     */
-    public User(String id, String email, String password, String username, List<Project> projects) {
-        super();
-        this.id = id;
-        this.email = email;
-        this.password = password;
-        this.username = username;
-        this.projects = projects;
-    }
+  /**
+   * @param id
+   * @param projects
+   * @param username
+   * @param email
+   * @param hash
+   * @param salt
+   */
+  public User(String id, String hash, String salt, String email, String username, List<Project> projects) {
+    super();
+    this.id = id;
+    this.hash = hash;
+    this.salt = salt;
+    this.email = email;
+    this.username = username;
+    this.projects = projects;
+  }
 
-    public String getId() {
-        return id;
-    }
+  public String getId() {
+    return id;
+  }
 
-    public void setId(String id) {
-        this.id = id;
-    }
+  public void setId(String id) {
+    this.id = id;
+  }
 
-    public String getEmail() {
-        return email;
-    }
+  public String getHash() {
+    return hash;
+  }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+  public void setHash(String hash) {
+    this.hash = hash;
+  }
 
-    public String getPassword() {
-        return password;
-    }
+  public String getSalt() {
+    return salt;
+  }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+  public void setSalt(String salt) {
+    this.salt = salt;
+  }
 
-    public String getUsername() {
-        return username;
-    }
+  public String getEmail() {
+    return email;
+  }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+  public void setEmail(String email) {
+    this.email = email;
+  }
 
-    public List<Project> getProjects() {
-        return projects;
-    }
+  public String getUsername() {
+    return username;
+  }
 
-    public void setProjects(List<Project> projects) {
-        this.projects = projects;
-    }
+  public void setUsername(String username) {
+    this.username = username;
+  }
+
+  public List<Project> getProjects() {
+    return projects;
+  }
+
+  public void setProjects(List<Project> projects) {
+    this.projects = projects;
+  }
 
 }
