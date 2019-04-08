@@ -7,15 +7,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <title>Milestone Planner</title>
-  <style>
-    .footer {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      height: 60px;
-      background-color: #f5f5f5;
-    }
-  </style>
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
