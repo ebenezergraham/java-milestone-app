@@ -12,6 +12,8 @@ import java.io.IOException;
 @WebServlet(urlPatterns = "/login", name = "LoginServlet")
 public class LoginServlet extends HttpServlet {
 
+  private LoginService mLoginService = new LoginService();
+
   @Override
   protected void doGet(HttpServletRequest request,
                        HttpServletResponse response) throws ServletException, IOException {
@@ -24,9 +26,8 @@ public class LoginServlet extends HttpServlet {
                         HttpServletResponse response) throws ServletException, IOException {
     String name = request.getParameter("name");
     String password = request.getParameter("password");
-    System.out.printf("Username: %s\tPassword: %s", name, password);
 
-    if (LoginService.isUserValid(name, password)) {
+    if (mLoginService.login(name, password)) {
       request.getSession().setAttribute("name", name);
       System.out.println(request.getSession().getAttribute("name"));
       response.sendRedirect("/");
