@@ -9,7 +9,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-@SuppressWarnings("WeakerAccess")
 public class UserService {
   private static final Logger LOGGER = LoggerFactory.getLogger(UserService.class.getName());
   private Gson mGson;

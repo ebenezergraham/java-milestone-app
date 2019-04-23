@@ -10,6 +10,9 @@ public class Project {
   @SerializedName("_id")
   @Expose
   private String id;
+  @SerializedName("title")
+  @Expose
+  private String title;
   @SerializedName("milestones")
   @Expose
   private List<Milestone> milestones = null;
@@ -22,11 +25,13 @@ public class Project {
 
   /**
    * @param id
+   * @param title
    * @param milestones
    */
-  public Project(String id, List<Milestone> milestones) {
+  public Project(String id, String title,  List<Milestone> milestones) {
     super();
     this.id = id;
+    this.title = title;
     this.milestones = milestones;
   }
 
@@ -36,6 +41,14 @@ public class Project {
 
   public void setId(String id) {
     this.id = id;
+  }
+
+  public String getTitle() {
+    return title;
+  }
+
+  public void setTitle(String title) {
+    this.title = title;
   }
 
   public List<Milestone> getMilestones() {
@@ -54,7 +67,7 @@ public class Project {
     return this.milestones.remove(milestone);
   }
 
-  public Milestone getMilestone(String id) {
-    return this.milestones.stream().filter(m -> m.getId().equals(id)).findFirst().orElse(null);
+  public Milestone getMilestone(String title) {
+    return this.milestones.stream().filter(milestone -> milestone.getTitle().equals(title)).findFirst().orElse(null);
   }
 }
