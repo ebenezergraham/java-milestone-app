@@ -1,5 +1,6 @@
 package controllers.servlets;
 
+import com.google.gson.Gson;
 import controllers.services.UserService;
 import domain.model.Milestone;
 import domain.model.Project;
@@ -81,15 +82,18 @@ public class ProjectServlet extends HttpServlet {
                            HttpServletResponse response) throws ServletException, IOException {
         String title = request.getParameter("title");
         String n = request.getParameter("project");
-        Project project;
+        Gson gson = new Gson();
+        Project project = UserService.getInstance().getUser().getProjects().get(0);
         System.out.println("n is "+n);
-        if(n==null) {
-            project = UserService.getInstance().getUser().getProjects().get(0);
-        }else{
-            project =  UserService.getInstance().getUser().getProjects().get(1);
-        }
+//        if(n==null) {
+        String projectGson =  gson.toJson(project);
+//        }
+//        else {
+//            project =  UserService.getInstance().getUser().getProjects().get(1);
+//        }
         request.setAttribute("title",title);
-        request.setAttribute("allMilestones",project.getMilestones());
+        request.setAttribute("allMilestones", project.getMilestones());
+//        request.setAttribute("allMilestones",project.getMilestones());
 
         request.getRequestDispatcher("/WEB-INF/views/project.jsp").forward(request,response);
 

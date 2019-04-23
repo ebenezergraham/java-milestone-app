@@ -41,13 +41,15 @@ function httpGetAsync(theUrl, callback) {
 
 }
 
-function editMilestone(ml) {
-  console.log(ml);
-  var lol = ml.toJSON();
-  console.log(lol);
+function editMilestone(t) {
+  // console.log("editing milestone");
+  // console.log(ml).id;
+  // var lol = ml.toJSON();
+  // console.log(lol);
   bootbox.prompt({
-    title: "This is a prompt with a textarea!",
+    title: t,
     inputType: 'textarea',
+
     callback: function (result) {
       console.log(result);
     }
