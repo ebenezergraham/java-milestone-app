@@ -30,7 +30,7 @@ public class LoginServlet extends HttpServlet {
     if (mLoginService.login(name, password)) {
       request.getSession().setAttribute("name", name);
       System.out.println(request.getSession().getAttribute("name"));
-      response.sendRedirect("/");
+      response.sendRedirect("/dashboard");
     } else {
       System.out.println("Invalid credentials");
       String errorMessage = "Invalid credentials";

@@ -7,6 +7,7 @@
 <head>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<%--  <link rel="stylesheet" href="webjars/bootstrap/4.3.1/css/bootstrap.min.css"/>--%>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
   <title>Milestone Planner</title>
@@ -36,7 +37,11 @@
 
 <%--<div class="container">--%>
   <h1>Project ${title}</h1>
-
+<%--<h3>${pageContext.request.getRequestDispatcher()}</h3>--%>
+<%--<h2>${pageContext.request.queryString}</h2>--%>
+<%--<h3>${pageContext.request.getAttribute("javax.servlet.forward.request_uri")}</h3>--%>
+<%--<h3>${requestScope['javax.servlet.forward.query_string']}</h3>--%>
+<%--<h2>${requestScope['javax.servlet.forward.request_uri']}</h2>--%>
   <div class="container py-2">
   <c:set var = "right" value = "${true}"/>
     <c:set var = "count" value = "0" scope="page"/>
@@ -46,8 +51,6 @@
       <c:when test="${right==true}">
         <c:set var = "right" value = "${false}"/>
 
-<%--        <c:set var = "id" value = "${milestone.id}"/>--%>
-<%--        <c:out value="${id}"></c:out>--%>
       <!-- timeline item 1 -->
           <div class="row no-gutters">
             <div class="col-sm"> <!--spacer--> </div>
@@ -89,7 +92,7 @@
                     &emsp;&emsp;
                     <i class="fas fa-circle"></i>
                     &emsp;&emsp;
-                    <i class="fas fa-pen"></i>
+                    <button onclick="editMilestone(${milestone})"><i class="fas fa-pen"></i></button>
                   </span>
                   </div>
                 </div>
@@ -107,7 +110,9 @@
             <div class="col-sm py-2">
               <div class="card border-success shadow">
                 <div class="card-body">
-                  <i class="fas fa-trash"></i>
+                  <i class="fas fa-trash" onclick="delMilestone('${milestone.title}','${milestone.id}')"
+                     onmouseover="console.log('${milestone.id}')"></i>
+<%--                  <form action = "project.jsp" method = "DELETE">DELETE</form>--%>
                   <div class="float-right text-muted small">Start Date: ${milestone.startDate}</div>
                   <br><br>
                   <button class="btn btn-lg btn-outline-info btn-block card-title" type="button"
@@ -153,19 +158,21 @@
       </c:forEach>
 
       </div>
-<%--</div>--%>
 
 
 
 
 
-
-<%--<footer class="footer">--%>
-<%--  <p>footer content</p>--%>
-<%--</footer>--%>
-
+<%--<script type="text/javascript" src="webjars/jquery/1.11.1/jquery.min.js"></script>--%>
+<%--<script type="text/javascript" src="webjars/popper.js"></script>--%>
+<%--<script type="text/javascript" src="webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>--%>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+
+<script type="text/javascript"  src="/resources/js/project.js"></script>
+<script src="/resources/js/bootbox.min.js"></script>
+
 
 </body>
 

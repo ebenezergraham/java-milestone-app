@@ -32,7 +32,8 @@
 
 <div class="container">
   <h1>Dashboard</h1>
-  <a href="/project/?title=kool">link</a> <p> Project 1 </p>>
+  <h2>${project}</h2>
+  <a href="/projects/?title=kool">link</a> <p> Project 1 </p>>
 <%--  <p><font color="red"> ${errorMessage} </font></p>--%>
 <%--  <form action="/login" method="post">--%>
 <%--    Enter Your Name <input type="text" name="name"/>--%>

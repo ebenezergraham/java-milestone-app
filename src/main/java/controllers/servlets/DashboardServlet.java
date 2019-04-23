@@ -1,5 +1,8 @@
 package controllers.servlets;
 
+import controllers.services.UserService;
+import domain.model.Project;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,7 +16,8 @@ public class DashboardServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response) throws ServletException, IOException {
-
+        Project project = UserService.getInstance().getUser().getProjects().get(0);
+        request.setAttribute("project",project);
         request.getRequestDispatcher("/WEB-INF/views/dashboard.jsp").forward(request,response);
 
     }
