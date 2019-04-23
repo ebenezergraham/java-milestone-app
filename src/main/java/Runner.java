@@ -23,7 +23,7 @@ public class Runner {
     if (webPort == null || webPort.isEmpty()) webPort = "8080";
 
     tomcat.setPort(Integer.valueOf(webPort));
-
+    System.out.println(WEBAPP_DIR_LOCATION);
     StandardContext ctx = (StandardContext) tomcat.addWebapp("/", new File(WEBAPP_DIR_LOCATION).getAbsolutePath());
     System.out.println("configuring app with basedir: " + new File(WEBAPP_DIR_LOCATION).getAbsolutePath());
 

@@ -108,7 +108,7 @@
                           </div>
                         <div class="modal-body">
 
-                          <form>
+                          <form method="">
                             <div class="form-group">
                               <label for="title${milestone.id}">Title</label><br>
                               <h3><input type="text" class="form-control modal-title" id="title${milestone.id}"

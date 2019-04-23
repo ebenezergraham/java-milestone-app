@@ -35,22 +35,26 @@ public class ProjectServlet extends HttpServlet {
     @Override
     protected void doDelete(HttpServletRequest request,
                           HttpServletResponse response) throws ServletException, IOException {
-        String milestoneID = request.getParameter("id");
-        Project project = UserService.getInstance().getUser().getProjects().get(0);
-        System.out.println(milestoneID);
+        String projectTitle = request.getParameter("project");
+        String milestoneT = request.getParameter("ml");
+        Project project = UserService.getInstance().getUser().getProject(projectTitle);
+        Milestone ml = project.getMilestone(milestoneT);
+        project.deleteMilestone(ml);
+//        UserService.getInstance().getUser().getProject(project);
+//        System.out.println(milestoneID);
         System.out.println(project.getMilestones().size());
 
-        Milestone delMilestone = project.getMilestone(milestoneID);
-        System.out.println("You want to delete this milestone " + delMilestone.getTitle());
-        request.setAttribute("project",project);
-        System.out.println(request.getSession().getAttribute("project"));
-        if (project.deleteMilestone(project.getMilestone(milestoneID))) {
+//        Milestone delMilestone = project.getMilestone(milestoneID);
+//        System.out.println("You want to delete this milestone " + delMilestone.getTitle());
+//        request.setAttribute("project",project);
+//        System.out.println(request.getSession().getAttribute("project"));
+//        if (project.deleteMilestone(project.getMilestone(milestoneID))) {
 //            request.setAttribute("name", name);
             System.out.println("AM I deleting stuff??");
             response.sendRedirect("/WEB-INF/views/dashboard.jsp");
-        } else {
-            request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
-        }
+//        } else {
+//            request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
+//        }
 //        String title = request.getParameter("title");
 //        Project p = UserService.getInstance().getUser().getProjects().get(0);
 //        request.setAttribute("title",title);
