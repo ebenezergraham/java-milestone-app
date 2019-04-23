@@ -1,9 +1,7 @@
 package controllers.servlets;
 
 import controllers.services.UserService;
-import domain.model.Milestone;
 import domain.model.Project;
-import domain.model.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = "/project/*")
-public class ProjectServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/test")
+public class TestServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request,
@@ -24,7 +22,7 @@ public class ProjectServlet extends HttpServlet {
         request.setAttribute("allMilestones",project.getMilestones());
 //        request.setAttribute("ml",ml);
 
-        request.getRequestDispatcher("/WEB-INF/views/project.jsp").forward(request,response);
+        request.getRequestDispatcher("/WEB-INF/views/test.jsp").forward(request,response);
 
     }
 
