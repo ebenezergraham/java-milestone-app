@@ -3,10 +3,10 @@
 
 <html>
 <head>
+    <title>Dashboard</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="/resources/css/main.css">
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -34,19 +34,16 @@
                 <section class="col-6">
 
                 <c:forEach items="${projectList}" var="project">
-                        <a href="project/?projectName=${project.getId()}" class="project card">
-                            <p><c:out value="${project.getId()}"/></p>
-                            <a href="project/"></a>
+                        <a href="projects/?title=${project.getTitle()}" class="project card">
+                            <p><c:out value="${project.getTitle()}"/></p>
                         </a>
                 </c:forEach>
                 </section>
                 <section class="col-6">
-
                     <c:forEach items="${projectList}" var="project">
-                        <div class="project card">
-                            <p><c:out value="${project.getId()}"/></p>
-                            <a href="project/"></a>
-                        </div>
+                        <a href="projects/?title=${project.getTitle()}" class="project card">
+                            <p><c:out value="${project.getTitle()}"/></p>
+                        </a>
                     </c:forEach>
                 </section>
             </div>
