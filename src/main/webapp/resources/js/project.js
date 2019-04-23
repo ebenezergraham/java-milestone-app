@@ -22,7 +22,7 @@ function delMilestone(title,id) {
       console.log(URL.slice(0, URL.indexOf("?")) + "delete/" + URL.slice(URL.indexOf("?")));
 
       if (result) {
-        var delURL = URL.slice(0, URL.indexOf("?")) + "delete/?id="+ id;
+        var delURL = URL.slice(0, URL.indexOf("?")) + "delete/?project="+title+"&ml="+ id;
         console.log(delURL);
         httpGetAsync(delURL,true,"DELETE");
         console.log("END");
