@@ -98,4 +98,7 @@ public class User {
     this.projects = projects;
   }
 
+  public Project getProject(String name) {
+    return this.projects.stream().filter(project -> project.getTitle().equals(name)).findFirst().orElse(null);
+  }
 }

@@ -9,23 +9,26 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
-@WebServlet(urlPatterns = "/dashboard")
-public class DashboardServlet extends HttpServlet {
-    List<Project> projectList = new ArrayList<>();
-    Project project = new Project();
-    Project project1 = new Project();
-    Project project2 = new Project();
-    Project project3 = new Project();
-    
+@WebServlet(urlPatterns = "/test")
+public class TestServlet extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response) throws ServletException, IOException {
+        String title = request.getParameter("title");
         Project project = UserService.getInstance().getUser().getProjects().get(0);
-        request.setAttribute("project",project);
-        request.getRequestDispatcher("/WEB-INF/views/dashboard.jsp").forward(request,response);
+        request.setAttribute("title",title);
+        request.setAttribute("allMilestones",project.getMilestones());
+//        request.setAttribute("ml",ml);
+
+        request.getRequestDispatcher("/WEB-INF/views/test.jsp").forward(request,response);
+
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request,
+                         HttpServletResponse response) throws ServletException, IOException {
 
     }
 }

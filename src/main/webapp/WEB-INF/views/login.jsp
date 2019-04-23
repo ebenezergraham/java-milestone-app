@@ -8,19 +8,6 @@
   <title>Milestone Planner</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a href="/" class="navbar-brand">Milestone</a>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="nav navbar-nav">
-      <li class="nav-item m-2"><a href="/dashboard">Dashboard</a></li>
-    </ul>
-
-    <ul class="nav navbar-nav navbar-right">
-      <li class="nav-item"><a href="/login">Login</a></li>
-    </ul>
-  </div>
-</nav>
-
 <div class="container">
   <h1>Login</h1>
   <p><font color="red"> ${errorMessage} </font></p>
@@ -30,6 +17,8 @@
     <input type="submit" value="Login"/>
   </form>
 </div>
+<script src="webjars/jquery/1.11.1/jquery.min.js"></script>
+<script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
 </body>
 
