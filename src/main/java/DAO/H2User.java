@@ -1,21 +1,20 @@
+package DAO;
 
-package net.katrinhartmann.dbdemo.db;
-
-import net.katrinhartmann.dbdemo.model.Person;
+import domain.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 
-public class H2Person  implements AutoCloseable {
+@SuppressWarnings("Duplicates")
+public class H2User  implements AutoCloseable {
     @SuppressWarnings("unused")
-    static final Logger LOG = LoggerFactory.getLogger(H2Person.class);
+    static final Logger LOG = LoggerFactory.getLogger(H2User.class);
 
     public static final String MEMORY = "jdbc:h2:mem:shop";
     public static final String FILE = "jdbc:h2:~/shop";
@@ -27,14 +26,14 @@ public class H2Person  implements AutoCloseable {
             return DriverManager.getConnection(db, "sa", "");  // default password, ok for embedded.
     }
 
-    public H2Person() {
+    public H2User() {
         this(MEMORY);
     }
 
-    public H2Person(String db) {
+    public H2User(String db) {
         try {
             connection = getConnection(db);
-            loadResource("/person.sql");
+            loadResource("/user.sql");
         } catch (ClassNotFoundException | SQLException e) {
             throw new RuntimeException(e);
         }
@@ -52,25 +51,26 @@ public class H2Person  implements AutoCloseable {
         }
     }
 
-    public void addPerson(Person person) {
-        final String ADD_PERSON_QUERY = "INSERT INTO person (first, last, email) VALUES (?,?,?)";
-        try (PreparedStatement ps = connection.prepareStatement(ADD_PERSON_QUERY)) {
-            ps.setString(1, person.getFirst());
-            ps.setString(2, person.getLast());
-            ps.setString(3, person.getEmail());
+    public void addUser(User user) {
+        final String ADD_USER_QUERY = "INSERT INTO user (username, hash) VALUES (?,?)";
+        try (PreparedStatement ps = connection.prepareStatement(ADD_USER_QUERY)) {
+            ps.setString(1, user.getUsername());
+            ps.setString(2, user.getHash());
             ps.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public List<Person> findPersons() {
-        final String LIST_PERSONS_QUERY = "SELECT first, last, email  FROM person";
-        List<Person> out = new ArrayList<>();
-        try (PreparedStatement ps = connection.prepareStatement(LIST_PERSONS_QUERY)) {
+    public List<User> findUsers() {
+        final String LIST_USERS_QUERY = "SELECT username FROM user";
+        List<User> out = new ArrayList<>();
+        try (PreparedStatement ps = connection.prepareStatement(LIST_USERS_QUERY)) {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                out.add(new Person(rs.getString(1), rs.getString(2), rs.getString(3)));
+                out.add(new User(rs.getString(1),
+                    rs.getString(2),
+                    rs.getString(3)));
              }
         } catch (SQLException e) {
             throw new RuntimeException(e);

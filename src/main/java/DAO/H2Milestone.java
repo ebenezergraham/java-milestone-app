@@ -1,20 +1,19 @@
 package DAO;
 
-import domain.model.User;
+import domain.model.Milestone;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 
-public class H2User  implements AutoCloseable {
+public class H2Milestone implements AutoCloseable {
     @SuppressWarnings("unused")
-    static final Logger LOG = LoggerFactory.getLogger(H2User.class);
+    static final Logger LOG = LoggerFactory.getLogger(H2Milestone.class);
 
     public static final String MEMORY = "jdbc:h2:mem:shop";
     public static final String FILE = "jdbc:h2:~/shop";
@@ -26,14 +25,14 @@ public class H2User  implements AutoCloseable {
             return DriverManager.getConnection(db, "sa", "");  // default password, ok for embedded.
     }
 
-    public H2User() {
+    public H2Milestone() {
         this(MEMORY);
     }
 
-    public H2User(String db) {
+    public H2Milestone(String db) {
         try {
             connection = getConnection(db);
-            loadResource("/user.sql");
+            loadResource("/milestone.sql");
         } catch (ClassNotFoundException | SQLException e) {
             throw new RuntimeException(e);
         }
@@ -51,11 +50,18 @@ public class H2User  implements AutoCloseable {
         }
     }
 
-    public void addUser(User user) {
-        final String ADD_PERSON_QUERY = "INSERT INTO user (first, last, email) VALUES (?,?,?)";
-        try (PreparedStatement ps = connection.prepareStatement(ADD_PERSON_QUERY)) {
-            ps.setString(1, user.getUsername());
-//            ps.setString(2, user.getLast());
+    public void addMilestone(Milestone milestone) {
+        final String ADD_MILESTONE_QUERY = "INSERT INTO milestone (title,description, status, start_date, due_date, " +
+            "end_date, " +
+            "project_id) VALUES(?,?,?,?,?,?,?)";
+        try (PreparedStatement ps = connection.prepareStatement(ADD_MILESTONE_QUERY)) {
+            ps.setString(1, milestone.getTitle());
+            ps.setString(2, milestone.getDescription());
+            ps.setString(1, milestone.getStatus());
+            ps.setString(1, milestone.getStartDate());
+            ps.setString(1, milestone.getDueDate());
+            ps.setString(1, milestone.getEndDate());
+
 //            ps.setString(3, user.getEmail());
             ps.execute();
         } catch (SQLException e) {
@@ -63,13 +69,13 @@ public class H2User  implements AutoCloseable {
         }
     }
 
-    public List<User> findUsers() {
+    public List<Milestone> findMilestones() {
         final String LIST_PERSONS_QUERY = "SELECT first, last, email  FROM user";
-        List<User> out = new ArrayList<>();
+        List<Milestone> out = new ArrayList<>();
         try (PreparedStatement ps = connection.prepareStatement(LIST_PERSONS_QUERY)) {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                out.add(new User(rs.getString(1), rs.getString(2), rs.getString(3)));
+                out.add(new Milestone(rs.getString(1), rs.getString(2), rs.getString(3)));
              }
         } catch (SQLException e) {
             throw new RuntimeException(e);

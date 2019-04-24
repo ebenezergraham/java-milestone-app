@@ -15,7 +15,7 @@ public class LoginService {
 
   public synchronized boolean login(@NonNull String username, @NonNull String password) {
     try {
-      mUser = UserService.getInstance().getUser(username);
+      mUser = UserService.getInstance().getUser();
       String storedHash = mUser.getHash();
       System.out.println(storedHash);
       return storedHash != null && PasswordHash.validatePassword(password, storedHash);

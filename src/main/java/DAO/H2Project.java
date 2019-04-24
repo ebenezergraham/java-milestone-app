@@ -1,6 +1,6 @@
 package DAO;
 
-import domain.model.User;
+import domain.model.Project;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,9 +12,9 @@ import java.util.Scanner;
 
 
 @SuppressWarnings("Duplicates")
-public class H2User  implements AutoCloseable {
+public class H2Project implements AutoCloseable {
     @SuppressWarnings("unused")
-    static final Logger LOG = LoggerFactory.getLogger(H2User.class);
+    static final Logger LOG = LoggerFactory.getLogger(H2Project.class);
 
     public static final String MEMORY = "jdbc:h2:mem:shop";
     public static final String FILE = "jdbc:h2:~/shop";
@@ -26,14 +26,14 @@ public class H2User  implements AutoCloseable {
             return DriverManager.getConnection(db, "sa", "");  // default password, ok for embedded.
     }
 
-    public H2User() {
+    public H2Project() {
         this(MEMORY);
     }
 
-    public H2User(String db) {
+    public H2Project(String db) {
         try {
             connection = getConnection(db);
-            loadResource("/user.sql");
+            loadResource("/project.sql");
         } catch (ClassNotFoundException | SQLException e) {
             throw new RuntimeException(e);
         }
@@ -51,24 +51,24 @@ public class H2User  implements AutoCloseable {
         }
     }
 
-    public void addUser(User user) {
-        final String ADD_USER_QUERY = "INSERT INTO user (username, hash) VALUES (?,?)";
+    public void addProject(Project project) {
+        final String ADD_USER_QUERY = "INSERT INTO project (projectname, hash) VALUES (?,?)";
         try (PreparedStatement ps = connection.prepareStatement(ADD_USER_QUERY)) {
-            ps.setString(1, user.getUsername());
-            ps.setString(2, user.getHash());
+            ps.setString(1, project.getTitle());
+            ps.setString(2, project.get());
             ps.execute();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public List<User> findUsers() {
-        final String LIST_USERS_QUERY = "SELECT username FROM user";
-        List<User> out = new ArrayList<>();
+    public List<Project> findProjects() {
+        final String LIST_USERS_QUERY = "SELECT projectname FROM project";
+        List<Project> out = new ArrayList<>();
         try (PreparedStatement ps = connection.prepareStatement(LIST_USERS_QUERY)) {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                out.add(new User(rs.getString(1),
+                out.add(new Project(rs.getString(1),
                     rs.getString(2),
                     rs.getString(3)));
              }

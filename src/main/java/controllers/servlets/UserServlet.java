@@ -1,10 +1,9 @@
 
-package net.katrinhartmann.servlet;
+package controllers.servlets;
 
+import DAO.H2User;
+import domain.model.User;
 import lombok.Data;
-import net.katrinhartmann.dbdemo.db.H2Person;
-import net.katrinhartmann.dbdemo.model.Person;
-import net.katrinhartmann.util.mustache.MustacheRender;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,21 +16,19 @@ import java.nio.charset.Charset;
 import java.util.List;
 
 
-public class PersonServlet extends HttpServlet{
+public class UserServlet extends HttpServlet{
     @SuppressWarnings("unused")
-    static final Logger LOG = LoggerFactory.getLogger(PersonServlet.class);
+    static final Logger LOG = LoggerFactory.getLogger(UserServlet.class);
 
-    private final H2Person h2Person;
-    private final MustacheRender mustache;
-    public PersonServlet(H2Person h2Person) {
-        mustache = new MustacheRender();
-        this.h2Person = h2Person;
+    private final H2User h2User;
+    public UserServlet(H2User h2User) {
+        this.h2User = h2User;
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Person> persons = h2Person.findPersons();
-        String html = mustache.render("index.mustache", new Result(persons.size()));
+        List<User> users = h2User.findUsers();
+        String html = mustache.render("index.mustache", new Result(users.size()));
         response.setContentType("text/html");
         response.setStatus(200);
         response.getOutputStream().write(html.getBytes(Charset.forName("utf-8")));
@@ -42,8 +39,8 @@ public class PersonServlet extends HttpServlet{
         String first = request.getParameter("first");
         String last = request.getParameter("last");
         String email = request.getParameter("email");
-        Person person = new Person(first, last, email);
-        h2Person.addPerson(person);
+//        User user = new User(username, last, email);
+//        h2User.addUser(user);
         response.sendRedirect("/index.html");
     }
 

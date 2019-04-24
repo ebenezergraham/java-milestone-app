@@ -1,8 +1,6 @@
 package controllers.servlets;
 
 import controllers.services.UserService;
-import domain.model.Project;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
