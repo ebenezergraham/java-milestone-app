@@ -31,7 +31,6 @@ public class MongoDB {
 	MongodProcess mongod;
 	
 	public MongoDB(){
-	
 	}
 	
 	public void start(){
@@ -59,21 +58,19 @@ public class MongoDB {
 			if (mongodExecutable == null)
 				mongodExecutable.stop();
 		}
-		
 	}
 	
-	public void testStartAndStopMongoImportAndMongod() throws UnknownHostException, IOException {
-		MongoImportProcess mongoImport = startMongoImport(defaultHost, port, database,collection,jsonFile,true,true,true);
+	public void importData() {
 			try {
-				MongoClient mongoClient = new MongoClient(defaultHost, port);
-				System.out.println("DB Names: " + mongoClient.getDatabaseNames());
-			} finally {
-				mongoImport.stop();
+				startMongoImport(defaultHost, port, database,collection,jsonFile,true,true,false);
+			} catch (IOException e) {
+				LOGGER.info("Failed To import");
+				e.getStackTrace();
 			}
 	}
 	
 	private MongoImportProcess startMongoImport(String bindIp, int port, String dbName, String collection, String jsonFile, Boolean jsonArray,Boolean upsert, Boolean drop)
-			throws UnknownHostException, IOException {
+			throws IOException {
 		IMongoImportConfig mongoImportConfig = new MongoImportConfigBuilder()
 				.version(Version.Main.PRODUCTION)
 				.net(new Net(bindIp, port, Network.localhostIsIPv6()))
@@ -86,7 +83,6 @@ public class MongoDB {
 				.build();
 		
 		MongoImportExecutable mongoImportExecutable = MongoImportStarter.getDefaultInstance().prepare(mongoImportConfig);
-		MongoImportProcess mongoImport = mongoImportExecutable.start();
-		return mongoImport;
+		return mongoImportExecutable.start();
 	}
 }

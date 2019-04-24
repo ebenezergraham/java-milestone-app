@@ -39,7 +39,7 @@ public class AuthenticationFilter implements Filter {
 			return;
 		}
 		
-		if(uri.equals("/") && session ==null){
+		if(uri.equals("/") || session ==null){
 			res.sendRedirect("/login");
 		}else{
 				if (session.getAttribute("username") == null) {

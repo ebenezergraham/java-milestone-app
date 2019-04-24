@@ -151,3 +151,8 @@ h1{
 #nameInput{
 	display: block;
 }
+
+#add-new-project{
+	display: none;
+	transition: 0.5ms;
+}
