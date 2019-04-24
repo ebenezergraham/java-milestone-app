@@ -6,10 +6,6 @@ import domain.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-
 public class UserService {
   private static final Logger LOGGER = LoggerFactory.getLogger(UserService.class.getName());
   private Gson mGson;
@@ -23,7 +19,7 @@ public class UserService {
   private UserService() {
     this.mGson = new Gson();
   }
-  DAO dao = new DAO();
+  private DAO dao = new DAO();
 /*  public User getUser() {
     User user = null;
     try (BufferedReader br = new BufferedReader(new FileReader("data.json"))) {
