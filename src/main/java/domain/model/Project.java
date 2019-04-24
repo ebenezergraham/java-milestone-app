@@ -21,7 +21,6 @@ public class Project {
    * No args constructor for use in serialization
    */
   public Project() {
-    this.id = "Untitled Project";
   }
 
   /**
