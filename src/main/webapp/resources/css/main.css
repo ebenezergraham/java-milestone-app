@@ -32,23 +32,25 @@ h1{
 	--input-padding-y: .75rem;
 }
 
-loginbg {
-	color: #fff;
+#loginbg {
 	background:linear-gradient(
 			rgba(0, 0, 0, 0.5),
-			rgba(56, 15, 17, 0.51)
-	), url('https://picsum.photos/2048/1365/?random');
+			rgba(33, 101, 88, 0.51)
+	), url('https://picsum.photos/2048/1365/?random'),url('img/bg.jpeg');
 	background-position: center center;
 	filter: blur(0.2px);
 	overflow: hidden;
-	text-shadow:0 1px 5px rgba(0,0,0,.1);
 	margin: 0;
+	padding: 1px;
+	width: 100vw;
+	height: 100vh;
 }
 
 .signin-card {
 	border: 0;
-	border-radius: 1rem;
-	box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+	border-radius: 0.5rem;
+	opacity: 0.9;
+	box-shadow: 0 0.5rem 1rem 0 rgba(33, 101, 88, 0.1);
 }
 
 .signin-card .card-title {
@@ -139,4 +141,9 @@ loginbg {
 .btn-google {
 	color: white;
 	background-color: #ea4335;
+}
+
+.btn-login {
+	color: white;
+	background-color: #216558;
 }

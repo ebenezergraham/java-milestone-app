@@ -4,11 +4,13 @@ import controllers.services.LoginService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = "/login", name = "RegisterServlet")
-public class LoginServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/register", name = "RegisterServlet")
+public class RegisterServlet extends HttpServlet {
 
   private LoginService mLoginService = new LoginService();
 
@@ -24,21 +26,9 @@ public class LoginServlet extends HttpServlet {
                         HttpServletResponse response) throws ServletException, IOException {
     String username = request.getParameter("name");
     String password = request.getParameter("password");
-    
-    HttpSession previousSession = request.getSession(false);
-    if(previousSession!=null){
-      previousSession.invalidate();
-    }
-    if (mLoginService.login(username, password)) {
-      //generate a new session
-      HttpSession newSession = request.getSession(true);
-  
-      newSession.setMaxInactiveInterval(10*60);
-  
-      Cookie cookie = new Cookie("username", username);
-      response.addCookie(cookie);
-      newSession.setAttribute("username", username);
-      System.out.println(request.getSession().getAttribute("username"));
+
+    if (mLoginService.register(username, password)) {
+      request.getSession().setAttribute("username", username);
       response.sendRedirect("/dashboard");
     } else {
       System.out.println("Invalid credentials");

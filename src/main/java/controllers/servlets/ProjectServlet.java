@@ -38,13 +38,12 @@ public class ProjectServlet extends HttpServlet {
         System.out.println(request.getServletPath());
         String projectTitle = request.getParameter("title");
         String milestoneT = request.getParameter("ml");
-        Project project = UserService.getInstance().getUser().getProject(projectTitle);
-        System.out.println(project.getMilestones().size());
-
+        String milestoneID = request.getParameter("id");
+        String name = request.getSession().getAttribute("username").toString();
+        Project project = UserService.getInstance().getUser(name).getProject(projectTitle);
         Milestone ml = project.getMilestone(milestoneT);
         project.deleteMilestone(ml);
-//        UserService.getInstance().getUser().getProject(project);
-//        System.out.println(milestoneID);
+        System.out.println(milestoneID);
         System.out.println(project.getMilestones().size());
 
         System.out.println("AM I deleting stuff??");
@@ -84,7 +83,7 @@ public class ProjectServlet extends HttpServlet {
         String title = request.getParameter("title");
         String n = request.getParameter("project");
         Gson gson = new Gson();
-        Project project = UserService.getInstance().getUser().getProjects().get(0);
+        Project project = UserService.getInstance().getUser("hermes").getProjects().get(0);
         System.out.println("n is "+n);
 //        if(n==null) {
         String projectGson =  gson.toJson(project);

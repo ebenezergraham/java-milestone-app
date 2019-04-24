@@ -11,10 +11,11 @@ import java.security.spec.InvalidKeySpecException;
 
 public class LoginService {
   private static final Logger LOGGER = LoggerFactory.getLogger(LoginService.class.getName());
-  private User mUser = UserService.getInstance().getUser();
+  private User mUser;
 
   public synchronized boolean login(@NonNull String username, @NonNull String password) {
     try {
+      mUser = UserService.getInstance().getUser(username);
       String storedHash = mUser.getHash();
       System.out.println(storedHash);
       return storedHash != null && PasswordHash.validatePassword(password, storedHash);

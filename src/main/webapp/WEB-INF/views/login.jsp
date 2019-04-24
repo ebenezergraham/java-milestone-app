@@ -1,14 +1,16 @@
 <%--<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>--%>
 <%@ page isELIgnored="false"%>
 <%@ page contentType="text/html;charset=UTF-8" %>
+
+
 <html>
 <head>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="resources/css/main.css">
     <title>Milestone Planner</title>
 </head>
-<body class="loginbg">
+<body id="loginbg">
 
 <div class="container">
     <div class="row">
@@ -31,7 +33,8 @@
                             <input type="checkbox" class="custom-control-input" id="customCheck1">
                             <label class="custom-control-label" for="customCheck1">Remember password</label>
                         </div>
-                        <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" value="login">Sign in</button>
+                        <button class="btn btn-lg btn-login btn-block text-uppercase" type="submit" value="login">Sign in</button>
+                        <button class="btn btn-lg btn-login btn-block text-uppercase" type="submit" value="register">Register</button>
                         <hr class="my-4">
                         <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> Sign in with Google</button>
                     </form>
@@ -43,6 +46,7 @@
 
 <script defer src="/resources/js/jquery-3.3.1.js"></script>
 <script defer src="/resources/js/jquery.ripples.js"></script>
+<script defer src="/resources/js/script.js"></script>
 </body>
 
 
