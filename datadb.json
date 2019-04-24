@@ -3,8 +3,7 @@
     "_id": "5ca947ed241e15ec63bcceda",
     "hash": "65536:f5c9f37c27e2acebd032a9f50ef7c1168dde823bc8aef826:ac7b763cd4ada38798ec133d8c7e65e627cf39b3eb817e7d65f2fe3b911b435cce3ea9a08df209e67f8477cc68d55ceddca883198890261c43d0dbb40b88e23e",
     "salt": "f5c9f37c27e2acebd032a9f50ef7c1168dde823bc8aef826",
-    "email": "cathrynchurch@geekola.com",
-    "username": "hermes",
+    "user_name": "hermes",
     "projects": [
       {
         "_id": "5ca947ed6a3bfad665fd6d7c",

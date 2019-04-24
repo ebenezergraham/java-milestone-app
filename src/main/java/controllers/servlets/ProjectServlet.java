@@ -33,7 +33,7 @@ public class ProjectServlet extends HttpServlet {
         if (title != null) {
             Project project = new Project();
             project.setTitle(title);
-            dao.addProject(project);
+            dao.addProject(request.getSession().getAttribute("username").toString(),project);
         }
 	      response.sendRedirect("/dashboard");
     }

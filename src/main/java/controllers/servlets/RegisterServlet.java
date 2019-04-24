@@ -17,7 +17,6 @@ public class RegisterServlet extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest request,
                        HttpServletResponse response) throws ServletException, IOException {
-    System.out.println("Got here!");
     request.getRequestDispatcher("/WEB-INF/views/register.jsp").forward(request, response);
 
   }
@@ -28,8 +27,7 @@ public class RegisterServlet extends HttpServlet {
     String password = request.getParameter("password");
 
     if (mLoginService.register(username, password)) {
-      request.getSession().setAttribute("username", username);
-      response.sendRedirect("/dashboard");
+      response.sendRedirect("/login");
     } else {
       System.out.println("Invalid credentials");
       String errorMessage = "Invalid credentials";
