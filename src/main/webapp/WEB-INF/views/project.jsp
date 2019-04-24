@@ -11,15 +11,7 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
   <title>Milestone Planner</title>
-  <style>
-    .footer {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      height: 60px;
-      background-color: #f5f5f5;
-    }
-  </style>
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -108,7 +100,7 @@
                           </div>
                         <div class="modal-body">
 
-                          <form>
+                          <form method="">
                             <div class="form-group">
                               <label for="title${milestone.id}">Title</label><br>
                               <h3><input type="text" class="form-control modal-title" id="title${milestone.id}"
@@ -158,7 +150,7 @@
             <div class="col-sm py-2">
               <div class="card border-success shadow">
                 <div class="card-body">
-                  <i class="fas fa-trash" onclick="delMilestone('${milestone.title}','${milestone.id}')"
+                  <i class="fas fa-trash" onclick="delMilestone('${title}','${milestone.title}')"
                      onmouseover="console.log('${milestone.id}')"></i>
 <%--                  <form action = "project.jsp" method = "DELETE">DELETE</form>--%>
                   <div class="float-right text-muted small">Start Date: ${milestone.startDate}</div>
@@ -206,14 +198,6 @@
       </c:forEach>
 
       </div>
-
-
-
-
-
-<%--<script type="text/javascript" src="webjars/jquery/1.11.1/jquery.min.js"></script>--%>
-<%--<script type="text/javascript" src="webjars/popper.js"></script>--%>
-<%--<script type="text/javascript" src="webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>--%>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>

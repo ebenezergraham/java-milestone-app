@@ -1,3 +1,4 @@
+import DAO.MongoDB;
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.WebResourceRoot;
 import org.apache.catalina.core.StandardContext;
@@ -7,6 +8,8 @@ import org.apache.catalina.webresources.StandardRoot;
 
 import javax.servlet.ServletException;
 import java.io.File;
+import java.io.IOException;
+import java.net.UnknownHostException;
 import java.util.logging.Logger;
 
 public class Runner {
@@ -16,14 +19,14 @@ public class Runner {
   public static void main(String[] args) throws ServletException {
 
     Tomcat tomcat = new Tomcat();
-
+    MongoDB db = new MongoDB();
     //The port that we should run on can be set into an environment variable
     //Look for that variable and default to 8080 if it isn't there.
     String webPort = System.getenv("PORT");
     if (webPort == null || webPort.isEmpty()) webPort = "8080";
 
     tomcat.setPort(Integer.valueOf(webPort));
-
+    System.out.println(WEBAPP_DIR_LOCATION);
     StandardContext ctx = (StandardContext) tomcat.addWebapp("/", new File(WEBAPP_DIR_LOCATION).getAbsolutePath());
     System.out.println("configuring app with basedir: " + new File(WEBAPP_DIR_LOCATION).getAbsolutePath());
 
@@ -37,8 +40,14 @@ public class Runner {
 
     try {
       tomcat.start();
+      db.start();
+      db.testStartAndStopMongoImportAndMongod();
     } catch (LifecycleException e) {
       LOGGER.warning(e.getMessage());
+    } catch (UnknownHostException e) {
+      e.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
     }
     tomcat.getServer().await();
   }
