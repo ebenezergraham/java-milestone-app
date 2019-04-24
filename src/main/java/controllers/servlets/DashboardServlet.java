@@ -19,7 +19,7 @@ public class DashboardServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response) throws ServletException, IOException {
-        projectList = UserService.getInstance().getUser().getProjects();
+        projectList = UserService.getInstance().getUser("hermes").getProjects();
         request.setAttribute("projectList",projectList);
         request.getRequestDispatcher("index.jsp").forward(request,response);
         

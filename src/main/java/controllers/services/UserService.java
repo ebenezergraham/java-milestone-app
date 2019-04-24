@@ -34,7 +34,7 @@ public class UserService {
     return user;
   }*/
   
-  public User getUser() {
-    return dao.getUser("hermes");
+  public User getUser(String username) {
+    return dao.getUser(username);
   }
 }

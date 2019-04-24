@@ -5,10 +5,10 @@
 <head>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="resources/css/main.css">
     <title>Milestone Planner</title>
 </head>
-<body class="loginbg">
+<body id="loginbg">
 
 <div class="container">
     <div class="row">
@@ -43,6 +43,7 @@
 
 <script defer src="/resources/js/jquery-3.3.1.js"></script>
 <script defer src="/resources/js/jquery.ripples.js"></script>
+<script defer src="/resources/js/script.js"></script>
 </body>
 
 

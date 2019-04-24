@@ -32,17 +32,18 @@ h1{
 	--input-padding-y: .75rem;
 }
 
-loginbg {
-	color: #fff;
+#loginbg {
 	background:linear-gradient(
 			rgba(0, 0, 0, 0.5),
-			rgba(56, 15, 17, 0.51)
+			rgba(56, 25, 18, 0.51)
 	), url('https://picsum.photos/2048/1365/?random');
 	background-position: center center;
 	filter: blur(0.2px);
 	overflow: hidden;
-	text-shadow:0 1px 5px rgba(0,0,0,.1);
 	margin: 0;
+	padding: 1px;
+	width: 100vw;
+	height: 100vh;
 }
 
 .signin-card {

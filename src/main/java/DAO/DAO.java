@@ -1,10 +1,12 @@
 package DAO;
 
+import com.google.gson.Gson;
 import com.mongodb.*;
 import domain.model.User;
 
 
 public class DAO {
+	private Gson mGson = new Gson();
 	MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://localhost:27017"));
 	DB database = mongoClient.getDB("mpdb");
 	DBCollection collection = database.getCollection("users");
@@ -12,10 +14,18 @@ public class DAO {
 	public User getUser(String username){
 		DBObject query = new BasicDBObject("username", username);
 		DBCursor cursor = collection.find(query);
-		return new User();
+		String response = cursor.one().toString();
+		User user = this.mGson.fromJson(response, User.class);
+		return user;
 	}
 	
-	public void addUser(){
-		collection.insert();
+	public void addUser(User user){
+		collection.insert(toDBObject(user));
+	}
+	
+	public static final DBObject toDBObject(User user) {
+		return new BasicDBObject("_id", user.getId())
+				.append("username", user.getUsername())
+				.append("hash", user.getHash());
 	}
 }

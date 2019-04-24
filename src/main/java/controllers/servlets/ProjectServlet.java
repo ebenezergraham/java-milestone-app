@@ -36,7 +36,7 @@ public class ProjectServlet extends HttpServlet {
     protected void doDelete(HttpServletRequest request,
                           HttpServletResponse response) throws ServletException, IOException {
         String milestoneID = request.getParameter("id");
-        Project project = UserService.getInstance().getUser().getProjects().get(0);
+        Project project = UserService.getInstance().getUser("hermes").getProjects().get(0);
         System.out.println(milestoneID);
         System.out.println(project.getMilestones().size());
 
@@ -83,7 +83,7 @@ public class ProjectServlet extends HttpServlet {
         String title = request.getParameter("title");
         String n = request.getParameter("project");
         Gson gson = new Gson();
-        Project project = UserService.getInstance().getUser().getProjects().get(0);
+        Project project = UserService.getInstance().getUser("hermes").getProjects().get(0);
         System.out.println("n is "+n);
 //        if(n==null) {
         String projectGson =  gson.toJson(project);

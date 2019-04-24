@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = "/register", name = "RegisterServlet")
-public class LoginServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/login", name = "LoginServlet")
+public class RegisterServlet extends HttpServlet {
 
   private LoginService mLoginService = new LoginService();
 
@@ -28,8 +28,8 @@ public class LoginServlet extends HttpServlet {
     String password = request.getParameter("password");
 
     if (mLoginService.login(username, password)) {
-      request.getSession().setAttribute("username", username);
-      System.out.println(request.getSession().getAttribute("username"));
+      request.getSession().setAttribute("name", username);
+      System.out.println(request.getSession().getAttribute("name"));
       response.sendRedirect("/dashboard");
     } else {
       System.out.println("Invalid credentials");
