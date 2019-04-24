@@ -1,6 +1,15 @@
 <%@ page isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<%
+    String userName = null;
+    Cookie[] cookies = request.getCookies();
+    if(cookies !=null){
+        for(Cookie cookie : cookies){
+            if(cookie.getName().equals("username")) userName = cookie.getValue();
+        }
+    }
+%>
 <html>
 <head>
     <title>Dashboard</title>
@@ -9,30 +18,26 @@
     <link rel="stylesheet" href="/resources/css/main.css">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a href="/dashboard" class="navbar-brand">Milestone</a>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="nav navbar-nav">
-            <li class="nav-item m-2"><a href="/dashboard">Dashboard</a></li>
-        </ul>
 
-        <ul class="nav navbar-nav navbar-right">
-            <li class="nav-item"><a href="/login">Login</a></li>
-        </ul>
-    </div>
-</nav>
-
+<%@include file="WEB-INF/views/menu.jsp"%>
 <div class="container m-5">
     <div class="row">
         <aside class="col-3">
-            <img class="avatar" src="https://picsum.photos/2048/1365/?random">
-            <h1>Welcome </h1>
-            <a class="btn" href="/projects/?create" onclick="">Add Project</a>
+            <img class="avatar" src="https://ui-avatars.com/api/?name=<%=userName%>&size=512">
+            <div class="m-3">
+                <h1 >Welcome <br><span style="text-transform: capitalize"><%=userName%><p></p></h1>
+                <a class="btn btn-login text-white">Add Project</a>
+            </div>
+
         </aside>
         <main class="col-9">
             <div class="row">
                 <section class="col-6">
-
+                    <div id="add-new-project m-3" class="card">
+                        <input id="nameInput" type="text" class="form-control"
+                               placeholder="enter project name ">
+                        <p id="project">Title</p>
+                    </div>
                 <c:forEach begin="0" end="${(projectList.size()/2)-1}" items="${projectList}" var="project">
                         <a href="projects/?title=${project.getTitle()}" class="project card m-3">
                             <p><c:out value="${project.getTitle()}"/></p>
@@ -50,5 +55,8 @@
         </main>
     </div>
 </div>
+<script defer src="resources/js/jquery-3.3.1.js"></script>
+<script defer src="resources/js/script.js"></script>
+
 </body>
 </html>

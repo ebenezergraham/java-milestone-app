@@ -2,6 +2,7 @@ package DAO;
 
 import com.google.gson.Gson;
 import com.mongodb.*;
+import domain.model.Project;
 import domain.model.User;
 
 
@@ -27,5 +28,13 @@ public class DAO {
 		return new BasicDBObject("_id", user.getId())
 				.append("username", user.getUsername())
 				.append("hash", user.getHash());
+	}
+	
+	public void addProject(Project project){
+		collection.insert(toProjectObject(project));
+	}
+	
+	public static final DBObject toProjectObject(Project project) {
+		return new BasicDBObject("title", project.getTitle());
 	}
 }
