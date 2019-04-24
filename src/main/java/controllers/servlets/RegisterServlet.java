@@ -17,10 +17,10 @@ public class RegisterServlet extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest request,
                        HttpServletResponse response) throws ServletException, IOException {
-    request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
+    System.out.println("Got here!");
+    request.getRequestDispatcher("/WEB-INF/views/register.jsp").forward(request, response);
 
   }
-
   @Override
   protected void doPost(HttpServletRequest request,
                         HttpServletResponse response) throws ServletException, IOException {
@@ -34,7 +34,7 @@ public class RegisterServlet extends HttpServlet {
       System.out.println("Invalid credentials");
       String errorMessage = "Invalid credentials";
       request.setAttribute("Invalid credentials", errorMessage);
-      request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
+      request.getRequestDispatcher("/WEB-INF/views/register.jsp").forward(request, response);
     }
   }
 }

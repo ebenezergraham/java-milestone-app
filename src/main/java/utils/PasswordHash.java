@@ -9,10 +9,10 @@ import java.security.spec.InvalidKeySpecException;
 import java.util.stream.IntStream;
 
 public class PasswordHash {
-  private static final String PBKDF2_ALGORITHM = "PBKDF2WithHmacSHA512";
+  private static final String PBKDF2_ALGORITHM = "PBKDF2WithHmacSHA1";
   private static final int SALT_BYTES = 24;
-  private static final int HASH_BYTES = 64;
-  private static final int PBKDF2_ITERATIONS = 65536;
+  private static final int HASH_BYTES = 24;
+  private static final int PBKDF2_ITERATIONS = 10000;
 
   private static final int ITERATION_INDEX = 0;
   private static final int SALT_INDEX = 1;

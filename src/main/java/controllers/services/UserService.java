@@ -19,7 +19,7 @@ public class UserService {
   private UserService() {
     this.mGson = new Gson();
   }
-  DAO dao = new DAO();
+  private DAO dao = new DAO();
 /*  public User getUser() {
     User user = null;
     try (BufferedReader br = new BufferedReader(new FileReader("data.json"))) {
