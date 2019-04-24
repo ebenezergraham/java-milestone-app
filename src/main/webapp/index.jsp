@@ -10,7 +10,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a href="/" class="navbar-brand">Milestone</a>
+    <a href="/dashboard" class="navbar-brand">Milestone</a>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="nav navbar-nav">
             <li class="nav-item m-2"><a href="/dashboard">Dashboard</a></li>
@@ -27,21 +27,21 @@
         <aside class="col-3">
             <img class="avatar" src="https://picsum.photos/2048/1365/?random">
             <h1>Welcome </h1>
-            <a class="btn" href="/milestone" onclick="">Add Project</a>
+            <a class="btn" href="/projects/?create" onclick="">Add Project</a>
         </aside>
         <main class="col-9">
             <div class="row">
                 <section class="col-6">
 
-                <c:forEach items="${projectList}" var="project">
-                        <a href="projects/?title=${project.getTitle()}" class="project card">
+                <c:forEach begin="0" end="${(projectList.size()/2)-1}" items="${projectList}" var="project">
+                        <a href="projects/?title=${project.getTitle()}" class="project card m-3">
                             <p><c:out value="${project.getTitle()}"/></p>
                         </a>
                 </c:forEach>
                 </section>
                 <section class="col-6">
-                    <c:forEach items="${projectList}" var="project">
-                        <a href="projects/?title=${project.getTitle()}" class="project card">
+                    <c:forEach begin="${projectList.size()/2}" items="${projectList}" var="project">
+                        <a href="projects/?title=${project.getTitle()}" class="project card m-3">
                             <p><c:out value="${project.getTitle()}"/></p>
                         </a>
                     </c:forEach>

@@ -17,7 +17,7 @@ public class TestServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response) throws ServletException, IOException {
         String title = request.getParameter("title");
-        Project project = UserService.getInstance().getUser().getProjects().get(0);
+        Project project = UserService.getInstance().getUser("hermes").getProjects().get(0);
         request.setAttribute("title",title);
         request.setAttribute("allMilestones",project.getMilestones());
 //        request.setAttribute("ml",ml);
