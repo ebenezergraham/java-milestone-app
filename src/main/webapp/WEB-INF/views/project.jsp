@@ -150,7 +150,7 @@
             <div class="col-sm py-2">
               <div class="card border-success shadow">
                 <div class="card-body">
-                  <i class="fas fa-trash" onclick="delMilestone('${milestone.title}','${milestone.id}')"
+                  <i class="fas fa-trash" onclick="delMilestone('${title}','${milestone.title}')"
                      onmouseover="console.log('${milestone.id}')"></i>
 <%--                  <form action = "project.jsp" method = "DELETE">DELETE</form>--%>
                   <div class="float-right text-muted small">Start Date: ${milestone.startDate}</div>

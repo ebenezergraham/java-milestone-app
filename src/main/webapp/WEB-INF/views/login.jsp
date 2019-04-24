@@ -47,15 +47,6 @@
 <script defer src="/resources/js/jquery-3.3.1.js"></script>
 <script defer src="/resources/js/jquery.ripples.js"></script>
 <script defer src="/resources/js/script.js"></script>
-<script>
-	$("#loginbg").ripples({
-		resolution: 800,
-		dropRadius: 10,
-		perturbance: 0.002,
-		interactive: true,
-		crossOrigin: true
-	});
-</script>
 </body>
 
 

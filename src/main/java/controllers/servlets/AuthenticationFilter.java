@@ -42,9 +42,6 @@ public class AuthenticationFilter implements Filter {
 		if(uri.equals("/") && session ==null){
 			res.sendRedirect("/login");
 		}else{
-			
-		
-			
 				if (session.getAttribute("username") == null) {
 				this.context.log("Unauthorized");
 				res.sendRedirect("/login");
@@ -52,7 +49,7 @@ public class AuthenticationFilter implements Filter {
 				chain.doFilter(request, response);
 			}
 		}
-		}
+	}
 		
 	public void destroy() {
 	}

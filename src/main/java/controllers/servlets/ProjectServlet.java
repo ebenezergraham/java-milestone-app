@@ -35,20 +35,19 @@ public class ProjectServlet extends HttpServlet {
     @Override
     protected void doDelete(HttpServletRequest request,
                           HttpServletResponse response) throws ServletException, IOException {
+        System.out.println(request.getServletPath());
+        String projectTitle = request.getParameter("title");
+        String milestoneT = request.getParameter("ml");
         String milestoneID = request.getParameter("id");
         String name = request.getSession().getAttribute("username").toString();
-        Project project = UserService.getInstance().getUser(name).getProjects().get(0);
+        Project project = UserService.getInstance().getUser(name).getProject(projectTitle);
+        Milestone ml = project.getMilestone(milestoneT);
+        project.deleteMilestone(ml);
         System.out.println(milestoneID);
         System.out.println(project.getMilestones().size());
 
-//        Milestone delMilestone = project.getMilestone(milestoneID);
-//        System.out.println("You want to delete this milestone " + delMilestone.getTitle());
-//        request.setAttribute("project",project);
-//        System.out.println(request.getSession().getAttribute("project"));
-//        if (project.deleteMilestone(project.getMilestone(milestoneID))) {
-//            request.setAttribute("name", name);
-            System.out.println("AM I deleting stuff??");
-            response.sendRedirect("/WEB-INF/views/dashboard.jsp");
+        System.out.println("AM I deleting stuff??");
+        response.sendRedirect("/WEB-INF/views/dashboard.jsp");
 //        } else {
 //            request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
 //        }

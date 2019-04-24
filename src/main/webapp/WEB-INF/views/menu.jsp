@@ -10,10 +10,10 @@
 
 
 <%
-    String state = "Logout";
+    String state = "logout";
     if (request.getRequestedSessionId() != null
             && !request.isRequestedSessionIdValid()) {
-        state = "Login";
+        state = "login";
     }
 %>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -23,7 +23,7 @@
             <li class="nav-item m-2"><a href="/dashboard">Dashboard</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li class="nav-item"><a href="/<%=state%>"><%=state%></a></li>
+            <li class="nav-item"><a href="/<%=state%>"><span style="text-transform: capitalize"><%=state%></span></a></li>
         </ul>
     </div>
 </nav>

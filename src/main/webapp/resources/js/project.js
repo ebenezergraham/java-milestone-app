@@ -22,7 +22,7 @@ function delMilestone(title,id) {
       console.log(URL.slice(0, URL.indexOf("?")) + "delete/" + URL.slice(URL.indexOf("?")));
 
       if (result) {
-        var delURL = URL.slice(0, URL.indexOf("?")) + "delete/?id="+ id;
+        var delURL = URL.slice(0, URL.indexOf("?")) + "delete/?title="+title+"&ml="+ id;
         console.log(delURL);
         httpGetAsync(delURL,true,"DELETE");
         console.log("END");
@@ -39,7 +39,7 @@ function httpGetAsync(theUrl, callback, request) {
   }
   xmlHttp.open(request, theUrl, true); // true for asynchronous
   xmlHttp.send(null);
-  location.reload();
+  // location.reload();
 
 }
 
