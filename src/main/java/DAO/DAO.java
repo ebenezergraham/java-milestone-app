@@ -2,11 +2,16 @@ package DAO;
 
 import com.google.gson.Gson;
 import com.mongodb.*;
+import com.mongodb.DB;
 import domain.model.Project;
 import domain.model.User;
 
 
 public class DAO {
+	
+	public DAO(){
+	
+	}
 	private Gson mGson = new Gson();
 	MongoClient mongoClient = new MongoClient(new MongoClientURI("mongodb://localhost:27017"));
 	DB database = mongoClient.getDB("mpdb");
@@ -31,6 +36,7 @@ public class DAO {
 	}
 	
 	public void addProject(Project project){
+		collection.find(new BasicDBObject("username", "hermes"));
 		collection.insert(toProjectObject(project));
 	}
 	

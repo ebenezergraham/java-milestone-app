@@ -147,3 +147,7 @@ h1{
 	color: white;
 	background-color: #216558;
 }
+
+#nameInput{
+	display: block;
+}

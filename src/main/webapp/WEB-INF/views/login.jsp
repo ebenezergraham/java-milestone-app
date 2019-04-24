@@ -46,7 +46,7 @@
 
 <script defer src="/resources/js/jquery-3.3.1.js"></script>
 <script defer src="/resources/js/jquery.ripples.js"></script>
-<script defer src="/resources/js/script.js"></script>
+<script defer src="/resources/js/login.js"></script>
 </body>
 
 

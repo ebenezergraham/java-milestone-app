@@ -18,8 +18,18 @@
     <link rel="stylesheet" href="/resources/css/main.css">
 </head>
 <body>
-
+<%@ page import="DAO.DAO" %>
+<%@ page import="domain.model.Project" %>
 <%@include file="WEB-INF/views/menu.jsp"%>
+<%
+    String title = request.getParameter("project");
+    DAO dao = new DAO();
+    if(title !=null){
+    	Project project = new Project();
+    	project.setTitle(title);
+        dao.addProject(project);
+    }
+%>
 <div class="container m-5">
     <div class="row">
         <aside class="col-3">
@@ -33,11 +43,14 @@
         <main class="col-9">
             <div class="row">
                 <section class="col-6">
-                    <div id="add-new-project m-3" class="card">
-                        <input id="nameInput" type="text" class="form-control"
+                    <a id="add-new-project m-3" class="card">
+                        <form action="index.jsp">
+
+                        <input id="nameInput" name="project" type="text" class="form-control"
                                placeholder="enter project name ">
-                        <p id="project">Title</p>
-                    </div>
+                        </form>
+                            <p id="project"></p>
+                    </a>
                 <c:forEach begin="0" end="${(projectList.size()/2)-1}" items="${projectList}" var="project">
                         <a href="projects/?title=${project.getTitle()}" class="project card m-3">
                             <p><c:out value="${project.getTitle()}"/></p>

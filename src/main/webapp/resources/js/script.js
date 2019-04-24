@@ -1,7 +1,6 @@
-$("#loginbg").ripples({
-	resolution: 800,
-	dropRadius: 10,
-	perturbance: 0.002,
-	interactive: true,
-	crossOrigin: true
+$("#nameInput").on('keypress', function (e) {
+	if (e.which === 13) {
+		localStorage.setItem("name", $("#nameInput").val());
+		document.getElementById("nameInput").style.display = "none";
+	}
 });

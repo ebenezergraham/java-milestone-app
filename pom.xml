@@ -110,8 +110,15 @@
       <artifactId>bootstrap</artifactId>
       <version>4.3.1</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <version>1.4.199</version>
+    </dependency>
 
-<!--    &lt;!&ndash; https://mvnrepository.com/artifact/org.webjars.npm/popper.js &ndash;&gt;-->
+
+    <!--    &lt;!&ndash; https://mvnrepository.com/artifact/org.webjars.npm/popper.js &ndash;&gt;-->
 <!--    <dependency>-->
 <!--      <groupId>org.webjars.npm</groupId>-->
 <!--      <artifactId>popper.js</artifactId>-->

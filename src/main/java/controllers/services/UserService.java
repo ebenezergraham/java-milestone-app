@@ -1,6 +1,7 @@
 package controllers.services;
 
 import DAO.DAO;
+import DAO.DB;
 import com.google.gson.Gson;
 import domain.model.User;
 import org.slf4j.Logger;
@@ -14,7 +15,7 @@ public class UserService {
   private static final Logger LOGGER = LoggerFactory.getLogger(UserService.class.getName());
   private Gson mGson;
   private static UserService instance = null;
-
+  DB db = new DB();
   public static UserService getInstance() {
     if (instance == null) instance = new UserService();
     return instance;
@@ -34,7 +35,11 @@ public class UserService {
     return user;
   }*/
   
-  public User getUser(String username) {
+/*  public User getUser(String username) {
     return dao.getUser(username);
+  }*/
+  
+  public User getUser(String username) {
+    return db.getUser(username);
   }
 }

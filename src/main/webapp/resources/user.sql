@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS users (
+  id int AUTO_INCREMENT PRIMARY KEY,
+  hash VARCHAR(255),
+  salt VARCHAR(255),
+  email VARCHAR(255),
+  username VARCHAR(255)
+);
