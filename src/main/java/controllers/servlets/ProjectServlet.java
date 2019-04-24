@@ -35,13 +35,10 @@ public class ProjectServlet extends HttpServlet {
     @Override
     protected void doDelete(HttpServletRequest request,
                           HttpServletResponse response) throws ServletException, IOException {
-        String projectTitle = request.getParameter("project");
-        String milestoneT = request.getParameter("ml");
-        Project project = UserService.getInstance().getUser("hermes").getProject(projectTitle);
-        Milestone ml = project.getMilestone(milestoneT);
-        project.deleteMilestone(ml);
-//        UserService.getInstance().getUser().getProject(project);
-//        System.out.println(milestoneID);
+        String milestoneID = request.getParameter("id");
+        String name = request.getSession().getAttribute("username").toString();
+        Project project = UserService.getInstance().getUser(name).getProjects().get(0);
+        System.out.println(milestoneID);
         System.out.println(project.getMilestones().size());
 
 //        Milestone delMilestone = project.getMilestone(milestoneID);
