@@ -9,7 +9,6 @@ import org.apache.catalina.webresources.StandardRoot;
 import javax.servlet.ServletException;
 import java.io.File;
 import java.io.IOException;
-import java.net.UnknownHostException;
 import java.util.logging.Logger;
 
 public class Runner {
@@ -44,8 +43,6 @@ public class Runner {
       db.testStartAndStopMongoImportAndMongod();
     } catch (LifecycleException e) {
       LOGGER.warning(e.getMessage());
-    } catch (UnknownHostException e) {
-      e.printStackTrace();
     } catch (IOException e) {
       e.printStackTrace();
     }

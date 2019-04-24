@@ -27,13 +27,12 @@ public class LoginService {
   }
 
   public synchronized boolean register(@NonNull String username, @NonNull String password) {
-    this.mUser = UserService.getInstance().getUser(username);
+    System.out.println(username);
     String hash;
     if (mUser == null) {
       try {
         hash = PasswordHash.createHash(password);
-        User user = new User(hash, username);
-        dao.addUser(user);
+        dao.addUser(username, hash);
       } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
         e.printStackTrace();
       }

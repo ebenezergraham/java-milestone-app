@@ -13,15 +13,9 @@ public class User {
   @SerializedName("hash")
   @Expose
   private String hash;
-  @SerializedName("salt")
+  @SerializedName("user_name")
   @Expose
-  private String salt;
-  @SerializedName("email")
-  @Expose
-  private String email;
-  @SerializedName("username")
-  @Expose
-  private String username;
+  private String userName;
   @SerializedName("projects")
   @Expose
   private List<Project> projects = null;
@@ -32,27 +26,17 @@ public class User {
   public User() {
   }
 
-  public User(String hash, String username) {
-    super();
-    this.hash = hash;
-    this.username = username;
-  }
-
   /**
    * @param id
    * @param projects
-   * @param username
-   * @param email
    * @param hash
-   * @param salt
+   * @param userName
    */
-  public User(String id, String hash, String salt, String email, String username, List<Project> projects) {
+  public User(String id, String hash, String userName, List<Project> projects) {
     super();
     this.id = id;
     this.hash = hash;
-    this.salt = salt;
-    this.email = email;
-    this.username = username;
+    this.userName = userName;
     this.projects = projects;
   }
 
@@ -72,28 +56,12 @@ public class User {
     this.hash = hash;
   }
 
-  public String getSalt() {
-    return salt;
+  public String getUserName() {
+    return userName;
   }
 
-  public void setSalt(String salt) {
-    this.salt = salt;
-  }
-
-  public String getEmail() {
-    return email;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
-  }
-
-  public String getUsername() {
-    return username;
-  }
-
-  public void setUsername(String username) {
-    this.username = username;
+  public void setUserName(String userName) {
+    this.userName = userName;
   }
 
   public List<Project> getProjects() {
@@ -107,7 +75,8 @@ public class User {
   public Project getProject(String title) {
     return this.projects.stream().filter(project -> project.getTitle().equals(title)).findFirst().orElse(null);
   }
-  public boolean removeProject(Project p){
+
+  public boolean removeProject(Project p) {
     return this.projects.remove(p);
   }
 }

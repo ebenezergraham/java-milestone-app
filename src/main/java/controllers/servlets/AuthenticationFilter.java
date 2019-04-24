@@ -27,15 +27,6 @@ public class AuthenticationFilter implements Filter {
 		HttpSession session = req.getSession(false);
 		this.context.log("Requested Resource::" + uri);
 
-//		if (uri.equals("/register")) {
-//			System.out.println("register redurect ..");
-//			chain.doFilter(request, response);
-
-//			res.sendRedirect("/register");
-//			chain.doFilter(request, response);
-//			return;
-//		}
-
 		if (uri.equals("/login")|| (uri.equals("/register"))){
 			System.out.println("register redirect ..");
 			chain.doFilter(request, response);
@@ -43,8 +34,6 @@ public class AuthenticationFilter implements Filter {
 			return;
 		}
 
-//		uri.equals("/") &&
-		
 		else if(session ==null){
 			res.sendRedirect("/login");
 		}
