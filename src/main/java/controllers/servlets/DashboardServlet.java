@@ -14,29 +14,26 @@ import java.util.List;
 
 @WebServlet(urlPatterns = "/dashboard")
 public class DashboardServlet extends HttpServlet {
-    
-    List<Project> projectList;
-    
-    @Override
-    protected void doGet(HttpServletRequest request,
-                         HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session=request.getSession(false);
-        if(session!=null){
-            String name=(String)session.getAttribute("username");
-            System.out.println("Session username: "+name);
-            projectList = UserService.getInstance().getUser(name).getProjects();
-            request.setAttribute("projectList",projectList);
-            request.getRequestDispatcher("index.jsp").forward(request,response);
-        }
-        else{
-            response.sendRedirect("/login");
-        }
-        
+
+  @Override
+  protected void doGet(HttpServletRequest request,
+                       HttpServletResponse response) throws ServletException, IOException {
+    HttpSession session = request.getSession(false);
+    if (session != null) {
+      String name = (String) session.getAttribute("username");
+      System.out.println("Session username: " + name);
+      List<Project> projectList = UserService.getInstance().getUser(name).getProjects();
+      request.setAttribute("projectList", projectList);
+      request.getRequestDispatcher("index.jsp").forward(request, response);
+    } else {
+      response.sendRedirect("/login");
     }
-    
-    @Override
-    protected void doPost(HttpServletRequest request,
-                          HttpServletResponse response) throws ServletException, IOException {
-        
-    }
+
+  }
+
+  @Override
+  protected void doPost(HttpServletRequest request,
+                        HttpServletResponse response) throws ServletException, IOException {
+
+  }
 }

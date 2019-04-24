@@ -32,6 +32,12 @@ public class User {
   public User() {
   }
 
+  public User(String hash, String username) {
+    super();
+    this.hash = hash;
+    this.username = username;
+  }
+
   /**
    * @param id
    * @param projects
