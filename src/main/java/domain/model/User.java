@@ -2,7 +2,6 @@ package domain.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.mongodb.lang.Nullable;
 
 import java.util.List;
 
@@ -17,7 +16,6 @@ public class User {
   @SerializedName("user_name")
   @Expose
   private String userName;
-  @Nullable
   @SerializedName("projects")
   @Expose
   private List<Project> projects = null;

@@ -1,6 +1,6 @@
 package controllers.services;
 
-import DAO.DAO;
+import DAO.H2db;
 import com.google.gson.Gson;
 import domain.model.User;
 import org.slf4j.Logger;
@@ -19,7 +19,7 @@ public class UserService {
   private UserService() {
     this.mGson = new Gson();
   }
-  private DAO dao = new DAO();
+  private H2db dao = new H2db();
 /*  public User getUser() {
     User user = null;
     try (BufferedReader br = new BufferedReader(new FileReader("data.json"))) {

@@ -1,6 +1,6 @@
 package controllers.servlets;
 
-import DAO.DAO;
+import DAO.H2db;
 import com.google.gson.Gson;
 import controllers.services.UserService;
 import domain.model.Milestone;
@@ -17,7 +17,7 @@ import java.sql.SQLException;
 
 @WebServlet(urlPatterns = "/project")
 public class ProjectServlet extends HttpServlet {
-    DAO dao = new DAO();
+    H2db dao = new H2db();
     @Override
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response) throws ServletException, IOException {
@@ -33,7 +33,7 @@ public class ProjectServlet extends HttpServlet {
         if (title != null) {
             Project project = new Project();
             project.setTitle(title);
-            dao.addProject(request.getSession().getAttribute("username").toString(),project);
+           // dao.addProject(request.getSession().getAttribute("username").toString(),project);
         }
 	      response.sendRedirect("/dashboard");
     }
