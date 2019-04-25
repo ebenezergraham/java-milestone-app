@@ -34,7 +34,6 @@
         background-color: #216558;
     }
 </style>
-<%--<%@ page import="DAO.DAO" %>--%>
 <%@include file="WEB-INF/views/menu.jsp" %>
 <div class="container m-5">
     <div class="row">

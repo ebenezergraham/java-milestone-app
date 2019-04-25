@@ -1,8 +1,7 @@
 package controllers.servlets;
 
-import DAO.H2Milestone;
-import DAO.H2Project;
-import com.google.gson.Gson;
+import DAO.DAOFactory;
+import DAO.MilestoneDAO;
 import controllers.services.UserService;
 import domain.model.Milestone;
 import domain.model.Project;
@@ -17,7 +16,9 @@ import java.util.List;
 
 @WebServlet(urlPatterns = "/project/*")
 public class MilestoneServlet extends HttpServlet {
+    MilestoneDAO dao = DAOFactory.getMilestoneDAO();
 
+    
     @Override
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response) throws ServletException, IOException {
@@ -33,7 +34,6 @@ public class MilestoneServlet extends HttpServlet {
         String ptitle = request.getParameter("title");
         System.out.println("Adding Milestone");
         System.out.println("------------------------");
-        H2Milestone dao = new H2Milestone();
         Milestone newML = new Milestone(request.getParameter(ptitle),request.getParameter(ptitle), ptitle);
         dao.addMilestone(newML);
         response.sendRedirect(getFullURL(request));
@@ -89,8 +89,8 @@ public class MilestoneServlet extends HttpServlet {
     private void listMilestones(HttpServletRequest request,
                            HttpServletResponse response) throws ServletException, IOException {
         String ptitle = request.getParameter("title");
-//        String pID = new H2Project().getProject();
-        H2Milestone dao = new H2Milestone();
+//        String pID = new ProjectDAO().getProject();
+        MilestoneDAO dao = new MilestoneDAO();
         List<Milestone> allM = dao.findMilestones(ptitle);
         request.setAttribute("allMilestones",allM);
 //        String n = request.getParameter("project");

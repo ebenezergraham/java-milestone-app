@@ -1,7 +1,7 @@
 package controllers.servlets;
 
-import DAO.H2Project;
-import DAO.H2db;
+import DAO.DAOFactory;
+import DAO.ProjectDAO;
 import controllers.services.UserService;
 import domain.model.Milestone;
 import domain.model.Project;
@@ -16,14 +16,13 @@ import java.io.IOException;
 
 @WebServlet(urlPatterns = "/projects")
 public class ProjectServlet extends HttpServlet {
-    H2Project dao = new H2Project();
+    ProjectDAO dao = DAOFactory.getProjectDAO();
+    
     @Override
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response) throws ServletException, IOException {
-
     }
-
-
+    
     @Override
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response) throws ServletException, IOException {
@@ -41,7 +40,6 @@ public class ProjectServlet extends HttpServlet {
             if (dao.getProject(userId,ptitle)==null){
               dao.addProject(new Project(ptitle,userId));
               System.out.println("Project added !");
-              System.out.println("success!");
             }else{
               System.out.println("project exists already!");
             }

@@ -9,40 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings("ALL")
-public class H2Project implements AutoCloseable {
+public class ProjectDAO implements AutoCloseable {
     @SuppressWarnings("unused")
-    static final Logger LOG = LoggerFactory.getLogger(H2db.class);
-
-    public static final String MEMORY = "jdbc:h2:mem:mpdb";
-    public static final String FILE = "jdbc:h2:~/mp";
+    static final Logger LOG = LoggerFactory.getLogger(ProjectDAO.class);
     private Connection connection;
-
-  public String getUserId() {
-    return userId;
-  }
-
-  public void setUserId(String userId) {
-    this.userId = userId;
-  }
-
-  private String userId;
-    static Connection getConnection(String db) throws SQLException, ClassNotFoundException {
-      Class.forName("org.h2.Driver");
-      // ensure the driver class is loaded when the DriverManager looks for an installed class. Idiom.
-      return DriverManager.getConnection(db, "", "");  // default password, ok for embedded.
-    }
-
-    public H2Project() {
-      this(FILE);
-    }
-
-    public H2Project(String db) {
-      try {
-        connection = getConnection(db);
-        loadResource();
-      } catch (ClassNotFoundException | SQLException e) {
-        throw new RuntimeException(e);
-      }
+    
+    public ProjectDAO() {
+      connection = DAOFactory.getConnection();
     }
 
     @Override
@@ -102,21 +75,6 @@ public class H2Project implements AutoCloseable {
             throw new RuntimeException(e);
         }
         return out;
-    }
-
-    private void loadResource() {
-      try {
-        String cmd = "CREATE TABLE IF NOT EXISTS projects (" +
-            "id int AUTO_INCREMENT PRIMARY KEY, " +
-            "title VARCHAR(255), " +
-            "user_id VARCHAR(255)," +
-            "foreign key (user_id) references users(id)) ";
-        PreparedStatement ps = connection.prepareStatement(cmd);
-        ps.execute();
-      } catch (SQLException e) {
-        System.out.println(e);
-//				throw new RuntimeException(e);
-      }
     }
   }
 

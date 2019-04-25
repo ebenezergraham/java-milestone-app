@@ -1,8 +1,7 @@
 package controllers.servlets;
 
-import DAO.H2Project;
-import DAO.H2db;
-import controllers.services.UserService;
+import DAO.DAOFactory;
+import DAO.ProjectDAO;
 import domain.model.Project;
 import domain.model.User;
 
@@ -17,7 +16,7 @@ import java.util.List;
 
 @WebServlet(urlPatterns = "/dashboard")
 public class DashboardServlet extends HttpServlet {
-//  H2Project h2Project= new H2Project();
+  ProjectDAO dao = DAOFactory.getProjectDAO();
 
   @Override
   protected void doGet(HttpServletRequest request,
@@ -26,7 +25,6 @@ public class DashboardServlet extends HttpServlet {
     if (session != null) {
       User usr = (User) session.getAttribute("userobj");
       System.out.println("Dashboard Servlet - Session username: " + usr.getUserName());
-      H2Project dao= new H2Project();
       List<Project> projectList = dao.findProjects(usr.getId());
       request.setAttribute("projectList", projectList);
       request.getRequestDispatcher("index.jsp").forward(request, response);

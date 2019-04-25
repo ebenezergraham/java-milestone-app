@@ -9,31 +9,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings("SqlDialectInspection")
-public class H2Milestone implements AutoCloseable {
+public class MilestoneDAO implements AutoCloseable {
   @SuppressWarnings("unused")
-  static final Logger LOG = LoggerFactory.getLogger(H2db.class);
+  static final Logger LOG = LoggerFactory.getLogger(MilestoneDAO.class);
 
-  public static final String MEMORY = "jdbc:h2:mem:mpdb";
-  public static final String FILE = "jdbc:h2:~/mp";
   private Connection connection;
 
-  static Connection getConnection(String db) throws SQLException, ClassNotFoundException {
-    Class.forName("org.h2.Driver");
-    // ensure the driver class is loaded when the DriverManager looks for an installed class. Idiom.
-    return DriverManager.getConnection(db, "", "");  // default password, ok for embedded.
-  }
-
-  public H2Milestone() {
-    this(FILE);
-  }
-
-  public H2Milestone(String db) {
-    try {
-      connection = getConnection(db);
+  public MilestoneDAO() {
+      connection = DAOFactory.getConnection();
       loadResource();
-    } catch (ClassNotFoundException | SQLException e) {
-      throw new RuntimeException(e);
-    }
   }
 
   @Override
@@ -109,25 +93,24 @@ public class H2Milestone implements AutoCloseable {
     }
     return out;
   }
-
-  private void loadResource() {
-    try {
-      //String cmd = new Scanner(getClass().getResource(name).openStream()).useDelimiter("\\Z").next();
-      String cmd = "CREATE TABLE IF NOT EXISTS milestones (" +
-          "id int AUTO_INCREMENT PRIMARY KEY," +
-          "title VARCHAR(255), " +
-          "description VARCHAR(255), "+
-          "status VARCHAR(255) ," +
-          "start_date VARCHAR(255) ," +
-          "due_date VARCHAR(255)," +
-          "end_date VARCHAR(255)," +
-          "project_title VARCHAR(255) NOT NULL, " +
-          "foreign key (project_title) references projects(title))";
-      PreparedStatement ps = connection.prepareStatement(cmd);
+  
+  public void updateMilestone(String projectID, Milestone ml) {
+    final String UPDATE_MILESTONE_QUERY = "UPDATE milestone SET title = ? description = ? status = ? start_date = ? due_date = ? end_date = ? WHERE project_title = ?";
+    try (PreparedStatement ps = connection.prepareStatement(UPDATE_MILESTONE_QUERY)) {
+      ps.setString(1, ml.getTitle());
+      ps.setString(2, ml.getDescription());
+      ps.setString(3, ml.getStatus());
+      ps.setString(4, ml.getStartDate());
+      ps.setString(5, ml.getDueDate());
+      ps.setString(6, ml.getEndDate());
+      ps.setString(7, ml.getProjectId());
       ps.execute();
     } catch (SQLException e) {
-      System.out.println(e);
-//				throw new RuntimeException(e);
+      throw new RuntimeException(e);
     }
+  }
+
+  private void loadResource() {
+  
   }
 }
