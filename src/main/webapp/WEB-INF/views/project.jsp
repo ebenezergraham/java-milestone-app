@@ -22,45 +22,21 @@
 
 <%--<div class="container">--%>
   <h1>Project ${title}</h1>
-<%--<div>--%>
-<%--  <a id="add-new-milestone">--%>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add">Add Milestone</button>
 
-<%--&lt;%&ndash;    <h2>${pageContext.request.getAttribute("javax.servlet.forward.request_uri")}<</h2>&ndash;%&gt;--%>
-<%--    <form method="post" id="add_form">--%>
-<%--      <input id="titleInput" name="mlT"  type="text" placeholder="enter milestone title">--%>
-<%--      <input id="DescriptionInput" name="mlD" type="text" class="form-control"--%>
-<%--             placeholder="enter project description">--%>
-<%--      <button type="submit">Add</button>--%>
-<%--    </form>--%>
-<%--    <p id="project"></p>--%>
-<%--  </a>--%>
-<%--</div>--%>
-<%--<h3>${pageContext.request.getRequestDispatcher()}</h3>--%>
-<%--<h2>${pageContext.request.queryString}</h2>--%>
-<%--<h3>${pageContext.request.getAttribute("javax.servlet.forward.request_uri")}</h3>--%>
-<%--<h3>${requestScope['javax.servlet.forward.query_string']}</h3>--%>
-<%--<h2>${requestScope['javax.servlet.forward.request_uri']}</h2>--%>
+<%@include file="add_milestone_form.jsp" %>
+
+<%--  <button>Add Milestone</button>--%>
   <div class="container py-2">
 <%--  <c:set var = "right" value = "${true}"/>--%>
     <c:set var = "count" value = "0" scope="request"/>
     <c:forEach items="${allMilestones}" var="milestone">
       <%@ include file="milestone.jsp" %>
-<%--      <c:choose>--%>
-<%--      <c:when test="${count%2==0}">--%>
-<%--        <%@ include file="milestone_right.jsp" %>--%>
-<%--      </c:when>--%>
-
-<%--        <c:otherwise>--%>
-<%--&lt;%&ndash;          <c:set var = "right" value = "${true}"/>&ndash;%&gt;--%>
-<%--          <%@include file="milestone_left.jsp" %>--%>
-
-<%--        </c:otherwise>--%>
-<%--        </c:choose>--%>
       <c:set var = "count" value = "${count+1}" scope="page"/>
 
     </c:forEach>
 
-      </div>
+  </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
@@ -73,3 +49,16 @@
 
 
 </html>
+
+
+<%--      <c:choose>--%>
+<%--      <c:when test="${count%2==0}">--%>
+<%--        <%@ include file="milestone_right.jsp" %>--%>
+<%--      </c:when>--%>
+
+<%--        <c:otherwise>--%>
+<%--&lt;%&ndash;          <c:set var = "right" value = "${true}"/>&ndash;%&gt;--%>
+<%--          <%@include file="milestone_left.jsp" %>--%>
+
+<%--        </c:otherwise>--%>
+<%--        </c:choose>--%>

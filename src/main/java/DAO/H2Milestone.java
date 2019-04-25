@@ -51,7 +51,7 @@ public class H2Milestone implements AutoCloseable {
 
 
   public void addMilestone(Milestone ml) {
-      final String ADD_MILESTONE_QUERY = "INSERT INTO milestones (title,description,status, start_date, due_date, " +
+      final String ADD_MILESTONE_QUERY = "INSERT INTO milestones (title,description,status, start_date, due_date," +
           "end_date, project_title) VALUES (?,?,?,?,?,?,?)";
     try (PreparedStatement ps = connection.prepareStatement(ADD_MILESTONE_QUERY)) {
       ps.setString(1, ml.getTitle());
@@ -62,6 +62,8 @@ public class H2Milestone implements AutoCloseable {
       ps.setString(6, ml.getEndDate());
       ps.setString(7, ml.getProjectTitle());
       ps.execute();
+      System.out.println("H2 adding milestone");
+
     } catch (SQLException e) {
       throw new RuntimeException(e);
     }
@@ -103,7 +105,8 @@ public class H2Milestone implements AutoCloseable {
 
   public boolean editMilestone(Milestone ml) {
     final String UPDATE_MILESTONE_QUERY =
-        "UPDATE milestones title, description, status, start_date, due_date, end_date WHERE id='"+ml.getId()+"' VALUES (?,?,?,?,?,?)";
+        "UPDATE milestones SET title = ?, description=?, status=?, start_date=?, due_date=?, end_date=? WHERE id = ?";
+
 //    Project project = new Project();
     try (PreparedStatement ps = connection.prepareStatement(UPDATE_MILESTONE_QUERY)) {
       ps.setString(1, ml.getTitle());
@@ -112,11 +115,14 @@ public class H2Milestone implements AutoCloseable {
       ps.setString(4, ml.getStartDate());
       ps.setString(5, ml.getDueDate());
       ps.setString(6, ml.getEndDate());
+      ps.setString(7, ml.getId());
+      ps.execute();
 //      ps.setString(7, ml.getProjectTitle());
+      System.out.println("there is something");
       return true;
     } catch (SQLException e) {
-      return false;
-//      throw new RuntimeException(e);
+//      return false;
+      throw new RuntimeException(e);
     }
 //    return false;
   }

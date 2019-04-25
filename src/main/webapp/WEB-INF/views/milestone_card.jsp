@@ -21,7 +21,8 @@
       <span class="float-right">&emsp;&emsp;
               <i class="fas fa-circle"></i>
               &emsp;&emsp;
-              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-pen"></i></button>
+              <button type="button" class="btn btn-primary" data-toggle="modal"
+                      data-target="#editForm${milestone.id}"><i class="fas fa-pen"></i></button>
           </span>
       <%@include file="milestone_form.jsp" %>
 

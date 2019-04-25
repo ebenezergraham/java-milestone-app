@@ -43,7 +43,17 @@ public class MilestoneServlet extends HttpServlet {
         System.out.println("Adding Milestone");
         System.out.println("------------------------");
         H2Milestone dao = new H2Milestone();
-        Milestone newML = new Milestone(request.getParameter(ptitle),request.getParameter(ptitle), ptitle);
+        Milestone newML = new Milestone(
+            request.getParameter("mlID"),
+            request.getParameter("mlTitle"),
+            request.getParameter("mlDescription"),
+            request.getParameter("mlStatus"),
+            request.getParameter("mlStartDate"),
+            request.getParameter("mlDueDate"),
+            request.getParameter("mlEndDate"),
+            ptitle
+        );
+        System.out.println("the new milestone is "+ newML.getTitle());
         dao.addMilestone(newML);
         response.sendRedirect(getFullURL(request));
 

@@ -48,8 +48,8 @@ public class EditMilestoneServlet extends HttpServlet {
         );
 //    System.out.println(dao.milestoneExists(newML.getId()));
     if(dao.milestoneExists(newML.getId())) {
-      System.out.println("NEW ML title and ID "+newML.getTitle()+ newML.getId());
-      dao.editMilestone(newML);
+      System.out.println("EXISTS "+newML.getTitle()+ newML.getId());
+      System.out.println(dao.editMilestone(newML));
     }
     System.out.println("project title"+ptitle);
     request.removeAttribute("mlID");

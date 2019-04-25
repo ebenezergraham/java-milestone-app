@@ -1,6 +1,5 @@
 <!-- Modal -->
-<div class="modal fade" id="editForm${milestone.id}" tabindex="-1" role="dialog"
-     aria-labelledby="exampleModalCenterTitle"
+<div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
      aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -11,35 +10,35 @@
       </div>
       <div class="modal-body">
 
-        <form action="/project/edit/?title=${title}&mlID=${milestone.id}" id="edit${milestone.id}"
-              METHOD="post">
+        <form action="project/?title=${title}" METHOD="post">
           <div class="form-group">
-            <label for="t${milestone.title}">Title</label><br>
-            <h3><input type="text" class="form-control modal-title" id="t${milestone.title}" value="${milestone.title}" name="mlTitle"></h3>
+            <label for="title${milestone.title}">Title</label><br>
+            <h3><input type="text" class="form-control modal-title" id="title${milestone.id}"
+                        name="mlTitle"></h3>
           </div>
 
           <div class="form-group">
-            <label for="desc${milestone.title}">Description</label>
-            <textarea rows ="5" cols = "50" id = "desc${milestone.title}"
-                      class="form-control" name="mlDescription">${milestone.description}</textarea>
+            <label for="description${milestone.id}">Description</label>
+            <textarea rows ="5" cols = "50" id = "description${milestone.id}"
+                      class="form-control" name="mlDescription"></textarea>
           </div>
 
           <div class="form-group">
             <label for="start${milestone.id}">Start ${milestone.startDate}</label>
             <input type="datetime-local" class="form-control" id="start${milestone.id}"
-                   value="${milestone.startDate}" name="mlStartDate">
+                    name="mlStartDate">
           </div>
 
           <div class="form-group">
             <label for="end${milestone.id}">End</label>
             <input type="datetime-local" class="form-control" id="end${milestone.id}"
-                   value="${milestone.endDate}" name="mlDueDate">
+                   name="mlDueDate">
           </div>
 
           <div class="form-group">
             <label for="end${milestone.id}">End</label>
             <input type="datetime-local" class="form-control" id="end${milestone.id}"
-                   value="${milestone.endDate}" name="mlEndDate">
+                   name="mlEndDate">
           </div>
 
           <div class="modal-footer">
