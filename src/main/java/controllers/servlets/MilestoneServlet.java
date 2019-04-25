@@ -1,5 +1,7 @@
 package controllers.servlets;
 
+import DAO.H2Milestone;
+import DAO.H2Project;
 import com.google.gson.Gson;
 import controllers.services.UserService;
 import domain.model.Milestone;
@@ -11,8 +13,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
-@WebServlet(urlPatterns = "/projects/*")
+@WebServlet(urlPatterns = "/project/*")
 public class MilestoneServlet extends HttpServlet {
 
     @Override
@@ -27,6 +30,13 @@ public class MilestoneServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response) throws ServletException, IOException {
+        String ptitle = request.getParameter("title");
+        System.out.println("Adding Milestone");
+        System.out.println("------------------------");
+        H2Milestone dao = new H2Milestone();
+        Milestone newML = new Milestone(request.getParameter(ptitle),request.getParameter(ptitle), ptitle);
+        dao.addMilestone(newML);
+        response.sendRedirect(getFullURL(request));
 
     }
 
@@ -78,23 +88,37 @@ public class MilestoneServlet extends HttpServlet {
 
     private void listMilestones(HttpServletRequest request,
                            HttpServletResponse response) throws ServletException, IOException {
-        String title = request.getParameter("title");
-        String n = request.getParameter("project");
-        Gson gson = new Gson();
-        Project project = UserService.getInstance().getUser("hermes").getProjects().get(0);
-        System.out.println("n is "+n);
+        String ptitle = request.getParameter("title");
+//        String pID = new H2Project().getProject();
+        H2Milestone dao = new H2Milestone();
+        List<Milestone> allM = dao.findMilestones(ptitle);
+        request.setAttribute("allMilestones",allM);
+//        String n = request.getParameter("project");
+//        Gson gson = new Gson();
+//        Project project = UserService.getInstance().getUser("hermes").getProjects().get(0);
+//        System.out.println("n is "+n);
 //        if(n==null) {
-        String projectGson =  gson.toJson(project);
+//        String projectGson =  gson.toJson(project);
 //        }
 //        else {
 //            project =  UserService.getInstance().getUser().getProjects().get(1);
 //        }
-        request.setAttribute("title",title);
-        request.setAttribute("allMilestones", project.getMilestones());
-//        request.setAttribute("allMilestones",project.getMilestones());
+//        request.setAttribute("title",title);
+//        request.setAttribute("allMilestones", project.getMilestones());
 
         request.getRequestDispatcher("/WEB-INF/views/project.jsp").forward(request,response);
 
+    }
+
+    public static String getFullURL(HttpServletRequest request) {
+        StringBuilder requestURL = new StringBuilder(request.getRequestURL().toString());
+        String queryString = request.getQueryString();
+
+        if (queryString == null) {
+            return requestURL.toString();
+        } else {
+            return requestURL.append('?').append(queryString).toString();
+        }
     }
 
 }

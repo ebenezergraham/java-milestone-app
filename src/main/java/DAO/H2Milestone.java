@@ -1,11 +1,12 @@
 package DAO;
 
 import domain.model.Milestone;
-import domain.model.Milestone;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @SuppressWarnings("SqlDialectInspection")
 public class H2Milestone implements AutoCloseable {
@@ -50,7 +51,7 @@ public class H2Milestone implements AutoCloseable {
 
   public void addMilestone(Milestone ml) {
       final String ADD_MILESTONE_QUERY = "INSERT INTO milestones (title,description,status, start_date, due_date, " +
-          "end_date, project_id) VALUES (?,?,?,?,?,?,?)";
+          "end_date, project_title) VALUES (?,?,?,?,?,?,?)";
     try (PreparedStatement ps = connection.prepareStatement(ADD_MILESTONE_QUERY)) {
       ps.setString(1, ml.getTitle());
       ps.setString(2, ml.getDescription());
@@ -66,8 +67,7 @@ public class H2Milestone implements AutoCloseable {
   }
 
   public Milestone getMilestone(String title) {
-    final String GET_MILESTONE_QUERY = "SELECT title,description,status, start_date, due_date, end_date, " +
-        "project_id  FROM milestones WHERE title='"+title+"'";
+    final String GET_MILESTONE_QUERY = "SELECT title,description,status, start_date, due_date, end_date, project_title  FROM milestones WHERE title='"+title+"'";
     Milestone ml = new Milestone();
     try (PreparedStatement ps = connection.prepareStatement(GET_MILESTONE_QUERY)) {
       ResultSet rs = ps.executeQuery();
@@ -79,7 +79,7 @@ public class H2Milestone implements AutoCloseable {
         ml.setStartDate(rs.getString("start_date"));
         ml.setDueDate(rs.getString("due_date"));
         ml.setEndDate(rs.getString("end_date"));
-        ml.setProjectId(rs.getString("project_id"));
+        ml.setProjectId(rs.getString("project_title"));
       }
     } catch (SQLException e) {
       throw new RuntimeException(e);
@@ -87,19 +87,28 @@ public class H2Milestone implements AutoCloseable {
     return ml;
   }
 
-//    public List<Project> findProjects() {
-//        final String LIST_PROJECT_QUERY = "SELECT first, last, email  FROM person";
-//        List<Project> out = new ArrayList<>();
-//        try (PreparedStatement ps = connection.prepareStatement(LIST_PROJECT_QUERY)) {
-//            ResultSet rs = ps.executeQuery();
-//            while (rs.next()) {
-//                out.add(new Project(rs.getString(1), rs.getString(2), rs.getString(3)));
-//             }
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
-//        return out;
-//    }
+  public List<Milestone> findMilestones(String projectID) {
+    final String LIST_MILESTONE_QUERY = "SELECT id, title,description,status, start_date, due_date, end_date, project_title FROM milestones WHERE project_title='"+projectID+"'";
+    List<Milestone> out = new ArrayList<>();
+    try (PreparedStatement ps = connection.prepareStatement(LIST_MILESTONE_QUERY)) {
+      ResultSet rs = ps.executeQuery();
+      while (rs.next()) {
+        out.add(new Milestone(
+            rs.getString(1),
+            rs.getString(2),
+            rs.getString(3),
+            rs.getString(4),
+            rs.getString(5),
+            rs.getString(6),
+            rs.getString(7),
+            rs.getString(8)
+        ));
+      }
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+    return out;
+  }
 
   private void loadResource() {
     try {
@@ -112,8 +121,8 @@ public class H2Milestone implements AutoCloseable {
           "start_date VARCHAR(255) ," +
           "due_date VARCHAR(255)," +
           "end_date VARCHAR(255)," +
-          "project_id VARCHAR(255)," +
-          "foreign key (project_id) references projects(id))";
+          "project_title VARCHAR(255) NOT NULL, " +
+          "foreign key (project_title) references projects(title))";
       PreparedStatement ps = connection.prepareStatement(cmd);
       ps.execute();
     } catch (SQLException e) {
