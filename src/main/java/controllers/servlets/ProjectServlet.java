@@ -1,7 +1,7 @@
 package controllers.servlets;
 
+import DAO.H2Project;
 import DAO.H2db;
-import com.google.gson.Gson;
 import controllers.services.UserService;
 import domain.model.Milestone;
 import domain.model.Project;
@@ -13,11 +13,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 
 @WebServlet(urlPatterns = "/project")
 public class ProjectServlet extends HttpServlet {
-    H2db dao = new H2db();
+    H2Project dao = new H2Project();
     @Override
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response) throws ServletException, IOException {
@@ -28,11 +27,28 @@ public class ProjectServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response) throws ServletException, IOException {
-        String title = request.getParameter("project");
-	    System.out.println("title: "+ title);
-        if (title != null) {
+      System.out.println("+++++++++++++++++++++++++++++++++++++");
+      String ptitle = request.getParameter("project");
+	    System.out.println("title: "+ ptitle);
+	    String userId = ((User) request.getSession().getAttribute("userobj")).getId();
+//      String p = request.getMethod();
+//      System.out.println("request method "+p);
+
+        if (ptitle != null) {
             Project project = new Project();
-            project.setTitle(title);
+//            project.setTitle(ptitle);
+//            (dao.getProject(userId,ptitle);
+            if (dao.getProject(userId,ptitle)==null){
+              dao.addProject(new Project(ptitle,userId));
+              System.out.println("Project added !");
+              System.out.println("success!");
+            }else{
+              System.out.println("project exists already!");
+            }
+//            project.setUserId(request.getAttribute("username").toString());
+//            System.out.println(request.getAttribute("username").toString());
+//            User s=request.getSession().getAttribute("username");
+//            project.setUserId(request.getSession().getAttribute("username"));
            // dao.addProject(request.getSession().getAttribute("username").toString(),project);
         }
 	      response.sendRedirect("/dashboard");

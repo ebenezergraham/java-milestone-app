@@ -1,6 +1,8 @@
 package controllers.servlets;
 
+import DAO.H2db;
 import controllers.services.LoginService;
+import domain.model.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,13 +34,18 @@ public class LoginServlet extends HttpServlet {
     if (mLoginService.login(username, password)) {
       //generate a new session
       HttpSession newSession = request.getSession(true);
-  
+      H2db userDB = new H2db();
+      User user = userDB.getUser(username);
+      newSession.setAttribute("userobj",user);
+//      User usr =
+//      System.out.println("Login USER: ");
+      newSession.setAttribute("userID",user.getId());
       newSession.setMaxInactiveInterval(10*60);
   
       Cookie cookie = new Cookie("username", username);
       response.addCookie(cookie);
       newSession.setAttribute("username", username);
-      System.out.println(request.getSession().getAttribute("username"));
+      System.out.println("Login Servlet : "+request.getSession().getAttribute("userobj"));
       response.sendRedirect("/dashboard");
     } else {
       System.out.println("Invalid credentials");

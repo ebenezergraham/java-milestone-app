@@ -19,7 +19,6 @@ public class LoginService {
   public synchronized boolean login(@NonNull String username, @NonNull String password) {
     try {
       mUser = dao.getUser(username);
-//      Cookie cookie = new Cookie("userID", mUser.getId());
       String storedHash = mUser.getHash();
       return storedHash != null && PasswordHash.validatePassword(password, storedHash);
     } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {

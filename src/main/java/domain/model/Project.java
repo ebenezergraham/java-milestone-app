@@ -39,11 +39,16 @@ public class Project {
     this.userId = userId;
     this.milestones = milestones;
   }
-
-  public Project(String id, String title){
+  public Project(String id, String title, String userId) {
     super();
     this.id = id;
     this.title = title;
+    this.userId = userId;
+  }
+  public Project(String title, String userId){
+    super();
+    this.title = title;
+    this.userId= userId;
   }
 
   public String getId() {

@@ -57,26 +57,26 @@ public class H2db implements AutoCloseable {
 			}
 		}
 	
-	public void addProject(User user) {
-		final String ADD_USER_QUERY = "INSERT INTO users (user_name,hash) VALUES (?,?)";
-		try (PreparedStatement ps = connection.prepareStatement(ADD_USER_QUERY)) {
-			ps.setString(1, user.getUserName());
-			ps.setString(2, user.getHash());
-			ps.execute();
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
-	}
+//	public void addProject(User user) {
+//		final String ADD_USER_QUERY = "INSERT INTO users (user_name,hash) VALUES (?,?)";
+//		try (PreparedStatement ps = connection.prepareStatement(ADD_USER_QUERY)) {
+//			ps.setString(1, user.getUserName());
+//			ps.setString(2, user.getHash());
+//			ps.execute();
+//		} catch (SQLException e) {
+//			throw new RuntimeException(e);
+//		}
+//	}
 		
 		public User getUser(String username) {
-			final String GET_USER_QUERY = "SELECT user_name,hash  FROM users WHERE user_name='"+username+"';";
+			final String GET_USER_QUERY = "SELECT id, user_name,hash  FROM users WHERE user_name='"+username+"';";
 			User user = new User();
 			try (PreparedStatement ps = connection.prepareStatement(GET_USER_QUERY)) {
 				ResultSet rs = ps.executeQuery();
 				System.out.println(rs);
 
 				if (rs.next()) {
-//					u.setName(rs.getString("user_name"));
+					user.setId(rs.getString("ID"));
 					user.setHash(rs.getString("hash"));
 					user.setUserName(rs.getString("user_name"));
 				}
