@@ -1,3 +1,5 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
+
 <div class="col-sm py-2">
   ${param.milestone.id}
   <div class="card border-success shadow">
