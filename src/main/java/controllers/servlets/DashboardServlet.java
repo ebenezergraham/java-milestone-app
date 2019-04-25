@@ -1,7 +1,10 @@
 package controllers.servlets;
 
+import DAO.H2Project;
+import DAO.H2db;
 import controllers.services.UserService;
 import domain.model.Project;
+import domain.model.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,15 +17,17 @@ import java.util.List;
 
 @WebServlet(urlPatterns = "/dashboard")
 public class DashboardServlet extends HttpServlet {
+//  H2Project h2Project= new H2Project();
 
   @Override
   protected void doGet(HttpServletRequest request,
                        HttpServletResponse response) throws ServletException, IOException {
     HttpSession session = request.getSession(false);
     if (session != null) {
-      String name = (String) session.getAttribute("username");
-      System.out.println("Session username: " + name);
-      List<Project> projectList = UserService.getInstance().getUser(name).getProjects();
+      User usr = (User) session.getAttribute("userobj");
+      System.out.println("Dashboard Servlet - Session username: " + usr.getUserName());
+      H2Project dao= new H2Project();
+      List<Project> projectList = dao.findProjects(usr.getId());
       request.setAttribute("projectList", projectList);
       request.getRequestDispatcher("index.jsp").forward(request, response);
     } else {

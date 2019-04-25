@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import utils.PasswordHash;
 
+import javax.servlet.http.Cookie;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 
@@ -17,7 +18,7 @@ public class LoginService {
 
   public synchronized boolean login(@NonNull String username, @NonNull String password) {
     try {
-      mUser = UserService.getInstance().getUser(username);
+      mUser = dao.getUser(username);
       String storedHash = mUser.getHash();
       return storedHash != null && PasswordHash.validatePassword(password, storedHash);
     } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
