@@ -1,6 +1,7 @@
 package DAO;
 
 import domain.model.Milestone;
+import domain.model.Project;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,14 +11,12 @@ import java.util.List;
 
 @SuppressWarnings("SqlDialectInspection")
 public class MilestoneDAO implements AutoCloseable {
-  @SuppressWarnings("unused")
   static final Logger LOG = LoggerFactory.getLogger(MilestoneDAO.class);
 
   private Connection connection;
 
   public MilestoneDAO() {
       connection = DAOFactory.getConnection();
-      loadResource();
   }
 
   @Override
@@ -34,7 +33,7 @@ public class MilestoneDAO implements AutoCloseable {
 
 
   public void addMilestone(Milestone ml) {
-      final String ADD_MILESTONE_QUERY = "INSERT INTO milestones (title,description,status, start_date, due_date, " +
+      final String ADD_MILESTONE_QUERY = "INSERT INTO milestones (title,description,status, start_date, due_date," +
           "end_date, project_title) VALUES (?,?,?,?,?,?,?)";
     try (PreparedStatement ps = connection.prepareStatement(ADD_MILESTONE_QUERY)) {
       ps.setString(1, ml.getTitle());
@@ -43,8 +42,10 @@ public class MilestoneDAO implements AutoCloseable {
       ps.setString(4, ml.getStartDate());
       ps.setString(5, ml.getDueDate());
       ps.setString(6, ml.getEndDate());
-      ps.setString(7, ml.getProjectId());
+      ps.setString(7, ml.getProjectTitle());
       ps.execute();
+      System.out.println("H2 adding milestone");
+
     } catch (SQLException e) {
       throw new RuntimeException(e);
     }
@@ -74,12 +75,49 @@ public class MilestoneDAO implements AutoCloseable {
         ml.setStartDate(rs.getString("start_date"));
         ml.setDueDate(rs.getString("due_date"));
         ml.setEndDate(rs.getString("end_date"));
-        ml.setProjectId(rs.getString("project_title"));
+        ml.setProjectTitle(rs.getString("project_title"));
       }
     } catch (SQLException e) {
       throw new RuntimeException(e);
     }
     return ml;
+  }
+
+  public boolean milestoneExists(String id) {
+    System.out.println(id);
+    final String EXISTS_QUERY = "SELECT id FROM milestones WHERE id='"+id+"' ";
+    try (PreparedStatement ps = connection.prepareStatement(EXISTS_QUERY)) {
+      ResultSet rs = ps.executeQuery();
+      System.out.println(rs);
+      return rs.next();
+    } catch (SQLException e) {
+      return false;
+//      throw new RuntimeException(e);
+    }
+  }
+
+  public boolean editMilestone(Milestone ml) {
+    final String UPDATE_MILESTONE_QUERY =
+        "UPDATE milestones SET title = ?, description=?, status=?, start_date=?, due_date=?, end_date=? WHERE id = ?";
+
+//    Project project = new Project();
+    try (PreparedStatement ps = connection.prepareStatement(UPDATE_MILESTONE_QUERY)) {
+      ps.setString(1, ml.getTitle());
+      ps.setString(2, ml.getDescription());
+      ps.setString(3, ml.getStatus());
+      ps.setString(4, ml.getStartDate());
+      ps.setString(5, ml.getDueDate());
+      ps.setString(6, ml.getEndDate());
+      ps.setString(7, ml.getId());
+      ps.execute();
+//      ps.setString(7, ml.getProjectTitle());
+      System.out.println("there is something");
+      return true;
+    } catch (SQLException e) {
+//      return false;
+      throw new RuntimeException(e);
+    }
+//    return false;
   }
 
   public List<Milestone> findMilestones(String projectID) {
@@ -114,14 +152,10 @@ public class MilestoneDAO implements AutoCloseable {
       ps.setString(4, ml.getStartDate());
       ps.setString(5, ml.getDueDate());
       ps.setString(6, ml.getEndDate());
-      ps.setString(7, ml.getProjectId());
+      ps.setString(7, ml.getProjectTitle());
       ps.execute();
     } catch (SQLException e) {
       throw new RuntimeException(e);
     }
-  }
-
-  private void loadResource() {
-  
   }
 }

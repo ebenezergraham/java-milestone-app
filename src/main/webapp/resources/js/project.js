@@ -2,9 +2,11 @@ console.log("I am loading");
 var URL = window.location.href;
 console.log("you are at "+URL);
 
-function delMilestone(title,id) {
-  console.log(this);
 
+// $(".fa-trash").on('click', function (e) {
+function delMilestone(title,id) {
+  var $this = $(Event.target);
+  console.log($this.attributes);
   bootbox.confirm({
     message: "Are you sure you want to delete milestone ".concat(title),
     buttons: {
@@ -22,14 +24,15 @@ function delMilestone(title,id) {
       console.log(URL.slice(0, URL.indexOf("?")) + "delete/" + URL.slice(URL.indexOf("?")));
 
       if (result) {
-        var delURL = URL.slice(0, URL.indexOf("?")) + "delete/?title="+title+"&ml="+ id;
+        var delURL = URL.slice(0, URL.indexOf("?")) + "delete/?title=" + title + "&ml=" + id;
         console.log(delURL);
-        httpGetAsync(delURL,true,"DELETE");
+        httpGetAsync(delURL, true, "DELETE");
         console.log("END");
       }
     }
   });
 }
+// })
 
 function httpGetAsync(theUrl, callback, request) {
   var xmlHttp = new XMLHttpRequest();
@@ -42,6 +45,42 @@ function httpGetAsync(theUrl, callback, request) {
   // location.reload();
 
 }
+//
+// function editMilestone(t) {
+//   console.log("editing milestone");
+//   // console.log(ml).id;
+//   // var lol = ml.toJSON();
+//   console.log(this);
+//     var form = this;
+//     var mlTitle = $form.find('input[name="mlTitle"]').val();
+//     var mlDescription = $form.find('input[name="mlDescription"]').val();
+//     // var mlStatus = $form.find('input[name="mlStatus"]').val();
+//     var mlStartDate = $form.find('input[name="mlStartDate"]').val();
+//     var mlDue_Date = $form.find('input[name="mlDueDate"]').val();
+//     var mlend_Date = $form.find('input[name="mlEndDate"]').val();
+//     // var url = 'http://localhost:8080/project?title="'+t;
+//     // var userName = $form.find('input[name="name"]').val();
+//     // var userEmail = $form.find('input[name="email"]').val();
+//
+//     $.ajax({
+//       type : 'PUT',
+//       url : URL,
+//       contentType: 'application/json',
+//       data : JSON.stringify({
+//         'title': mlTitle,'description': mlDescription,
+//         // 'status':mlStatus,
+//           'startDate':mlStartDate,'dueDate':mlDue_Date,'endDate':mlend_Date}),
+//       success : function(data, status, xhr){
+//         location.reload();
+//         // window.location.replace("http://localhost:8080/users/"+userId);
+//       },
+//       error: function(xhr, status, error){
+//         // $('#msg').html('<span style=\'color:red;\'>'+error+'</span>')
+//         console.log(error);
+//       }
+//     });
+//
+// }
 
 function editMilestone() {
   document.getElementById('theform').onsubmit = function() {

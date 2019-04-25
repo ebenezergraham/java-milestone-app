@@ -28,7 +28,7 @@ public class Milestone {
   private String endDate;
   @SerializedName("project_id")
   @Expose
-  private String projectId;
+  private String projectTitle;
 
   /**
    * No args constructor for use in serialization
@@ -63,10 +63,11 @@ public class Milestone {
    * @param status
    * @param description
    * @param endDate
-   * @param projectId
+   * @param projectTitle
    * @param dueDate
    */
-  public Milestone(String id, String title, String description, String status, String startDate, String dueDate, String endDate, String projectId) {
+  public Milestone(String id, String title, String description, String status, String startDate, String dueDate,
+                   String endDate, String projectTitle) {
     super();
     this.id = id;
     this.title = title;
@@ -75,14 +76,22 @@ public class Milestone {
     this.startDate = startDate;
     this.dueDate = dueDate;
     this.endDate = endDate;
-    this.projectId = projectId;
+    this.projectTitle = projectTitle;
   }
-
-  public Milestone(String title, String description, String projectId) {
+  public Milestone(String title, String description, String status, String startDate, String dueDate, String endDate) {
     super();
     this.title = title;
     this.description = description;
-    this.projectId = projectId;
+    this.status = status;
+    this.startDate = startDate;
+    this.dueDate = dueDate;
+    this.endDate = endDate;
+  }
+  public Milestone(String title, String description, String projectTitle) {
+    super();
+    this.title = title;
+    this.description = description;
+    this.projectTitle = projectTitle;
   }
 
 
@@ -142,11 +151,11 @@ public class Milestone {
     this.endDate = endDate;
   }
 
-  public String getProjectId() {
-    return projectId;
+  public String getProjectTitle() {
+    return projectTitle;
   }
 
-  public void setProjectId(String projectId) {
-    this.projectId = projectId;
+  public void setProjectTitle(String projectTitle) {
+    this.projectTitle = projectTitle;
   }
 }
