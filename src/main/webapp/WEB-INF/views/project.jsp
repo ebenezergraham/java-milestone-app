@@ -17,202 +17,48 @@
   document.getElementById('add_form').setAttribute('action', window.location.href);
 </script>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a href="/" class="navbar-brand">Milestone</a>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="nav navbar-nav">
-      <li class="nav-item m-2"><a href="/dashboard">Dashboard</a></li>
-    </ul>
+<%@include file="menu.jsp" %>
 
-    <ul class="nav navbar-nav navbar-right">
-      <li class="nav-item"><a href="/login">Login</a></li>
-    </ul>
-  </div>
-</nav>
 
 <%--<div class="container">--%>
   <h1>Project ${title}</h1>
-<div>
-  <a id="add-new-milestone">
+<%--<div>--%>
+<%--  <a id="add-new-milestone">--%>
 
-<%--    <h2>${pageContext.request.getAttribute("javax.servlet.forward.request_uri")}<</h2>--%>
-    <form method="post" id="add_form">
-<%--      <input name="">--%>
-      <input id="titleInput" name="mlT"  type="text" placeholder="enter milestone title">
-      <input id="DescriptionInput" name="mlD" type="text" class="form-control"
-             placeholder="enter project description">
-      <button type="submit">Add</button>
-    </form>
-    <p id="project"></p>
-  </a>
-</div>
+<%--&lt;%&ndash;    <h2>${pageContext.request.getAttribute("javax.servlet.forward.request_uri")}<</h2>&ndash;%&gt;--%>
+<%--    <form method="post" id="add_form">--%>
+<%--      <input id="titleInput" name="mlT"  type="text" placeholder="enter milestone title">--%>
+<%--      <input id="DescriptionInput" name="mlD" type="text" class="form-control"--%>
+<%--             placeholder="enter project description">--%>
+<%--      <button type="submit">Add</button>--%>
+<%--    </form>--%>
+<%--    <p id="project"></p>--%>
+<%--  </a>--%>
+<%--</div>--%>
 <%--<h3>${pageContext.request.getRequestDispatcher()}</h3>--%>
 <%--<h2>${pageContext.request.queryString}</h2>--%>
 <%--<h3>${pageContext.request.getAttribute("javax.servlet.forward.request_uri")}</h3>--%>
 <%--<h3>${requestScope['javax.servlet.forward.query_string']}</h3>--%>
 <%--<h2>${requestScope['javax.servlet.forward.request_uri']}</h2>--%>
   <div class="container py-2">
-  <c:set var = "right" value = "${true}"/>
-    <c:set var = "count" value = "0" scope="page"/>
+<%--  <c:set var = "right" value = "${true}"/>--%>
+    <c:set var = "count" value = "0" scope="request"/>
     <c:forEach items="${allMilestones}" var="milestone">
-<%--      <c:set var="count" value="${count + 1}"/>--%>
-      <c:choose>
-      <c:when test="${right==true}">
-        <c:set var = "right" value = "${false}"/>
+      <%@ include file="milestone.jsp" %>
+<%--      <c:choose>--%>
+<%--      <c:when test="${count%2==0}">--%>
+<%--        <%@ include file="milestone_right.jsp" %>--%>
+<%--      </c:when>--%>
 
-      <!-- timeline item 1 -->
-          <div class="row no-gutters">
-            <div class="col-sm"> <!--spacer--> </div>
-          <!-- timeline item 1 center dot -->
-            <div class="col-sm-1 text-center flex-column d-none d-sm-flex">
-                <div class="row h-50">
-                <div class="col">&nbsp;</div>
-                <div class="col">&nbsp;</div>
-                </div>
-                <h5 class="m-2">
-                <span class="badge badge-pill bg-light border">&nbsp;</span>
-                </h5>
-                <div class="row h-50">
-                <div class="col border-right">&nbsp;</div>
-                <div class="col">&nbsp;</div>
-                </div>
-            </div>
-          <!-- timeline item 1 event content -->
-            <div class="col-sm py-2">
-              <div class="card border-success shadow">
-                <div class="card-body">
-                  <i class="fas fa-trash"></i>
+<%--        <c:otherwise>--%>
+<%--&lt;%&ndash;          <c:set var = "right" value = "${true}"/>&ndash;%&gt;--%>
+<%--          <%@include file="milestone_left.jsp" %>--%>
 
-                  <div class="float-right text-muted small">Start Date: ${milestone.startDate}</div>
-                  <br>
-                  <button class="btn btn-lg btn-outline-info btn-block card-title" type="button"
-                          data-target="#_${milestone.id}"
-                          data-toggle="collapse">
-                    &emsp;&emsp;${milestone.title}&emsp;&emsp;▼
-                  </button>
-                  <div class="collapse" id="_${milestone.id}" >
-                    <div class="p-2 text-monospace">
-                        ${milestone.description}
-                    </div>
-                  </div>
-                  <div class="small">
-                  Due: ${milestone.endDate}
-                  <span>
-                    &emsp;&emsp;
-                    <i class="fas fa-circle"></i>
+<%--        </c:otherwise>--%>
+<%--        </c:choose>--%>
+      <c:set var = "count" value = "${count+1}" scope="page"/>
 
-                    <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                        <i class="fas fa-pen"></i>
-            </button>
-
-                                        <!-- Modal -->
-                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                      <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                        <div class="modal-body">
-
-                          <form method="">
-                            <div class="form-group">
-                              <label for="title${milestone.id}">Title</label><br>
-                              <h3><input type="text" class="form-control modal-title" id="title${milestone.id}"
-                                         value="${milestone.title}"></h3>
-                            </div>
-
-                            <div class="form-group">
-                              <label for="description${milestone.id}">Description</label>
-                              <textarea rows ="5" cols = "50" id = "description${milestone.id}"
-                                        class="form-control">${milestone.description}</textarea>
-                            </div>
-                            <div class="form-group">
-                              <label for="start${milestone.id}">Start ${milestone.startDate}</label>
-                              <input type="datetime-local" class="form-control" id="start${milestone.id}"
-                                     value="${milestone.startDate}" >
-                            </div>
-                            <div class="form-group">
-                              <label for="end${milestone.id}">End</label>
-                              <input type="datetime-local" class="form-control" id="end${milestone.id}"
-                                     value="${milestone.endDate}" >
-                            </div>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save changes</button>
-<%--                            <button type="button" class="btn btn-primary">Save changes</button>--%>
-                          </div>
-                                                         </form>
-
-                        </div>
-                      </div>
-                    </div>
-                  </span>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </div>
-            <!--/row-->
-      </c:when>
-
-        <c:otherwise>
-          <c:set var = "right" value = "${true}"/>
-          <!-- timeline item 2 -->
-          <div class="row no-gutters">
-            <div class="col-sm py-2">
-              <div class="card border-success shadow">
-                <div class="card-body">
-                  <i class="fas fa-trash" onclick="delMilestone('${title}','${milestone.title}')"
-                     onmouseover="console.log('${milestone.id}')"></i>
-<%--                  <form action = "project.jsp" method = "DELETE">DELETE</form>--%>
-                  <div class="float-right text-muted small">Start Date: ${milestone.startDate}</div>
-                  <br><br>
-                  <button class="btn btn-lg btn-outline-info btn-block card-title" type="button"
-                          data-target="#_${milestone.id}"
-                          data-toggle="collapse">
-                    &emsp;${milestone.title}&emsp;&emsp;▼
-                  </button>
-                  <div class="collapse " id="_${milestone.id}">
-                    <div class="p-2 text-monospace">
-                        ${milestone.description}
-                    </div>
-                  </div>
-                </div>
-                <div class="card-footer">Due: ${milestone.endDate}
-                  <span>
-                    &emsp;&emsp;
-                    <i class="fas fa-circle"></i>
-                    &emsp;&emsp;
-                    <i class="fas fa-pen"></i>
-                  </span>
-                </div>
-
-              </div>
-            </div>
-            <div class="col-sm-1 text-center flex-column d-none d-sm-flex">
-              <div class="row h-50">
-                <div class="col border-right">&nbsp;</div>
-                <div class="col">&nbsp;</div>
-              </div>
-              <h5 class="m-2">
-                <span class="badge badge-pill bg-success">&nbsp;</span>
-              </h5>
-              <div class="row h-50">
-                <div class="col border-right">&nbsp;</div>
-                <div class="col">&nbsp;</div>
-              </div>
-            </div>
-            <div class="col-sm"> <!--spacer--> </div>
-          </div>
-          <!--/row-->
-        </c:otherwise>
-        </c:choose>
-      </c:forEach>
+    </c:forEach>
 
       </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

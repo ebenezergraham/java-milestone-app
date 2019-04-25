@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+@SuppressWarnings("Duplicates")
 @WebServlet(urlPatterns = "/project/*")
 public class MilestoneServlet extends HttpServlet {
 
@@ -22,8 +23,16 @@ public class MilestoneServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response) throws ServletException, IOException {
 
-        String action = request.getServletPath();
-        listMilestones(request, response);
+//        String action = request.getServletPath();
+//        listMilestones(request, response);
+        String title = request.getParameter("title");
+        request.setAttribute("title",title);
+//        String pID = new H2Project().getProject();
+        H2Milestone dao = new H2Milestone();
+        List<Milestone> allM = dao.findMilestones(title);
+        request.setAttribute("allMilestones",allM);
+        request.getRequestDispatcher("/WEB-INF/views/project.jsp").forward(request,response);
+
     }
 
 
@@ -39,6 +48,29 @@ public class MilestoneServlet extends HttpServlet {
         response.sendRedirect(getFullURL(request));
 
     }
+
+//    @Override
+//    protected void doPut(HttpServletRequest request,
+//                         HttpServletResponse response) throws ServletException, IOException {
+//
+//        System.out.println("--put--");
+////        int userId = retrieveUserid(req);
+//        System.out.println(request.getPathTranslated());
+////        String body = inputStreamToString(req.getInputStream());
+////        System.out.println("body: " + body);
+////        UserDataService.Instance.saveUserById(userId, body);
+//
+//        String ptitle = request.getParameter("title");
+//        System.out.println("Editing Milestone");
+//        System.out.println("------------------------");
+////        H2Milestone dao = new H2Milestone();
+////        Milestone newML = new Milestone(request.getParameter(ptitle),request.getParameter(ptitle), ptitle);
+////        dao.addMilestone(newML);
+////        response.sendRedirect(getFullURL(request));
+
+//    }
+
+
 
     @Override
     protected void doDelete(HttpServletRequest request,

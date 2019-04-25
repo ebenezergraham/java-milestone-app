@@ -90,6 +90,9 @@ public class H2Project implements AutoCloseable {
       return project;
     }
 
+
+
+
     public List<Project> findProjects(String userId) {
         final String LIST_PROJECT_QUERY = "SELECT id, title, USER_ID FROM projects WHERE user_id='"+userId+"'";
         List<Project> out = new ArrayList<>();
