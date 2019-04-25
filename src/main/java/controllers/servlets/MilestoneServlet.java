@@ -89,6 +89,7 @@ public class MilestoneServlet extends HttpServlet {
     private void listMilestones(HttpServletRequest request,
                            HttpServletResponse response) throws ServletException, IOException {
         String ptitle = request.getParameter("title");
+        request.setAttribute("title",ptitle);
 //        String pID = new H2Project().getProject();
         H2Milestone dao = new H2Milestone();
         List<Milestone> allM = dao.findMilestones(ptitle);
