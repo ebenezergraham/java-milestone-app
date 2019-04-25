@@ -1,3 +1,5 @@
+import DAO.H2Milestone;
+import DAO.H2Project;
 import domain.model.User;
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.WebResourceRoot;
@@ -47,9 +49,11 @@ public class Runner {
   
   public static void createAdmin(){
     H2db h2db = new H2db();
-    User user = new User();
-    user.setUserName("hermes");
-    user.setHash("hermes");
-    h2db.addUser(user);
+    H2Project h2p = new H2Project();
+    H2Milestone h2ML= new H2Milestone();
+//    User user = new User();
+//    user.setUserName("hermes");
+//    user.setHash("1234");
+//    h2db.addUser(user);
   }
 }

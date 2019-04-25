@@ -40,6 +40,12 @@ public class Project {
     this.milestones = milestones;
   }
 
+  public Project(String id, String title){
+    super();
+    this.id = id;
+    this.title = title;
+  }
+
   public String getId() {
     return id;
   }
