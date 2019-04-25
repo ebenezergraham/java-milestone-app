@@ -13,6 +13,9 @@ public class Project {
   @SerializedName("title")
   @Expose
   private String title;
+  @SerializedName("user_id")
+  @Expose
+  private String userId;
   @SerializedName("milestones")
   @Expose
   private List<Milestone> milestones = null;
@@ -25,14 +28,22 @@ public class Project {
 
   /**
    * @param id
-   * @param title
    * @param milestones
+   * @param title
+   * @param userId
    */
-  public Project(String id, String title,  List<Milestone> milestones) {
+  public Project(String id, String title, String userId, List<Milestone> milestones) {
     super();
     this.id = id;
     this.title = title;
+    this.userId = userId;
     this.milestones = milestones;
+  }
+
+  public Project(String id, String title){
+    super();
+    this.id = id;
+    this.title = title;
   }
 
   public String getId() {
@@ -51,6 +62,14 @@ public class Project {
     this.title = title;
   }
 
+  public String getUserId() {
+    return userId;
+  }
+
+  public void setUserId(String userId) {
+    this.userId = userId;
+  }
+
   public List<Milestone> getMilestones() {
     return milestones;
   }
@@ -63,8 +82,8 @@ public class Project {
     return this.milestones.add(milestone);
   }
 
-  public boolean deleteMilestone(Milestone milestone) {
-    return this.milestones.remove(milestone);
+  public void deleteMilestone(Milestone milestone) {
+    this.milestones.remove(milestone);
   }
 
   public Milestone getMilestone(String title) {

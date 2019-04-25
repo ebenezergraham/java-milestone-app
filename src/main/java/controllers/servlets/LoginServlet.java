@@ -35,8 +35,8 @@ public class LoginServlet extends HttpServlet {
   
       newSession.setMaxInactiveInterval(10*60);
   
-//      Cookie cookie = new Cookie("username", username);
-//      response.addCookie(cookie);
+      Cookie cookie = new Cookie("username", username);
+      response.addCookie(cookie);
       newSession.setAttribute("username", username);
       System.out.println(request.getSession().getAttribute("username"));
       response.sendRedirect("/dashboard");

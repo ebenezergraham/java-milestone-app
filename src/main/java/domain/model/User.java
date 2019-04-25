@@ -12,10 +12,12 @@ public class User {
   @SerializedName("hash")
   @Expose
   private String hash;
-
-  @SerializedName("username")
+  @SerializedName("user_name")
   @Expose
-  private String username;
+  private String userName;
+  @SerializedName("projects")
+  @Expose
+  private List<Project> projects = null;
 
   /**
    * No args constructor for use in serialization
@@ -25,14 +27,16 @@ public class User {
 
   /**
    * @param id
-   * @param username
+   * @param projects
    * @param hash
+   * @param userName
    */
-  public User(String id, String username,String hash) {
+  public User(String id, String hash, String userName, List<Project> projects) {
     super();
     this.id = id;
     this.hash = hash;
-    this.username = username;
+    this.userName = userName;
+    this.projects = projects;
   }
 
   public User(String hash, String username) {
@@ -62,12 +66,27 @@ public class User {
     this.hash = hash;
   }
 
-  public String getUsername() {
-    return username;
+  public String getUserName() {
+    return userName;
   }
 
-  public void setUsername(String username) {
-    this.username = username;
+  public void setUserName(String userName) {
+    this.userName = userName;
   }
 
+  public List<Project> getProjects() {
+    return projects;
+  }
+
+  public void setProjects(List<Project> projects) {
+    this.projects = projects;
+  }
+
+  public Project getProject(String title) {
+    return this.projects.stream().filter(project -> project.getTitle().equals(title)).findFirst().orElse(null);
+  }
+
+  public boolean removeProject(Project p) {
+    return this.projects.remove(p);
+  }
 }

@@ -147,3 +147,12 @@ h1{
 	color: white;
 	background-color: #216558;
 }
+
+#nameInput{
+	display: block;
+}
+
+#add-new-project{
+	display: none;
+	transition: 0.5ms;
+}

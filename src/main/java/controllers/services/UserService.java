@@ -1,13 +1,10 @@
 package controllers.services;
 
+import DAO.H2db;
 import com.google.gson.Gson;
 import domain.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 
 public class UserService {
   private static final Logger LOGGER = LoggerFactory.getLogger(UserService.class.getName());
@@ -22,8 +19,8 @@ public class UserService {
   private UserService() {
     this.mGson = new Gson();
   }
-
-  public User getUser() {
+  private H2db dao = new H2db();
+/*  public User getUser() {
     User user = null;
     try (BufferedReader br = new BufferedReader(new FileReader("data.json"))) {
       user = this.mGson.fromJson(br, User.class);
@@ -31,5 +28,9 @@ public class UserService {
       LOGGER.error(e.getMessage(), e.getCause());
     }
     return user;
+  }*/
+  
+  public User getUser(String username) {
+    return dao.getUser(username);
   }
 }
