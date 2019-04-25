@@ -78,6 +78,14 @@ public class Milestone {
     this.projectId = projectId;
   }
 
+  public Milestone(String title, String description, String projectId) {
+    super();
+    this.title = title;
+    this.description = description;
+    this.projectId = projectId;
+  }
+
+
   public String getId() {
     return id;
   }

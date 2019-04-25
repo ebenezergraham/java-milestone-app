@@ -13,6 +13,9 @@
   <title>Milestone Planner</title>
 
 </head>
+<script>
+  document.getElementById('add_form').setAttribute('action', window.location.href);
+</script>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a href="/" class="navbar-brand">Milestone</a>
@@ -29,6 +32,20 @@
 
 <%--<div class="container">--%>
   <h1>Project ${title}</h1>
+<div>
+  <a id="add-new-milestone">
+
+<%--    <h2>${pageContext.request.getAttribute("javax.servlet.forward.request_uri")}<</h2>--%>
+    <form method="post" id="add_form">
+<%--      <input name="">--%>
+      <input id="titleInput" name="mlT"  type="text" placeholder="enter milestone title">
+      <input id="DescriptionInput" name="mlD" type="text" class="form-control"
+             placeholder="enter project description">
+      <button type="submit">Add</button>
+    </form>
+    <p id="project"></p>
+  </a>
+</div>
 <%--<h3>${pageContext.request.getRequestDispatcher()}</h3>--%>
 <%--<h2>${pageContext.request.queryString}</h2>--%>
 <%--<h3>${pageContext.request.getAttribute("javax.servlet.forward.request_uri")}</h3>--%>

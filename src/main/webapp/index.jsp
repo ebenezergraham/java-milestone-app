@@ -53,7 +53,7 @@
                         <div id="b"></div>
                     </div>
                     <a id="add-new-project" class="card m-3">
-                        <form action="/project"  method="post">
+                        <form action="/projects"  method="post">
                             <input id="nameInput" name="project" type="text" class="form-control"
                                    placeholder="enter project name ">
                         </form>
@@ -61,7 +61,7 @@
                     </a>
                     <c:if test="${projectList.size()>0}">
                         <c:forEach begin="0" end="${(projectList.size()/2)-1}" items="${projectList}" var="project">
-                            <a href="projects/?title=${project.getTitle()}" class="project card m-3">
+                            <a href="project/?title=${project.getTitle()}" class="project card m-3">
                                 <p><c:out value="${project.getTitle()}"/></p>
 
                             </a>
@@ -73,7 +73,7 @@
                     <c:if test="${projectList.size()>0}">
 
                         <c:forEach begin="${projectList.size()/2}" items="${projectList}" var="project">
-                            <a href="projects/?title=${project.getTitle()}" class="project card m-3">
+                            <a href="project/?title=${project.getTitle()}" class="project card m-3">
                                 <p><c:out value="${project.getTitle()}"/></p>
                             </a>
                         </c:forEach>
