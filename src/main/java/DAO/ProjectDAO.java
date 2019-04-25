@@ -76,5 +76,19 @@ public class ProjectDAO implements AutoCloseable {
         }
         return out;
     }
+  
+  public boolean deleteProject(String projectId) {
+    System.out.println(projectId);
+    final String QUERY = "DELETE FROM MILESTONES where project_title=?; DELETE FROM projects where title=?; ";
+    boolean status;
+    try (PreparedStatement ps = connection.prepareStatement(QUERY)) {
+      ps.setString(1, projectId);
+      ps.setString(2, projectId);
+       status = ps.execute();
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+    return status;
+  }
   }
 

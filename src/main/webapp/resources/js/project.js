@@ -43,28 +43,26 @@ function httpGetAsync(theUrl, callback, request) {
 
 }
 
-function editMilestone(t) {
+function editMilestone() {
+  document.getElementById('theform').onsubmit = function() {
+    console.log(document.getElementById('searchTerm').value);
+    return false;
+  };
   console.log("editing milestone");
-  // console.log(ml).id;
-  // var lol = ml.toJSON();
   console.log(this);
     var form = this;
-    var userId = $form.find('input[name="userId"]').val();
-    var url = 'http://localhost:8080/users/'+userId;
-    var userName = $form.find('input[name="name"]').val();
-    var userEmail = $form.find('input[name="email"]').val();
+    var url = 'http://localhost:8080/milestone';
 
-    // $.ajax({
-    //   type : 'PUT',
-    //   url : url,
-    //   contentType: 'application/json',
-    //   data : JSON.stringify({name: userName, email: userEmail}),
-    //   success : function(data, status, xhr){
-    //     window.location.replace("http://localhost:8080/users/"+userId);
-    //   },
-    //   error: function(xhr, status, error){
-    //     $('#msg').html('<span style=\'color:red;\'>'+error+'</span>')
-    //   }
-    // });
+     $.ajax({
+       type : 'PUT',
+       url : url,
+       contentType: 'application/json',
+       data : JSON.stringify(form),
+       success : function(data, status, xhr){
+       },
+       error: function(xhr, status, error){
+         $('#msg').html('<span style=\'color:red;\'>'+error+'</span>')
+       }
+     });
 
 }

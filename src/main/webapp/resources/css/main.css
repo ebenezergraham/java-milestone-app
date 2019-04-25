@@ -159,10 +159,10 @@ h1{
 
 .control-pane{
 	background-color: #216558;
-	z-index: 100000;
-	margin: 0 30%;
+	padding: 5rem;
 	position: fixed;
-	padding: 8%;
-	-webkit-clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 0% 75%, 0% 25%);
-	clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 0% 75%, 0% 25%);
+	height: 100px;
+	bottom: 0;
+	-webkit-clip-path: polygon(50% 0%, 100% 25%, 100% 100%, 0 100%, 0% 25%);
+	clip-path: polygon(50% 0%, 100% 25%, 100% 100%, 0 100%, 0% 25%);
 }

@@ -1,3 +1,4 @@
+/*
 package DAO;
 
 import org.junit.Test;
@@ -25,3 +26,4 @@ public class DAOFactoryTest {
 		assertNotNull(testDao);
 	}
 }
+*/

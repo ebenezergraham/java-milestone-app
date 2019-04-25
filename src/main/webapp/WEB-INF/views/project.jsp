@@ -7,203 +7,216 @@
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <%--  <link rel="stylesheet" href="webjars/bootstrap/4.3.1/css/bootstrap.min.css"/>--%>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
           integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="../../resources/css/main.css">
     <title>Milestone Planner</title>
+
 </head>
 <script>
 	document.getElementById('add_form').setAttribute('action', window.location.href);
 </script>
 <body>
 <%@include file="menu.jsp" %>
-    <div class="card-title ">
-        <h1>Project ${title}</h1>
-    </div>
 
-    <%--<h3>${pageContext.request.getRequestDispatcher()}</h3>--%>
-    <%--<h2>${pageContext.request.queryString}</h2>--%>
-    <%--<h3>${pageContext.request.getAttribute("javax.servlet.forward.request_uri")}</h3>--%>
-    <%--<h3>${requestScope['javax.servlet.forward.query_string']}</h3>--%>
-    <%--<h2>${requestScope['javax.servlet.forward.request_uri']}</h2>--%>
+<h1>Project ${title}</h1>
+<%--<h3>${pageContext.request.getRequestDispatcher()}</h3>--%>
+<%--<h2>${pageContext.request.queryString}</h2>--%>
+<%--<h3>${pageContext.request.getAttribute("javax.servlet.forward.request_uri")}</h3>--%>
+<%--<h3>${requestScope['javax.servlet.forward.query_string']}</h3>--%>
+<%--<h2>${requestScope['javax.servlet.forward.request_uri']}</h2>--%>
+<div class="container py-2">
+    <c:set var="right" value="${true}"/>
+    <c:set var="count" value="0" scope="page"/>
+    <c:forEach items="${allMilestones}" var="milestone">
+        <c:choose>
+            <c:when test="${right==true}">
+                <c:set var="right" value="${false}"/>
 
-    <div class="container py-2">
-        <c:set var="right" value="${true}"/>
-        <c:set var="count" value="0" scope="page"/>
-        <c:forEach items="${allMilestones}" var="milestone">
-            <c:choose>
-                <c:when test="${right==true}">
-                    <c:set var="right" value="${false}"/>
+                <!-- timeline item 1 -->
+                <div class="row no-gutters">
+                    <div class="col-sm"> <!--spacer--> </div>
+                    <!-- timeline item 1 center dot -->
+                    <div class="col-sm-1 text-center flex-column d-none d-sm-flex">
+                        <div class="row h-50">
+                            <div class="col">&nbsp;</div>
+                            <div class="col">&nbsp;</div>
+                        </div>
+                        <h5 class="m-2">
+                            <span class="badge badge-pill bg-light border">&nbsp;</span>
+                        </h5>
+                        <div class="row h-50">
+                            <div class="col border-right">&nbsp;</div>
+                            <div class="col">&nbsp;</div>
+                        </div>
+                    </div>
+                    <!-- timeline item 1 event content -->
+                    <div class="col-sm py-2">
+                        <div class="border-success shadow">
+                            <div class="card-body">
+                                <i class="fas fa-trash"></i>
 
-                    <!-- timeline item 1 -->
-                    <div class="row no-gutters">
-                        <div class="col-sm"> <!--spacer--> </div>
-                        <!-- timeline item 1 center dot -->
-                        <div class="col-sm-1 text-center flex-column d-none d-sm-flex">
-                            <div class="row h-50">
-                                <div class="col">&nbsp;</div>
-                                <div class="col">&nbsp;</div>
-                            </div>
-                            <h5 class="m-2">
-                                <span class="badge badge-pill bg-light border">&nbsp;</span>
-                            </h5>
-                            <div class="row h-50">
-                                <div class="col border-right">&nbsp;</div>
-                                <div class="col">&nbsp;</div>
+                                <div class="float-right text-muted small">Start Date: ${milestone.startDate}</div>
+                                <br>
+                                <button class="btn btn-lg btn-outline-info btn-block card-title" type="button"
+                                        data-target="#_${milestone.id}"
+                                        data-toggle="collapse">
+                                    &emsp;&emsp;${milestone.title}&emsp;&emsp;▼
+                                </button>
+                                <div class="collapse" id="_${milestone.id}">
+                                    <div class="p-2 text-monospace">
+                                            ${milestone.description}
+                                    </div>
+                                </div>
+                                <div class="small">Due: ${milestone.endDate}
+                                    <div>
+                                        <span>&emsp;&emsp;<i class="fas fa-circle"></i></span>
+                                    </div>
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                                            data-target="#exampleModalCenter">
+                                        <i class="fas fa-pen"></i>
+                                    </button>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                                         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+
+                                                    <form action="project.jsp" name="${milestone.id}">
+                                                        <div>
+                                                            <div class="form-group">
+                                                                <label for="title${milestone.id}">Title</label><br>
+                                                                <h3><input type="text" class="form-control modal-title"
+                                                                           id="title${milestone.id}"
+                                                                           value="${milestone.title}"></h3>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <label for="description${milestone.id}">Description</label>
+                                                                <textarea rows="5" cols="50"
+                                                                          id="description${milestone.id}"
+                                                                          class="form-control">${milestone.description}</textarea>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="start${milestone.id}">Start ${milestone.startDate}</label>
+                                                                <input type="datetime-local" class="form-control"
+                                                                       id="start${milestone.id}"
+                                                                       value="${milestone.startDate}">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="end${milestone.id}">End</label>
+                                                                <input type="datetime-local" class="form-control"
+                                                                       id="end${milestone.id}"
+                                                                       value="${milestone.endDate}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                    data-dismiss="modal">Close
+                                                            </button>
+                                                            <button type="submit" class="btn btn-primary" >Save changes
+                                                            </button>
+                                                        </div>
+                                                    </form>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <!-- timeline item 1 event content -->
-                        <div class="col-sm py-2">
-                            <div class="card border-success shadow">
-                                <div class="card-body">
-                                    <i class="fas fa-trash"></i>
-
-                                    <div class="float-right text-muted small">Start Date: ${milestone.startDate}</div>
-                                    <br>
-                                    <button class="btn btn-lg btn-outline-info btn-block card-title" type="button"
-                                            data-target="#_${milestone.id}"
-                                            data-toggle="collapse">
-                                        &emsp;&emsp;${milestone.title}&emsp;&emsp;▼
-                                    </button>
-                                    <div class="collapse" id="_${milestone.id}">
-                                        <div class="p-2 text-monospace">
-                                                ${milestone.description}
-                                        </div>
+                    </div>
+                </div>
+                <!--/row-->
+            </c:when>
+            <c:otherwise>
+                <c:set var="right" value="${true}"/>
+                <!-- timeline item 2 -->
+                <div class="row no-gutters">
+                    <div class="col-sm py-2">
+                        <div class="border-success shadow">
+                            <div class="card-body">
+                                <i class="fas fa-trash" onclick="delMilestone('${title}','${milestone.title}')"
+                                   onmouseover="console.log('${milestone.id}')"></i>
+                                <div class="float-right text-muted small">Start Date: ${milestone.startDate}</div>
+                                <br><br>
+                                <button class="btn btn-lg btn-outline-info btn-block card-title" type="button"
+                                        data-target="#_${milestone.id}"
+                                        data-toggle="collapse">
+                                    &emsp;${milestone.title}&emsp;&emsp;▼
+                                </button>
+                                <div class="collapse " id="_${milestone.id}">
+                                    <div class="p-2 text-monospace">
+                                            ${milestone.description}
                                     </div>
-                                    <div class="small">
-                                        Due: ${milestone.endDate}
-                                        <span>
+                                </div>
+                            </div>
+                            <div class="card-footer">Due: ${milestone.endDate}
+                                <span>
                     &emsp;&emsp;
                     <i class="fas fa-circle"></i>
-
-                                            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                        <i class="fas fa-pen"></i>
-            </button>
-
-                                            <!-- Modal -->
-                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-                         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                      <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                        <div class="modal-body">
-
-                          <form method="">
-                              <div>
-                            <div class="form-group">
-                              <label for="title${milestone.id}">Title</label><br>
-                              <h3><input type="text" class="form-control modal-title" id="title${milestone.id}"
-                                         value="${milestone.title}"></h3>
-                            </div>
-
-                            <div class="form-group">
-                              <label for="description${milestone.id}">Description</label>
-                              <textarea rows="5" cols="50" id="description${milestone.id}"
-                                        class="form-control">${milestone.description}</textarea>
-                            </div>
-                            <div class="form-group">
-                              <label for="start${milestone.id}">Start ${milestone.startDate}</label>
-                              <input type="datetime-local" class="form-control" id="start${milestone.id}"
-                                     value="${milestone.startDate}">
-                            </div>
-                            <div class="form-group">
-                              <label for="end${milestone.id}">End</label>
-                              <input type="datetime-local" class="form-control" id="end${milestone.id}"
-                                     value="${milestone.endDate}">
-                            </div>
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Save changes</button>
-<%--                            <button type="button" class="btn btn-primary">Save changes</button>--%>
-                          </div>
-                            </form>
-
-                        </div>
-                      </div>
-                    </div>
-                  </span>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <!--/row-->
-                </c:when>
-
-                <c:otherwise>
-                    <c:set var="right" value="${true}"/>
-                    <!-- timeline item 2 -->
-                    <div class="row no-gutters">
-                        <div class="col-sm py-2">
-                            <div class="card border-success shadow">
-                                <div class="card-body">
-                                    <i class="fas fa-trash" onclick="delMilestone('${title}','${milestone.title}')"
-                                       onmouseover="console.log('${milestone.id}')"></i>
-                                        <%--                  <form action = "project.jsp" method = "DELETE">DELETE</form>--%>
-                                    <div class="float-right text-muted small">Start Date: ${milestone.startDate}</div>
-                                    <br><br>
-                                    <button class="btn btn-lg btn-outline-info btn-block card-title" type="button"
-                                            data-target="#_${milestone.id}"
-                                            data-toggle="collapse">
-                                        &emsp;${milestone.title}&emsp;&emsp;▼
-                                    </button>
-                                    <div class="collapse " id="_${milestone.id}">
-                                        <div class="p-2 text-monospace">
-                                                ${milestone.description}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-footer">Due: ${milestone.endDate}
-                                    <span>
                     &emsp;&emsp;
-                    <i class="fas fa-circle"></i>
-                    &emsp;&emsp;
-                    <i class="fas fa-pen" onclick="editMilestone(${milestone})"></i>
+                    <button type="button" class=" fas fa-pen btn btn-primary" data-toggle="modal"
+                            data-target="#exampleModalCenter"></button>
                   </span>
-                                </div>
+                            </div>
 
-                            </div>
                         </div>
-                        <div class="col-sm-1 text-center flex-column d-none d-sm-flex">
-                            <div class="row h-50">
-                                <div class="col border-right">&nbsp;</div>
-                                <div class="col">&nbsp;</div>
-                            </div>
-                            <h5 class="m-2">
-                                <span class="badge badge-pill bg-success">&nbsp;</span>
-                            </h5>
-                            <div class="row h-50">
-                                <div class="col border-right">&nbsp;</div>
-                                <div class="col">&nbsp;</div>
-                            </div>
-                        </div>
-                        <div class="col-sm"> <!--spacer--> </div>
                     </div>
-                    <!--/row-->
-                </c:otherwise>
-            </c:choose>
-        </c:forEach>
+                    <div class="col-sm-1 text-center flex-column d-none d-sm-flex">
+                        <div class="row h-50">
+                            <div class="col border-right">&nbsp;</div>
+                            <div class="col">&nbsp;</div>
+                        </div>
+                        <h5 class="m-2">
+                            <span class="badge badge-pill bg-success">&nbsp;</span>
+                        </h5>
+                        <div class="row h-50">
+                            <div class="col border-right">&nbsp;</div>
+                            <div class="col">&nbsp;</div>
+                        </div>
+                    </div>
+                    <div class="col-sm"> <!--spacer--> </div>
+                </div>
+                <!--/row-->
+            </c:otherwise>
+        </c:choose>
+    </c:forEach>
+</div>
+<div class="d-flex justify-content-center">
+        <div class="control-pane">
+            <a id="add-new-milestone">
 
+                <form method="post" id="add_form">
+                    <input id="titleInput" name="mlT" type="text" class="form-control" placeholder="enter milestone title">
+                    <input id="DescriptionInput" name="mlD" type="text" class="form-control"
+                           placeholder="enter project description">
+                    <button  class="rounded-circle p-3 fa fa-plus-circle" type="submit"></button>
+                </form>
+                <p id="project"></p>
+            </a>
+        </div>
     </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+        integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+        crossorigin="anonymous"></script>
 
-<footer>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
-            integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
-            crossorigin="anonymous"></script>
+<script type="text/javascript" src="../../resources/js/project.js"></script>
+<script src="../../resources/js/bootbox.min.js"></script>
 
-    <script type="text/javascript" src="../../resources/js/project.js"></script>
-    <script src="../../resources/js/bootbox.min.js"></script>
-</footer>
+
 </body>
 
 

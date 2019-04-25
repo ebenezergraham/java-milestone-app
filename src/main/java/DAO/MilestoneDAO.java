@@ -49,6 +49,17 @@ public class MilestoneDAO implements AutoCloseable {
       throw new RuntimeException(e);
     }
   }
+  
+  public void deleteMilestone(String projectTitle, String title) {
+    final String ADD_MILESTONE_QUERY = "DELETE FROM milestone where title = ? AND project_title=?";
+    try (PreparedStatement ps = connection.prepareStatement(ADD_MILESTONE_QUERY)) {
+      ps.setString(1, title);
+      ps.setString(2, projectTitle);
+      ps.execute();
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+  }
 
   public Milestone getMilestone(String title) {
     final String GET_MILESTONE_QUERY = "SELECT title,description,status, start_date, due_date, end_date, project_title  FROM milestones WHERE title='"+title+"'";
