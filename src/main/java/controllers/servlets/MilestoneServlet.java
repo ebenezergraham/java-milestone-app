@@ -2,7 +2,6 @@ package controllers.servlets;
 
 import DAO.DAOFactory;
 import DAO.MilestoneDAO;
-import com.google.gson.Gson;
 import controllers.services.UserService;
 import domain.model.Milestone;
 import domain.model.Project;
@@ -42,6 +41,12 @@ public class MilestoneServlet extends HttpServlet {
                 String ptitle = request.getParameter("title");
                 System.out.println("Adding Milestone");
                 System.out.println("------------------------");
+//                String status;
+//                if (request.getParameter("mlStatus")==null){
+//                        status = "false";
+//                }else{
+//                        status="true";
+//                }
                 Milestone newML = new Milestone(
                     request.getParameter("mlID"),
                     request.getParameter("mlTitle"),
@@ -49,7 +54,6 @@ public class MilestoneServlet extends HttpServlet {
                     request.getParameter("mlStatus"),
                     request.getParameter("mlStartDate"),
                     request.getParameter("mlDueDate"),
-                    request.getParameter("mlEndDate"),
                     ptitle
                 );
                 System.out.println("the new milestone is "+ newML.getTitle());

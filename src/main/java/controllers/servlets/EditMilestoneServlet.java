@@ -3,14 +3,12 @@ package controllers.servlets;
 import DAO.DAOFactory;
 import DAO.MilestoneDAO;
 import domain.model.Milestone;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 import static controllers.servlets.MilestoneServlet.getFullURL;
 
@@ -22,14 +20,16 @@ public class EditMilestoneServlet extends HttpServlet {
                         HttpServletResponse response) throws ServletException, IOException {
     String ptitle = request.getParameter("title");
     System.out.println("Editing Milestone from "+ getFullURL(request));
+    System.out.println(request.getParameter("mlStatus"));
     System.out.println("------------------------");
-    System.out.println(request.getParameter("mlID")+
+    System.out.println("Status is "+request.getParameter("mlStatus"));
+        System.out.println(request.getParameter("mlID")+
         request.getParameter("mlTitle")+
         request.getParameter("mlDescription")+
-        request.getParameter("mlStatus")+
+        request.getParameter(request.getParameter("mlStatus"))+
         request.getParameter("mlStartDate")+
-        request.getParameter("mlDueDate")+
-        request.getParameter("mlEndDate"));
+        request.getParameter("mlDueDate"));
+//        request.getParameter("mlEndDate"));
 
         Milestone newML = new Milestone(
         request.getParameter("mlID"),
@@ -38,7 +38,6 @@ public class EditMilestoneServlet extends HttpServlet {
         request.getParameter("mlStatus"),
         request.getParameter("mlStartDate"),
         request.getParameter("mlDueDate"),
-        request.getParameter("mlEndDate"),
         ptitle
         );
 //    System.out.println(dao.milestoneExists(newML.getId()));
