@@ -94,4 +94,14 @@ public class Project {
   public Milestone getMilestone(String title) {
     return this.milestones.stream().filter(milestone -> milestone.getTitle().equals(title)).findFirst().orElse(null);
   }
+  
+  @Override
+  public String toString() {
+    return "Project{" +
+        "id='" + id + '\'' +
+        ", title='" + title + '\'' +
+        ", userId='" + userId + '\'' +
+        ", milestones=" + milestones +
+        '}';
+  }
 }

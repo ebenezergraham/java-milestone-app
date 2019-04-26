@@ -83,7 +83,7 @@ public class ProjectDAO implements AutoCloseable {
   
   public boolean deleteProject(String projectId) {
     System.out.println(projectId);
-    final String QUERY = "DELETE FROM MILESTONES where project_title=?; DELETE FROM projects where title=?; ";
+    final String QUERY = "DELETE FROM MILESTONES where project_id=?; DELETE FROM projects where title=?; ";
     boolean status;
     try (PreparedStatement ps = connection.prepareStatement(QUERY)) {
       ps.setString(1, projectId);
@@ -95,8 +95,8 @@ public class ProjectDAO implements AutoCloseable {
     return status;
   }
 
-  public Project getProject(String title) {
-    final String GET_PROJECT_QUERY = "SELECT id,title, user_id FROM PROJECTS WHERE title='"+title+"'";
+  public Project getProject(String id) {
+    final String GET_PROJECT_QUERY = "SELECT id,title, user_id FROM PROJECTS WHERE id='"+id+"'";
     Project pr = new Project();
     try (PreparedStatement ps = connection.prepareStatement(GET_PROJECT_QUERY)) {
       ResultSet rs = ps.executeQuery();

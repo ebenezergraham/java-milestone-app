@@ -28,13 +28,14 @@ public class MilestoneServlet extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest request,
                        HttpServletResponse response) throws ServletException, IOException {
-    String title = request.getParameter("title");
+    String id = request.getParameter("id");
     String completed = request.getParameter("completed");
 
-    Project pr = daoProject.getProject(title);
+    Project pr = daoProject.getProject(id);
 
     if (pr != null && pr.getUserId().equals(request.getSession().getAttribute("userID"))) {
-      request.setAttribute("title", title);
+      request.setAttribute("title", pr.getTitle());
+      request.setAttribute("id", pr.getId());
 
       List<Milestone> allM = dao.findMilestones(pr.getId());
       System.out.println(completed);
@@ -56,13 +57,16 @@ public class MilestoneServlet extends HttpServlet {
   @Override
   protected void doPost(HttpServletRequest request,
                         HttpServletResponse response) throws ServletException, IOException {
-    String ptitle = request.getParameter("title");
+    String id = request.getParameter("id");
+	  System.out.println("id: "+id);
     System.out.println("Adding Milestone");
     System.out.println("------------------------");
 
-    Project pr = daoProject.getProject(ptitle);
+    Project pr = daoProject.getProject(id);
+	  System.out.println("project: "+ pr.toString());
     if (pr != null && pr.getUserId().equals(request.getSession().getAttribute("userID"))) {
-      request.setAttribute("title", ptitle);
+      request.setAttribute("id", pr.getId());
+      request.setAttribute("title", pr.getTitle());
       String mlStartDate = request.getParameter("mlStartDate");
       String mlDueDate = request.getParameter("mlDueDate");
 

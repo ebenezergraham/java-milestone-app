@@ -14,8 +14,7 @@
 .control-pane{
     color: #216558;
     position: fixed;
-    height: 100px;
-
+    height: 100%;
 }
 
 .control-pane button{

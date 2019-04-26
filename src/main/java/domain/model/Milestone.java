@@ -135,4 +135,17 @@ public class Milestone {
   public void setProjectId(String projectId) {
     this.projectId = projectId;
   }
+  
+  @Override
+  public String toString() {
+    return "Milestone{" +
+        "id='" + id + '\'' +
+        ", title='" + title + '\'' +
+        ", description='" + description + '\'' +
+        ", status='" + status + '\'' +
+        ", startDate='" + startDate + '\'' +
+        ", dueDate='" + dueDate + '\'' +
+        ", projectId='" + projectId + '\'' +
+        '}';
+  }
 }

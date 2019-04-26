@@ -37,7 +37,6 @@
             </div>
             <button class="btn btn-lg btn-login btn-block text-uppercase" type="submit" value="register">Register</button>
             <hr class="my-4">
-<%--            <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> Sign in with Google</button>--%>
           </form>
         </div>
       </div>
@@ -45,9 +44,9 @@
   </div>
 </div>
 
-<script defer src="resources/js/jquery-3.3.1.js"></script>
-<script defer src="resources/js/jquery.ripples.js"></script>
-<script defer src="resources/js/script.js"></script>
+<script defer src="../../resources/js/jquery-3.3.1.js"></script>
+<script defer src="../../resources/js/jquery.ripples.js"></script>
+<script defer src="../../resources/js/script.js"></script>
 </body>
 
 

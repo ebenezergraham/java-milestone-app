@@ -79,4 +79,14 @@ public class User {
   public boolean removeProject(Project p) {
     return this.projects.remove(p);
   }
+  
+  @Override
+  public String toString() {
+    return "User{" +
+        "id='" + id + '\'' +
+        ", hash='" + hash + '\'' +
+        ", userName='" + userName + '\'' +
+        ", projects=" + projects +
+        '}';
+  }
 }

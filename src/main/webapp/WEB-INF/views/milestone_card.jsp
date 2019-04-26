@@ -1,5 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%--<link rel="stylesheet" href="../../resources/css/project.css">--%>
 
 <div class="col-sm py-2">
   <div class="card border-success shadow">

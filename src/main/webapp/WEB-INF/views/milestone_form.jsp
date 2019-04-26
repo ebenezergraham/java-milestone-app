@@ -1,5 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%--<link rel="stylesheet" href="../../resources/css/project.css">--%>
 <!-- Modal -->
 <div class="modal fade" id="editForm${milestone.id}" tabindex="-1" role="dialog"
      aria-labelledby="exampleModalCenterTitle"
@@ -14,10 +13,10 @@
       </div>
       <div class="modal-body">
 
-        <form action="/project/edit/?title=${title}&mlID=${milestone.id}" id="edit${milestone.id}"
+        <form action="/project/edit/?id=${id}&mlID=${milestone.id}" id="edit${milestone.id}"
               METHOD="post">
           <div class="form-group">
-            <label for="t${milestone.title}" maxlength="50>Title</label><br>
+            <label for="t${milestone.title}" maxlength="50">Title</label><br>
             <h3><input type="text" class="form-control modal-title" id="t${milestone.title}" value="${milestone.title}" name="mlTitle"></h3>
           </div>
 

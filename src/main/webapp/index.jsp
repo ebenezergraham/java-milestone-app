@@ -64,28 +64,27 @@
                     </a>
                     <c:if test="${projectList.size()>0}">
                         <c:forEach begin="0" end="${(projectList.size()/2)-1}" items="${projectList}" var="project">
-                            <div id="${project.getTitle()}" class=" m-3">
-                                <a href="project/?title=${project.getTitle()}" class="project card">
+                            <div id="${project.getId()}" class=" m-3">
+                                <a href="/project?id=${project.getId()}" class="project card">
                                     <p><c:out value="${project.getTitle()}"/></p>
                                 </a>
-                                <i id="${project.getTitle()}" style="cursor: pointer; font-size: 10px; background-color: #216558; padding: 7px"
-                                   class="rounded-circle text-white m-3 fa fa-trash btn-delete-project"></i>
+                                <i id="${project.getTitle()}"
+                                   class="options rounded-circle text-white m-2 fa fa-trash btn-delete-project" title="delete"></i>
+                                <i class="options rounded-circle m-2 text-white fa fa-share share-project" title="share"></i>
                             </div>
-
                         </c:forEach>
                     </c:if>
                 </section>
                 <section class="col-6">
                     <c:if test="${projectList.size()>0}">
-<%--                        <c:set var="c"--%>
                         <c:forEach begin="${projectList.size()/2}" items="${projectList}" var="project">
-                        <div id="${project.getTitle()}" class=" m-3">
-                        <a href="project/?title=${project.getTitle()}" class="project card">
+                        <div id="${project.getId()}" class=" m-3">
+                        <a href="/project?id=${project.getId()}" class="project card">
                                 <p><c:out value="${project.getTitle()}"/></p>
                             </a>
-                            <i id="${project.getTitle()}" style="cursor: pointer; font-size: 10px; background-color: #216558; padding: 7px"
-                               class="rounded-circle m-3 text-white fa fa-trash btn-delete-project"></i>
-                            <button class="share-project" type="button">Share</button>
+                            <i id="${project.getId()}"
+                               class="options rounded-circle m-2 text-white fa fa-trash btn-delete-project" title="delete"></i>
+                            <i class="options rounded-circle m-2 text-white fa fa-share share-project" title="share"></i>
 
                         </div>
                         </c:forEach>
@@ -95,7 +94,6 @@
         </main>
     </div>
     <%@include file="WEB-INF/views/footer.jsp" %>
-
 </div>
 <script defer src="resources/js/jquery-3.3.1.js"></script>
 <script defer src="resources/js/script.js"></script>

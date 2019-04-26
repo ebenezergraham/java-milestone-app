@@ -148,14 +148,14 @@ h1{
 	background-color: #216558;
 }
 
-/*#nameInput{*/
-/*	display: block;*/
-/*}*/
+#nameInput{
+	display: block;
+}
 
-/*#add-new-project{*/
-/*	display: none;*/
-/*	transition: 0.5ms;*/
-/*}*/
+#add-new-project{
+	display: none;
+	transition: 0.5ms;
+}
 
 /*.control-pane{*/
 /*	background-color: #216558;*/
@@ -191,4 +191,11 @@ h1{
 .bg-green{
 	background-color: #216558;
 
+}
+
+.options{
+	cursor: pointer;
+	font-size: 10px;
+	background-color: #216558;
+	padding: 7px
 }

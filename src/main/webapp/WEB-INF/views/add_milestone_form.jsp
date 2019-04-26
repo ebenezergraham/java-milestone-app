@@ -11,7 +11,8 @@
       </div>
       <div class="modal-body">
 
-        <form action="project/?title=${title}" METHOD="post">
+        <form action="/project?id=${id}" METHOD="post">
+          <p>Id ${id}</p>
           <div class="form-group">
             <label for="title${milestone.title}">Title</label><br>
             <h3><input type="text" class="form-control modal-title" id="title${milestone.id}"
