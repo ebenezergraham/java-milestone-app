@@ -25,10 +25,7 @@ public class Milestone {
   private String dueDate;
   @SerializedName("end_date")
   @Expose
-  private String endDate;
-  @SerializedName("project_id")
-  @Expose
-  private String projectTitle;
+  private String projectId;
 
   /**
    * No args constructor for use in serialization
@@ -43,9 +40,8 @@ public class Milestone {
    * @param status
    * @param startDate
    * @param dueDate
-   * @param endDate
    */
-  public Milestone(String id, String title, String description, String status, String startDate, String dueDate, String endDate) {
+  public Milestone(String id, String title, String description, String status, String startDate, String dueDate) {
     super();
     this.id = id;
     this.title = title;
@@ -53,7 +49,6 @@ public class Milestone {
     this.status = status;
     this.startDate = startDate;
     this.dueDate = dueDate;
-    this.endDate = endDate;
   }
 
   /**
@@ -62,12 +57,11 @@ public class Milestone {
    * @param title
    * @param status
    * @param description
-   * @param endDate
-   * @param projectTitle
+   * @param projectId
    * @param dueDate
    */
   public Milestone(String id, String title, String description, String status, String startDate, String dueDate,
-                   String endDate, String projectTitle) {
+                   String projectId) {
     super();
     this.id = id;
     this.title = title;
@@ -75,23 +69,14 @@ public class Milestone {
     this.status = status;
     this.startDate = startDate;
     this.dueDate = dueDate;
-    this.endDate = endDate;
-    this.projectTitle = projectTitle;
+    this.projectId = projectId;
   }
-  public Milestone(String title, String description, String status, String startDate, String dueDate, String endDate) {
+
+  public Milestone(String title, String description, String projectId) {
     super();
     this.title = title;
     this.description = description;
-    this.status = status;
-    this.startDate = startDate;
-    this.dueDate = dueDate;
-    this.endDate = endDate;
-  }
-  public Milestone(String title, String description, String projectTitle) {
-    super();
-    this.title = title;
-    this.description = description;
-    this.projectTitle = projectTitle;
+    this.projectId = projectId;
   }
 
 
@@ -143,19 +128,11 @@ public class Milestone {
     this.dueDate = dueDate;
   }
 
-  public String getEndDate() {
-    return endDate;
+  public String getProjectId() {
+    return projectId;
   }
 
-  public void setEndDate(String endDate) {
-    this.endDate = endDate;
-  }
-
-  public String getProjectTitle() {
-    return projectTitle;
-  }
-
-  public void setProjectTitle(String projectTitle) {
-    this.projectTitle = projectTitle;
+  public void setProjectId(String projectId) {
+    this.projectId = projectId;
   }
 }

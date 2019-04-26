@@ -1,5 +1,6 @@
 package DAO;
 
+import domain.model.Milestone;
 import domain.model.Project;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -92,6 +93,23 @@ public class ProjectDAO implements AutoCloseable {
       throw new RuntimeException(e);
     }
     return status;
+  }
+
+  public Project getProject(String title) {
+    final String GET_PROJECT_QUERY = "SELECT id,title, user_id FROM PROJECTS WHERE title='"+title+"'";
+    Project pr = new Project();
+    try (PreparedStatement ps = connection.prepareStatement(GET_PROJECT_QUERY)) {
+      ResultSet rs = ps.executeQuery();
+      System.out.println(rs);
+      if (rs.next()) {
+        pr.setId(rs.getString("id"));
+        pr.setTitle(rs.getString("title"));
+        pr.setUserId(rs.getString("user_id"));
+      }
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+    return pr;
   }
   }
 

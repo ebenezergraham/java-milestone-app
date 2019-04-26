@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
+<%--<link rel="stylesheet" href="../../resources/css/project.css">--%>
 
 <div class="col-sm py-2">
   <div class="card border-success shadow">
@@ -19,12 +20,13 @@
       </div>
     </div>
     <div class="card-footer">Due: ${milestone.dueDate}
-      <span class="float-right">&emsp;&emsp;
-              <i class="fas fa-circle"></i>
-              &emsp;&emsp;
-              <button type="button" class="btn btn-primary" data-toggle="modal"
-                      data-target="#editForm${milestone.id}"><i class="fas fa-pen"></i></button>
-          </span>
+      <span class="float-right">
+
+<i class="fas fa-circle ${milestone.status}"></i>
+  &emsp;&emsp;
+  <button type="button" class="btn btn-primary" data-toggle="modal"
+          data-target="#editForm${milestone.id}"><i class="fas fa-pen"></i></button>
+  </span>
       <%@include file="milestone_form.jsp" %>
 
     </div>
