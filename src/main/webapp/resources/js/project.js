@@ -1,59 +1,62 @@
 console.log("I am loading");
 var URL = window.location.href;
-console.log("you are at "+URL);
+console.log("you are at " + URL);
 
-$(".status").on("click",function () {
-  // console.log($(this).getAttribute("id"));
-  console.log($(this).val());
-  // console.log($(this).is(":checked"));
-  $(this).prop('value',$(this).is(":checked"));
-  console.log("Value of this checkbox "+$(this).attr("id")+" is "+$(this).val());
+document.getElementById('add_form').setAttribute('action', window.location.href);
+
+$(".status").on("click", function () {
+	// console.log($(this).getAttribute("id"));
+	console.log($(this).val());
+	// console.log($(this).is(":checked"));
+	$(this).prop('value', $(this).is(":checked"));
+	console.log("Value of this checkbox " + $(this).attr("id") + " is " + $(this).val());
 
 });
 
 
+function delMilestone(title, id) {
+	var $this = $(Event.target);
+	console.log($this.attributes);
+	bootbox.confirm({
+		message: "Are you sure you want to delete milestone ".concat(title),
+		buttons: {
+			confirm: {
+				label: 'Delete',
+				className: 'btn-danger'
+			},
+			cancel: {
+				label: 'Cancel',
+				className: 'btn'
+			}
+		},
+		callback: function (result) {
+			console.log('This was logged in the callback: ' + result);
+			console.log(URL.slice(0, URL.indexOf("?")) + "delete/" + URL.slice(URL.indexOf("?")));
 
-function delMilestone(title,id) {
-  var $this = $(Event.target);
-  console.log($this.attributes);
-  bootbox.confirm({
-    message: "Are you sure you want to delete milestone ".concat(title),
-    buttons: {
-      confirm: {
-        label: 'Delete',
-        className: 'btn-danger'
-      },
-      cancel: {
-        label: 'Cancel',
-        className: 'btn'
-      }
-    },
-    callback: function (result) {
-      console.log('This was logged in the callback: ' + result);
-      console.log(URL.slice(0, URL.indexOf("?")) + "delete/" + URL.slice(URL.indexOf("?")));
-
-      if (result) {
-        var delURL = URL.slice(0, URL.indexOf("?")) + "delete/?title=" + title + "&ml=" + id;
-        console.log(delURL);
-        httpGetAsync(delURL, true, "DELETE");
-        console.log("END");
-      }
-    }
-  });
+			if (result) {
+				var delURL = URL.slice(0, URL.indexOf("?")) + "delete/?title=" + title + "&ml=" + id;
+				console.log(delURL);
+				httpGetAsync(delURL, true, "DELETE");
+				console.log("END");
+			}
+		}
+	});
 }
+
 // })
 
 function httpGetAsync(theUrl, callback, request) {
-  var xmlHttp = new XMLHttpRequest();
-  xmlHttp.onreadystatechange = function() {
-    if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-      callback(xmlHttp.responseText);
-  }
-  xmlHttp.open(request, theUrl, true); // true for asynchronous
-  xmlHttp.send(null);
-  // location.reload();
+	var xmlHttp = new XMLHttpRequest();
+	xmlHttp.onreadystatechange = function () {
+		if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+			callback(xmlHttp.responseText);
+	}
+	xmlHttp.open(request, theUrl, true); // true for asynchronous
+	xmlHttp.send(null);
+	// location.reload();
 
 }
+
 //
 // function editMilestone(t) {
 //   console.log("editing milestone");
@@ -92,25 +95,25 @@ function httpGetAsync(theUrl, callback, request) {
 // }
 
 function editMilestone() {
-  document.getElementById('theform').onsubmit = function() {
-    console.log(document.getElementById('searchTerm').value);
-    return false;
-  };
-  console.log("editing milestone");
-  console.log(this);
-    var form = this;
-    var url = 'http://localhost:8080/milestone';
+	document.getElementById('theform').onsubmit = function () {
+		console.log(document.getElementById('searchTerm').value);
+		return false;
+	};
+	console.log("editing milestone");
+	console.log(this);
+	var form = this;
+	var url = 'http://localhost:8080/milestone';
 
-     $.ajax({
-       type : 'PUT',
-       url : url,
-       contentType: 'application/json',
-       data : JSON.stringify(form),
-       success : function(data, status, xhr){
-       },
-       error: function(xhr, status, error){
-         $('#msg').html('<span style=\'color:red;\'>'+error+'</span>')
-       }
-     });
+	$.ajax({
+		type: 'PUT',
+		url: url,
+		contentType: 'application/json',
+		data: JSON.stringify(form),
+		success: function (data, status, xhr) {
+		},
+		error: function (xhr, status, error) {
+			$('#msg').html('<span style=\'color:red;\'>' + error + '</span>')
+		}
+	});
 
 }

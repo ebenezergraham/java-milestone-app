@@ -12,23 +12,22 @@
       <div class="modal-body">
 
         <form action="/project?id=${id}" METHOD="post">
-          <p>Id ${id}</p>
           <div class="form-group">
             <label for="title${milestone.title}">Title</label><br>
             <h3><input type="text" class="form-control modal-title" id="title${milestone.id}"
-                        name="mlTitle"></h3>
+                       name="mlTitle"></h3>
           </div>
 
           <div class="form-group">
             <label for="description${milestone.id}">Description</label>
-            <textarea rows ="5" cols = "50" id = "description${milestone.id}" maxlength="250"
+            <textarea rows="5" cols="50" id="description${milestone.id}" maxlength="250"
                       class="form-control" name="mlDescription"></textarea>
           </div>
 
           <div class="form-group">
             <label for="start${milestone.id}">Start ${milestone.startDate}</label>
             <input type="date" class="form-control" id="start${milestone.id}"
-                    name="mlStartDate">
+                   name="mlStartDate">
           </div>
 
           <div class="form-group">
@@ -37,12 +36,20 @@
                    name="mlDueDate">
           </div>
 
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input status" id="customCheck${milestone.id}"
+                     value="false" name="mlStatus">
+
+              <label class="custom-control-label" for="customCheck${milestone.id}">Completed</label>
+            </div>
+          </div>
+
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Save changes</button>
+            <button type="submit" class="btn text-white bg-green">Save changes</button>
           </div>
         </form>
-
       </div>
     </div>
   </div>

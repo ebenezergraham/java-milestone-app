@@ -19,48 +19,47 @@ import java.util.List;
 
 @WebServlet(urlPatterns = "/dashboard")
 public class DashboardServlet extends HttpServlet {
-  ProjectDAO dao = DAOFactory.getProjectDAO();
-  private static final Logger LOGGER = LoggerFactory.getLogger(DashboardServlet.class.getName());
-  
-  
-  @Override
-  protected void doGet(HttpServletRequest request,
-                       HttpServletResponse response) throws ServletException, IOException {
-    HttpSession session = request.getSession(false);
-    if (session != null) {
-      User usr = (User) session.getAttribute("userobj");
-      System.out.println("Dashboard Servlet - Session username: " + usr.getUserName());
-      List<Project> projectList = dao.findProjects(usr.getId());
-      request.setAttribute("projectList", projectList);
-      request.getRequestDispatcher("index.jsp").forward(request, response);
-    } else {
-      response.sendRedirect("/login");
-    }
-
-  }
-
-  @Override
-  protected void doPost(HttpServletRequest request,
-                        HttpServletResponse response) throws ServletException, IOException {
-
-  }
-  
-  @Override
-  protected void doDelete(HttpServletRequest request,
-                          HttpServletResponse response) throws ServletException, IOException {
-    LOGGER.info("deleting project");
-    if(request.getSession(false)!= null){
-    String projectId = request.getParameter("projectId");
-      System.out.println("get param "+projectId);
-    projectId = request.getReader().readLine().split("=")[1];
-    projectId = projectId.replaceAll("%20"," ");
-      System.out.println(projectId);
-    User name = (User)request.getSession().getAttribute("userobj");
-    if(dao.deleteProject(projectId)) {
-      response.setStatus(200);
-    }
-    }else {
-      response.setStatus(403);
-    }
-  }
+	private static final Logger LOGGER = LoggerFactory.getLogger(DashboardServlet.class.getName());
+	ProjectDAO dao = DAOFactory.getProjectDAO();
+	
+	@Override
+	protected void doGet(HttpServletRequest request,
+	                     HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession(false);
+		if (session != null) {
+			User usr = (User) session.getAttribute("userobj");
+			System.out.println("Dashboard Servlet - Session username: " + usr.getUserName());
+			List<Project> projectList = dao.findProjects(usr.getId());
+			request.setAttribute("projectList", projectList);
+			request.getRequestDispatcher("index.jsp").forward(request, response);
+		} else {
+			response.sendRedirect("/login");
+		}
+		
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest request,
+	                      HttpServletResponse response) throws ServletException, IOException {
+		/*Todo: Edit Project Name*/
+	}
+	
+	@Override
+	protected void doDelete(HttpServletRequest request,
+	                        HttpServletResponse response) throws ServletException, IOException {
+		LOGGER.info("deleting project");
+		if (request.getSession(false) != null) {
+			String projectId = request.getParameter("projectId");
+			System.out.println("get param " + projectId);
+			projectId = request.getReader().readLine().split("=")[1];
+			projectId = projectId.replaceAll("%20", " ");
+			System.out.println(projectId);
+			User name = (User) request.getSession().getAttribute("userobj");
+			if (dao.deleteProject(projectId)) {
+				response.setStatus(200);
+			}
+		} else {
+			response.setStatus(403);
+		}
+	}
 }

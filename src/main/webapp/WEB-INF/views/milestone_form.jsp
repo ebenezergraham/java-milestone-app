@@ -17,12 +17,13 @@
               METHOD="post">
           <div class="form-group">
             <label for="t${milestone.title}" maxlength="50">Title</label><br>
-            <h3><input type="text" class="form-control modal-title" id="t${milestone.title}" value="${milestone.title}" name="mlTitle"></h3>
+            <h3><input type="text" class="form-control modal-title" id="t${milestone.title}"
+                       value="${milestone.title}" name="mlTitle"></h3>
           </div>
 
           <div class="form-group">
             <label for="desc${milestone.title}">Description</label>
-            <textarea rows ="4" cols = "50" id = "desc${milestone.title}" maxlength="250"
+            <textarea rows="4" cols="50" id="desc${milestone.title}" maxlength="250"
                       class="form-control" name="mlDescription">${milestone.description}</textarea>
           </div>
 
@@ -37,24 +38,21 @@
             <input type="date" class="form-control" id="due${milestone.id}"
                    value="${milestone.dueDate}" name="mlDueDate">
           </div>
-          ${milestone.status}
 
           <div class="form-group">
             <div class="custom-control custom-checkbox">
               <input type="checkbox" class="custom-control-input status" id="customCheck${milestone.id}"
-                     <c:if test="${milestone.status=='true'}"> checked</c:if> value="${milestone.status}"
-                    name="mlStatus">
+              <c:if test="${milestone.status=='true'}"> checked</c:if> value="${milestone.status}"
+                     name="mlStatus">
               <label class="custom-control-label" for="customCheck${milestone.id}">Completed</label>
             </div>
           </div>
 
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary float-right">Save changes</button>
+          <button type="button" class="btn btn-secondary " data-dismiss="modal">Close</button>
+          <button type="submit" class="btn bg-green text-white float-right">Save changes</button>
         </form>
 
       </div>
     </div>
   </div>
 </div>
-<%--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>--%>
-<%--<script type="text/javascript" src="../../resources/js/project.js"></script>--%>

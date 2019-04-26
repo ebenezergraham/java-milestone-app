@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+
 /*
 ebenezergraham created on 4/24/19
 */
@@ -26,19 +27,18 @@ public class AuthenticationFilter implements Filter {
 		String uri = req.getServletPath();
 		HttpSession session = req.getSession(false);
 		this.context.log("Requested Resource::" + uri);
-
-		if (uri.equals("/login")|| uri.equals("/register")|| uri.equals("/view") || uri.equals("/readonly")){
+		
+		if (uri.equals("/login") || uri.equals("/register") || uri.equals("/view") || uri.equals("/readonly")) {
 			System.out.println("register redirect ..");
 			chain.doFilter(request, response);
 			System.out.println("About to leave!");
 			return;
 		}
 		
-		if(uri.equals("/") || session ==null){
+		if (uri.equals("/") || session == null) {
 			res.sendRedirect("/login");
-		}
-		else{
-				if (session.getAttribute("username") == null) {
+		} else {
+			if (session.getAttribute("username") == null) {
 				this.context.log("Unauthorized");
 				res.sendRedirect("/login");
 			} else {
@@ -46,7 +46,7 @@ public class AuthenticationFilter implements Filter {
 			}
 		}
 	}
-		
+	
 	public void destroy() {
 	}
 	
