@@ -4,6 +4,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
+        <h3>Add Milestone</h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -25,20 +26,14 @@
 
           <div class="form-group">
             <label for="start${milestone.id}">Start ${milestone.startDate}</label>
-            <input type="datetime-local" class="form-control" id="start${milestone.id}"
+            <input type="date" class="form-control" id="start${milestone.id}"
                     name="mlStartDate">
           </div>
 
           <div class="form-group">
-            <label for="end${milestone.id}">End</label>
-            <input type="datetime-local" class="form-control" id="end${milestone.id}"
+            <label for="due${milestone.id}">Due</label>
+            <input type="date" class="form-control" id="due${milestone.id}"
                    name="mlDueDate">
-          </div>
-
-          <div class="form-group">
-            <label for="end${milestone.id}">End</label>
-            <input type="datetime-local" class="form-control" id="end${milestone.id}"
-                   name="mlEndDate">
           </div>
 
           <div class="modal-footer">

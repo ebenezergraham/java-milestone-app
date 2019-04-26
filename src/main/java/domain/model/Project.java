@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Project {
 
-  @SerializedName("_id")
+  @SerializedName("id")
   @Expose
   private String id;
   @SerializedName("title")
