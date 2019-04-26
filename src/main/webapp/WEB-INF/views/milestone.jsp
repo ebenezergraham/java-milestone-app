@@ -1,3 +1,5 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
+
 <div class="row no-gutters">
   ${count}
   ${milestone.title}

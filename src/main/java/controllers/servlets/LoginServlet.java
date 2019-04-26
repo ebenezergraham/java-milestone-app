@@ -1,7 +1,7 @@
 package controllers.servlets;
 
-import DAO.H2db;
-import controllers.services.LoginService;
+import DAO.UserDAO;
+import controllers.services.AuthenticationService;
 import domain.model.User;
 
 import javax.servlet.ServletException;
@@ -12,7 +12,7 @@ import java.io.IOException;
 @WebServlet(urlPatterns = "/login", name = "LoginServlet")
 public class LoginServlet extends HttpServlet {
 
-  private LoginService mLoginService = new LoginService();
+  private AuthenticationService authenticationService = new AuthenticationService();
 
   @Override
   protected void doGet(HttpServletRequest request,
@@ -31,10 +31,10 @@ public class LoginServlet extends HttpServlet {
     if(previousSession!=null){
       previousSession.invalidate();
     }
-    if (mLoginService.login(username, password)) {
+    if (authenticationService.login(username, password)) {
       //generate a new session
       HttpSession newSession = request.getSession(true);
-      H2db userDB = new H2db();
+      UserDAO userDB = new UserDAO();
       User user = userDB.getUser(username);
       newSession.setAttribute("userobj",user);
 //      User usr =

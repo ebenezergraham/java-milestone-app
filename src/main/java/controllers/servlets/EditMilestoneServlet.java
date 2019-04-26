@@ -1,7 +1,7 @@
 package controllers.servlets;
 
-import DAO.H2Milestone;
-import DAO.H2Project;
+import DAO.DAOFactory;
+import DAO.MilestoneDAO;
 import com.google.gson.Gson;
 import controllers.services.UserService;
 import domain.model.Milestone;
@@ -19,7 +19,7 @@ import static controllers.servlets.MilestoneServlet.getFullURL;
 
 @WebServlet(urlPatterns = "/project/edit/*")
 public class EditMilestoneServlet extends HttpServlet {
-
+  MilestoneDAO dao = DAOFactory.getMilestoneDAO();
   @Override
   protected void doPost(HttpServletRequest request,
                         HttpServletResponse response) throws ServletException, IOException {
@@ -34,9 +34,7 @@ public class EditMilestoneServlet extends HttpServlet {
         request.getParameter("mlDueDate")+
         request.getParameter("mlEndDate"));
 
-
-    H2Milestone dao = new H2Milestone();
-    Milestone newML = new Milestone(
+        Milestone newML = new Milestone(
         request.getParameter("mlID"),
         request.getParameter("mlTitle"),
         request.getParameter("mlDescription"),

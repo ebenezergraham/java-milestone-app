@@ -1,4 +1,6 @@
 <!-- Modal -->
+<%@ page contentType="text/html;charset=UTF-8" %>
+
 <div class="modal fade" id="editForm${milestone.id}" tabindex="-1" role="dialog"
      aria-labelledby="exampleModalCenterTitle"
      aria-hidden="true">

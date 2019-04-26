@@ -81,3 +81,27 @@ function httpGetAsync(theUrl, callback, request) {
 //     });
 //
 // }
+
+function editMilestone() {
+  document.getElementById('theform').onsubmit = function() {
+    console.log(document.getElementById('searchTerm').value);
+    return false;
+  };
+  console.log("editing milestone");
+  console.log(this);
+    var form = this;
+    var url = 'http://localhost:8080/milestone';
+
+     $.ajax({
+       type : 'PUT',
+       url : url,
+       contentType: 'application/json',
+       data : JSON.stringify(form),
+       success : function(data, status, xhr){
+       },
+       error: function(xhr, status, error){
+         $('#msg').html('<span style=\'color:red;\'>'+error+'</span>')
+       }
+     });
+
+}

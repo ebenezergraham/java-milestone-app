@@ -1,6 +1,6 @@
 package controllers.servlets;
 
-import controllers.services.LoginService;
+import controllers.services.AuthenticationService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,7 +12,7 @@ import java.io.IOException;
 @WebServlet(urlPatterns = "/register", name = "RegisterServlet")
 public class RegisterServlet extends HttpServlet {
 
-  private LoginService mLoginService = new LoginService();
+  private AuthenticationService authenticationService = new AuthenticationService();
 
   @Override
   protected void doGet(HttpServletRequest request,
@@ -26,7 +26,7 @@ public class RegisterServlet extends HttpServlet {
     String username = request.getParameter("name");
     String password = request.getParameter("password");
 
-    if (mLoginService.register(username, password)) {
+    if (authenticationService.register(username, password)) {
       response.sendRedirect("/login");
     } else {
       System.out.println("Invalid credentials");
