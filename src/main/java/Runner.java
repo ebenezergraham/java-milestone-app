@@ -1,13 +1,11 @@
-import DAO.H2Milestone;
-import DAO.H2Project;
-import domain.model.User;
+import DAO.DAOFactory;
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.WebResourceRoot;
 import org.apache.catalina.core.StandardContext;
 import org.apache.catalina.startup.Tomcat;
 import org.apache.catalina.webresources.DirResourceSet;
 import org.apache.catalina.webresources.StandardRoot;
-import DAO.H2db;
+
 import javax.servlet.ServletException;
 import java.io.File;
 import java.util.logging.Logger;
@@ -15,7 +13,8 @@ import java.util.logging.Logger;
 public class Runner {
   private static final String WEBAPP_DIR_LOCATION = "src/main/webapp/";
   private static final Logger LOGGER = Logger.getLogger(Runner.class.getName());
-
+  private static DAOFactory daoFactory;
+  
   public static void main(String[] args) throws ServletException {
 
     Tomcat tomcat = new Tomcat();
@@ -39,21 +38,11 @@ public class Runner {
 
     try {
       tomcat.start();
-      createAdmin();
+      daoFactory = new DAOFactory();
     } catch (LifecycleException e) {
       LOGGER.warning(e.getMessage());
       e.printStackTrace();
     }
     tomcat.getServer().await();
-  }
-  
-  public static void createAdmin(){
-    H2db h2db = new H2db();
-    H2Project h2p = new H2Project();
-    H2Milestone h2ML= new H2Milestone();
-//    User user = new User();
-//    user.setUserName("hermes");
-//    user.setHash("1234");
-//    h2db.addUser(user);
   }
 }

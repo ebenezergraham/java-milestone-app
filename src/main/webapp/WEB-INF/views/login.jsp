@@ -55,9 +55,9 @@
 <script src="webjars/jquery/1.11.1/jquery.min.js"></script>
 <script src="webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
-<script defer src="/resources/js/jquery-3.3.1.js"></script>
-<script defer src="/resources/js/jquery.ripples.js"></script>
-<script defer src="/resources/js/login.js"></script>
+<script defer src="../../resources/js/jquery-3.3.1.js"></script>
+<script defer src="../../resources/js/jquery.ripples.js"></script>
+<script defer src="../../resources/js/login.js"></script>
 </body>
 
 

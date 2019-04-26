@@ -1,7 +1,7 @@
 package controllers.servlets;
 
-import DAO.H2db;
-import com.google.gson.Gson;
+import DAO.DAOFactory;
+import DAO.ProjectDAO;
 import controllers.services.UserService;
 import domain.model.Milestone;
 import domain.model.Project;
@@ -13,27 +13,29 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 
-@WebServlet(urlPatterns = "/project")
+@WebServlet(urlPatterns = "/projects")
 public class ProjectServlet extends HttpServlet {
-    H2db dao = new H2db();
+    ProjectDAO dao = DAOFactory.getProjectDAO();
+    
     @Override
     protected void doGet(HttpServletRequest request,
                          HttpServletResponse response) throws ServletException, IOException {
-
     }
-
-
+    
     @Override
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response) throws ServletException, IOException {
-        String title = request.getParameter("project");
-	    System.out.println("title: "+ title);
-        if (title != null) {
-            Project project = new Project();
-            project.setTitle(title);
-           // dao.addProject(request.getSession().getAttribute("username").toString(),project);
+      String ptitle = request.getParameter("project");
+	    System.out.println("title: "+ ptitle);
+	    String userId = ((User) request.getSession().getAttribute("userobj")).getId();
+        if (ptitle != null) {
+            if (dao.getProject(userId,ptitle)==null){
+              dao.addProject(new Project(ptitle,userId));
+              System.out.println("Project added !");
+            }else{
+              System.out.println("project exists already!");
+            }
         }
 	      response.sendRedirect("/dashboard");
     }

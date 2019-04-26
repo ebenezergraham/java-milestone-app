@@ -11,7 +11,18 @@
     }
 %>
 <html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../resources/css/main.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+</head>
 <body>
+<%@include file="WEB-INF/views/menu.jsp" %>
+
 <style>
     div#b {
         display: none;
@@ -28,9 +39,7 @@
         background-color: #216558;
     }
 </style>
-<%--<%@ page import="DAO.DAO" %>--%>
-<%@include file="WEB-INF/views/menu.jsp" %>
-<div class="container m-5">
+<div style="vh: 100%" class="container m-5 px-5">
     <div class="row">
         <aside class="col-3">
             <img class="avatar" src="https://ui-avatars.com/api/?name=<%=userName%>&size=512">
@@ -47,35 +56,46 @@
                         <div id="b"></div>
                     </div>
                     <a id="add-new-project" class="card m-3">
-                        <form action="/project"  method="post">
-                            <input id="nameInput" name="project" type="text" class="form-control"
+                        <form action="/projects" method="post">
+                            <input id="nameInput" autofocus name="project" type="text" class="form-control"
                                    placeholder="enter project name ">
                         </form>
                         <p id="project"></p>
                     </a>
                     <c:if test="${projectList.size()>0}">
                         <c:forEach begin="0" end="${(projectList.size()/2)-1}" items="${projectList}" var="project">
-                            <a href="projects/?title=${project.getTitle()}" class="project card m-3">
-                                <p><c:out value="${project.getTitle()}"/></p>
-
-                            </a>
+                            <div id="${project.getTitle()}" class=" m-3">
+                                <a href="project/?title=${project.getTitle()}" class="project card">
+                                    <p><c:out value="${project.getTitle()}"/></p>
+                                </a>
+                                <i id="${project.getTitle()}" style="cursor: pointer; font-size: 10px; background-color: #216558; padding: 7px"
+                                   class="rounded-circle text-white m-3 fa fa-trash btn-delete-project"></i>
+                            </div>
 
                         </c:forEach>
                     </c:if>
                 </section>
                 <section class="col-6">
                     <c:if test="${projectList.size()>0}">
-
+<%--                        <c:set var="c"--%>
                         <c:forEach begin="${projectList.size()/2}" items="${projectList}" var="project">
-                            <a href="projects/?title=${project.getTitle()}" class="project card m-3">
+                        <div id="${project.getTitle()}" class=" m-3">
+                        <a href="project/?title=${project.getTitle()}" class="project card">
                                 <p><c:out value="${project.getTitle()}"/></p>
                             </a>
+                            <i id="${project.getTitle()}" style="cursor: pointer; font-size: 10px; background-color: #216558; padding: 7px"
+                               class="rounded-circle m-3 text-white fa fa-trash btn-delete-project"></i>
+                            <button class="share-project" type="button">Share</button>
+
+                        </div>
                         </c:forEach>
                     </c:if>
                 </section>
             </div>
         </main>
     </div>
+    <%@include file="WEB-INF/views/footer.jsp" %>
+
 </div>
 <script defer src="resources/js/jquery-3.3.1.js"></script>
 <script defer src="resources/js/script.js"></script>

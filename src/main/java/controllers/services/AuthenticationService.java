@@ -1,25 +1,24 @@
 package controllers.services;
 
-import DAO.H2db;
+import DAO.DAOFactory;
+import DAO.UserDAO;
 import domain.model.User;
 import lombok.NonNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import utils.PasswordHash;
 
-import javax.servlet.http.Cookie;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 
-public class LoginService {
-  private static final Logger LOGGER = LoggerFactory.getLogger(LoginService.class.getName());
+public class AuthenticationService {
+  private static final Logger LOGGER = LoggerFactory.getLogger(AuthenticationService.class.getName());
   private User mUser;
-  private H2db dao = new H2db();
+  private UserDAO dao = DAOFactory.getUserDAO();
 
   public synchronized boolean login(@NonNull String username, @NonNull String password) {
     try {
       mUser = dao.getUser(username);
-//      Cookie cookie = new Cookie("userID", mUser.getId());
       String storedHash = mUser.getHash();
       return storedHash != null && PasswordHash.validatePassword(password, storedHash);
     } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
