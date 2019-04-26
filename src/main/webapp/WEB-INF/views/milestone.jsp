@@ -1,8 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 
 <div class="row no-gutters">
-  ${count}
-  ${milestone.title}
 <%--  <c:if test="${count%2==0}">--%>
 <c:choose>
   <c:when test="${count%2==0}">
@@ -11,7 +9,14 @@
   <!-- timeline item 1 center dot -->
   <div class="col-sm-1 text-center flex-column d-none d-sm-flex">
     <div class="row h-50">
-      <div class="col">&nbsp;</div>
+      <c:choose>
+      <c:when test="${count==0}">
+        <div class="col">&nbsp;</div>
+      </c:when>
+      <c:otherwise>
+        <div class="col border-right">&nbsp;</div>
+      </c:otherwise>
+      </c:choose>
       <div class="col">&nbsp;</div>
     </div>
     <h5 class="m-2">
