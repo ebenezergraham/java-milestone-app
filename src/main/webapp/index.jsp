@@ -21,6 +21,8 @@
 
 </head>
 <body>
+<%@include file="WEB-INF/views/menu.jsp" %>
+
 <style>
     div#b {
         display: none;
@@ -37,8 +39,7 @@
         background-color: #216558;
     }
 </style>
-<%@include file="WEB-INF/views/menu.jsp" %>
-<div class="container m-5">
+<div class="container m-5 px-5">
     <div class="row">
         <aside class="col-3">
             <img class="avatar" src="https://ui-avatars.com/api/?name=<%=userName%>&size=512">
@@ -56,7 +57,7 @@
                     </div>
                     <a id="add-new-project" class="card m-3">
                         <form action="/projects" method="post">
-                            <input id="nameInput" name="project" type="text" class="form-control"
+                            <input id="nameInput" autofocus name="project" type="text" class="form-control"
                                    placeholder="enter project name ">
                         </form>
                         <p id="project"></p>
@@ -76,7 +77,7 @@
                 </section>
                 <section class="col-6">
                     <c:if test="${projectList.size()>0}">
-
+<%--                        <c:set var="c"--%>
                         <c:forEach begin="${projectList.size()/2}" items="${projectList}" var="project">
                         <div id="${project.getTitle()}" class=" m-3">
                         <a href="project/?title=${project.getTitle()}" class="project card">
@@ -84,6 +85,8 @@
                             </a>
                             <i id="${project.getTitle()}" style="cursor: pointer; font-size: 10px; background-color: #216558; padding: 7px"
                                class="rounded-circle m-3 text-white fa fa-trash btn-delete-project"></i>
+                            <button class="share-project" type="button">Share</button>
+
                         </div>
                         </c:forEach>
                     </c:if>
@@ -94,6 +97,7 @@
 </div>
 <script defer src="resources/js/jquery-3.3.1.js"></script>
 <script defer src="resources/js/script.js"></script>
+<%@include file="WEB-INF/views/footer.jsp" %>
 
 </body>
 </html>

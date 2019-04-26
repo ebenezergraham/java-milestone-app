@@ -18,8 +18,9 @@
 </script>
 <body>
 <%@include file="menu.jsp" %>
-<%--<div class="container">--%>
-  <h1>Project ${title}</h1>
+<main class="container py-5">
+
+<h1 class="text-green">Project ${title}</h1>
   <div class="container py-2">
     <c:set var = "count" value = "0" scope="request"/>
     <c:forEach items="${allMilestones}" var="milestone">
@@ -27,10 +28,10 @@
       <c:set var = "count" value = "${count+1}" scope="page"/>
     </c:forEach>
   </div>
-<div class="d-flex justify-content-center">
+<div class=" d-flex justify-content-center " >
     <div class="control-pane">
         <a id="add-new-milestone">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add">Add Milestone</button>
+            <button type="button" class="btn btn-primary ${visibility}" data-toggle="modal" data-target="#add">Add Milestone</button>
 
         </a>
     </div>
@@ -43,5 +44,7 @@
         crossorigin="anonymous"></script>
 <script type="text/javascript" src="../../resources/js/project.js"></script>
 <script src="../../resources/js/bootbox.min.js"></script>
+
+</main>
 </body>
 </html>

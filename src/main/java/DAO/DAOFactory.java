@@ -13,8 +13,9 @@ public class DAOFactory implements AutoCloseable{
 	private static UserDAO userDAO = new UserDAO();
 	private static MilestoneDAO milestoneDAO = new MilestoneDAO();
 	private static ProjectDAO projectDAO = new ProjectDAO();
+	private static ShareableLinkDAO shareableLinkDAO = new ShareableLinkDAO();
 	private Connection connection;
-	private static final String db = "jdbc:h2:~/mp";
+	private static final String db = "jdbc:h2:~/mp;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE";
 	
 	DBUtil dbUtil = new DBUtil();;
 	
@@ -62,6 +63,14 @@ public class DAOFactory implements AutoCloseable{
 	
 	public void setConnection(Connection connection) {
 		this.connection = connection;
+	}
+	
+	public static ShareableLinkDAO getShareableLinkDAO() {
+		return shareableLinkDAO;
+	}
+	
+	public static void setShareableLinkDAO(ShareableLinkDAO shareableLinkDAO) {
+		DAOFactory.shareableLinkDAO = shareableLinkDAO;
 	}
 	
 	@Override

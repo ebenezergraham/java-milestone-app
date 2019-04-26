@@ -11,7 +11,7 @@ import java.sql.SQLException;
 public class DBUtil {
 	
 	private static Connection connection;
-	private static final String db = "jdbc:h2:~/mp";
+	private static final String db = "jdbc:h2:~/mp;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE";
 	
 	public DBUtil() {
 		try {
@@ -61,6 +61,18 @@ public class DBUtil {
 					"end_date VARCHAR(255)," +
 					"project_title VARCHAR(255) NOT NULL, " +
 					"foreign key (project_title) references projects(title))";
+			PreparedStatement ps = connection.prepareStatement(cmd);
+			ps.execute();
+		} catch (SQLException e) {
+			System.out.println(e);
+//				throw new RuntimeException(e);
+		}
+		
+		try {
+			String cmd = "CREATE TABLE IF NOT EXISTS links (" +
+					"id int AUTO_INCREMENT PRIMARY KEY," +
+					"link VARCHAR(255), " +
+					"project_id VARCHAR(255))";
 			PreparedStatement ps = connection.prepareStatement(cmd);
 			ps.execute();
 		} catch (SQLException e) {
