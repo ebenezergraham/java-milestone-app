@@ -27,7 +27,7 @@ public class AuthenticationFilter implements Filter {
 		HttpSession session = req.getSession(false);
 		this.context.log("Requested Resource::" + uri);
 
-		if (uri.equals("/login")|| (uri.equals("/register"))){
+		if (uri.equals("/login")|| uri.equals("/register")|| uri.equals("/view") || uri.equals("/readonly")){
 			System.out.println("register redirect ..");
 			chain.doFilter(request, response);
 			System.out.println("About to leave!");
