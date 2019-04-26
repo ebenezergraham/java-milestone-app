@@ -2,8 +2,17 @@ console.log("I am loading");
 var URL = window.location.href;
 console.log("you are at "+URL);
 
+$(".status").on("click",function () {
+  // console.log($(this).getAttribute("id"));
+  console.log($(this).val());
+  // console.log($(this).is(":checked"));
+  $(this).prop('value',$(this).is(":checked"));
+  console.log("Value of this checkbox "+$(this).attr("id")+" is "+$(this).val());
 
-// $(".fa-trash").on('click', function (e) {
+});
+
+
+
 function delMilestone(title,id) {
   var $this = $(Event.target);
   console.log($this.attributes);

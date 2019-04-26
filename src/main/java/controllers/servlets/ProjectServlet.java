@@ -16,7 +16,7 @@ import java.io.IOException;
 
 @WebServlet(urlPatterns = "/projects")
 public class ProjectServlet extends HttpServlet {
-    ProjectDAO dao = DAOFactory.getProjectDAO();
+    private ProjectDAO dao = DAOFactory.getProjectDAO();
     
     @Override
     protected void doGet(HttpServletRequest request,
@@ -28,7 +28,7 @@ public class ProjectServlet extends HttpServlet {
                           HttpServletResponse response) throws ServletException, IOException {
       String ptitle = request.getParameter("project");
 	    System.out.println("title: "+ ptitle);
-	    String userId = ((User) request.getSession().getAttribute("userobj")).getId();
+	    String userId = (String) request.getSession().getAttribute("userID");
         if (ptitle != null) {
             if (dao.getProject(userId,ptitle)==null){
               dao.addProject(new Project(ptitle,userId));
