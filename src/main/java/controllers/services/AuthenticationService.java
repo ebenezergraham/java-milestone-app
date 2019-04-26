@@ -1,6 +1,7 @@
 package controllers.services;
 
-import DAO.DAO;
+import DAO.DAOFactory;
+import DAO.UserDAO;
 import domain.model.User;
 import lombok.NonNull;
 import org.slf4j.Logger;
@@ -10,14 +11,14 @@ import utils.PasswordHash;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 
-public class LoginService {
-  private static final Logger LOGGER = LoggerFactory.getLogger(LoginService.class.getName());
+public class AuthenticationService {
+  private static final Logger LOGGER = LoggerFactory.getLogger(AuthenticationService.class.getName());
   private User mUser;
-  private DAO dao = new DAO();
+  private UserDAO dao = DAOFactory.getUserDAO();
 
   public synchronized boolean login(@NonNull String username, @NonNull String password) {
     try {
-      mUser = UserService.getInstance().getUser(username);
+      mUser = dao.getUser(username);
       String storedHash = mUser.getHash();
       return storedHash != null && PasswordHash.validatePassword(password, storedHash);
     } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
@@ -32,7 +33,10 @@ public class LoginService {
     if (mUser == null) {
       try {
         hash = PasswordHash.createHash(password);
-        dao.addUser(username, hash);
+        User user = new User();
+        user.setUserName(username);
+        user.setHash(hash);
+        dao.addUser(user);
       } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
         e.printStackTrace();
       }

@@ -1,4 +1,7 @@
-import DAO.MongoDB;
+import DAO.DAOFactory;
+import DAO.MilestoneDAO;
+import DAO.ProjectDAO;
+import DAO.UserDAO;
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.WebResourceRoot;
 import org.apache.catalina.core.StandardContext;
@@ -8,17 +11,16 @@ import org.apache.catalina.webresources.StandardRoot;
 
 import javax.servlet.ServletException;
 import java.io.File;
-import java.io.IOException;
 import java.util.logging.Logger;
 
 public class Runner {
   private static final String WEBAPP_DIR_LOCATION = "src/main/webapp/";
   private static final Logger LOGGER = Logger.getLogger(Runner.class.getName());
-
+  private static DAOFactory daoFactory;
+  
   public static void main(String[] args) throws ServletException {
 
     Tomcat tomcat = new Tomcat();
-    MongoDB db = new MongoDB();
     //The port that we should run on can be set into an environment variable
     //Look for that variable and default to 8080 if it isn't there.
     String webPort = System.getenv("PORT");
@@ -39,11 +41,9 @@ public class Runner {
 
     try {
       tomcat.start();
-      db.start();
-      db.testStartAndStopMongoImportAndMongod();
+      daoFactory = new DAOFactory();
     } catch (LifecycleException e) {
       LOGGER.warning(e.getMessage());
-    } catch (IOException e) {
       e.printStackTrace();
     }
     tomcat.getServer().await();

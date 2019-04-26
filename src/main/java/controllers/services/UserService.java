@@ -1,6 +1,6 @@
 package controllers.services;
 
-import DAO.DAO;
+import DAO.UserDAO;
 import com.google.gson.Gson;
 import domain.model.User;
 import org.slf4j.Logger;
@@ -19,17 +19,7 @@ public class UserService {
   private UserService() {
     this.mGson = new Gson();
   }
-  private DAO dao = new DAO();
-/*  public User getUser() {
-    User user = null;
-    try (BufferedReader br = new BufferedReader(new FileReader("data.json"))) {
-      user = this.mGson.fromJson(br, User.class);
-    } catch (IOException e) {
-      LOGGER.error(e.getMessage(), e.getCause());
-    }
-    return user;
-  }*/
-  
+  private UserDAO dao = new UserDAO();
   public User getUser(String username) {
     return dao.getUser(username);
   }
