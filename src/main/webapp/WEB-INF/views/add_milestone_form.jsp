@@ -19,7 +19,7 @@
 
           <div class="form-group">
             <label for="description${milestone.id}">Description</label>
-            <textarea rows ="5" cols = "50" id = "description${milestone.id}"
+            <textarea rows ="5" cols = "50" id = "description${milestone.id}" maxlength="250"
                       class="form-control" name="mlDescription"></textarea>
           </div>
 

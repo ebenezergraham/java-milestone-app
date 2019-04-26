@@ -22,7 +22,7 @@
 
           <div class="form-group">
             <label for="desc${milestone.title}">Description</label>
-            <textarea rows ="5" cols = "50" id = "desc${milestone.title}"
+            <textarea rows ="4" cols = "50" id = "desc${milestone.title}" maxlength="250"
                       class="form-control" name="mlDescription">${milestone.description}</textarea>
           </div>
 
@@ -33,9 +33,9 @@
           </div>
 
           <div class="form-group">
-            <label for="end${milestone.id}">End</label>
-            <input type="datetime-local" class="form-control" id="end${milestone.id}"
-                   value="${milestone.endDate}" name="mlDueDate">
+            <label for="due${milestone.id}">End</label>
+            <input type="datetime-local" class="form-control" id="due${milestone.id}"
+                   value="${milestone.dueDate}" name="mlDueDate">
           </div>
 
           <div class="form-group">

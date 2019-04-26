@@ -2,10 +2,7 @@ package controllers.servlets;
 
 import DAO.DAOFactory;
 import DAO.MilestoneDAO;
-import com.google.gson.Gson;
-import controllers.services.UserService;
 import domain.model.Milestone;
-import domain.model.Project;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
