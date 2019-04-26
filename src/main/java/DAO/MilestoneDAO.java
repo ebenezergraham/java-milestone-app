@@ -34,15 +34,14 @@ public class MilestoneDAO implements AutoCloseable {
 
   public void addMilestone(Milestone ml) {
       final String ADD_MILESTONE_QUERY = "INSERT INTO milestones (title,description,status, start_date, due_date," +
-          "end_date, project_title) VALUES (?,?,?,?,?,?,?)";
+          "project_title) VALUES (?,?,?,?,?,?)";
     try (PreparedStatement ps = connection.prepareStatement(ADD_MILESTONE_QUERY)) {
       ps.setString(1, ml.getTitle());
       ps.setString(2, ml.getDescription());
       ps.setString(3, ml.getStatus());
       ps.setString(4, ml.getStartDate());
       ps.setString(5, ml.getDueDate());
-      ps.setString(6, ml.getEndDate());
-      ps.setString(7, ml.getProjectTitle());
+      ps.setString(6, ml.getProjectTitle());
       ps.execute();
       System.out.println("H2 adding milestone");
 
@@ -74,7 +73,6 @@ public class MilestoneDAO implements AutoCloseable {
         ml.setStatus(rs.getString("status"));
         ml.setStartDate(rs.getString("start_date"));
         ml.setDueDate(rs.getString("due_date"));
-        ml.setEndDate(rs.getString("end_date"));
         ml.setProjectTitle(rs.getString("project_title"));
       }
     } catch (SQLException e) {
@@ -98,7 +96,7 @@ public class MilestoneDAO implements AutoCloseable {
 
   public boolean editMilestone(Milestone ml) {
     final String UPDATE_MILESTONE_QUERY =
-        "UPDATE milestones SET title = ?, description=?, status=?, start_date=?, due_date=?, end_date=? WHERE id = ?";
+        "UPDATE milestones SET title = ?, description=?, status=?, start_date=?, due_date=? WHERE id = ?";
 
 //    Project project = new Project();
     try (PreparedStatement ps = connection.prepareStatement(UPDATE_MILESTONE_QUERY)) {
@@ -107,8 +105,7 @@ public class MilestoneDAO implements AutoCloseable {
       ps.setString(3, ml.getStatus());
       ps.setString(4, ml.getStartDate());
       ps.setString(5, ml.getDueDate());
-      ps.setString(6, ml.getEndDate());
-      ps.setString(7, ml.getId());
+      ps.setString(6, ml.getId());
       ps.execute();
 //      ps.setString(7, ml.getProjectTitle());
       System.out.println("there is something");
@@ -121,7 +118,7 @@ public class MilestoneDAO implements AutoCloseable {
   }
 
   public List<Milestone> findMilestones(String projectID) {
-    final String LIST_MILESTONE_QUERY = "SELECT id, title,description,status, start_date, due_date, end_date, project_title FROM milestones WHERE project_title='"+projectID+"'";
+    final String LIST_MILESTONE_QUERY = "SELECT id, title,description,status, start_date, due_date, project_title FROM milestones WHERE project_title='"+projectID+"'";
     List<Milestone> out = new ArrayList<>();
     try (PreparedStatement ps = connection.prepareStatement(LIST_MILESTONE_QUERY)) {
       ResultSet rs = ps.executeQuery();
@@ -133,8 +130,7 @@ public class MilestoneDAO implements AutoCloseable {
             rs.getString(4),
             rs.getString(5),
             rs.getString(6),
-            rs.getString(7),
-            rs.getString(8)
+            rs.getString(7)
         ));
       }
     } catch (SQLException e) {
@@ -144,15 +140,15 @@ public class MilestoneDAO implements AutoCloseable {
   }
   
   public void updateMilestone(String projectID, Milestone ml) {
-    final String UPDATE_MILESTONE_QUERY = "UPDATE milestone SET title = ? description = ? status = ? start_date = ? due_date = ? end_date = ? WHERE project_title = ?";
+    final String UPDATE_MILESTONE_QUERY = "UPDATE milestone SET title = ?, description = ?, status = ?, start_date = " +
+        "?, due_date = ? WHERE project_title = ?";
     try (PreparedStatement ps = connection.prepareStatement(UPDATE_MILESTONE_QUERY)) {
       ps.setString(1, ml.getTitle());
       ps.setString(2, ml.getDescription());
       ps.setString(3, ml.getStatus());
       ps.setString(4, ml.getStartDate());
       ps.setString(5, ml.getDueDate());
-      ps.setString(6, ml.getEndDate());
-      ps.setString(7, ml.getProjectTitle());
+      ps.setString(6, ml.getProjectTitle());
       ps.execute();
     } catch (SQLException e) {
       throw new RuntimeException(e);

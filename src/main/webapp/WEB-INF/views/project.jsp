@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
           integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="../../resources/css/main.css">
+    <link rel="stylesheet" href="../../resources/css/normalize.css">
+    <link rel="stylesheet" href="../../resources/css/project.css">
+
     <title>Milestone Planner</title>
 
 </head>
@@ -24,7 +27,9 @@
   <div class="container py-2">
     <c:set var = "count" value = "0" scope="request"/>
     <c:forEach items="${allMilestones}" var="milestone">
-      <%@ include file="milestone.jsp" %>
+<%--      <c:if test="${milestone.status == incomplete}">--%>
+        <%@ include file="milestone.jsp" %>
+<%--      </c:if>--%>
       <c:set var = "count" value = "${count+1}" scope="page"/>
     </c:forEach>
   </div>
@@ -34,6 +39,14 @@
             <button type="button" class="btn btn-primary ${visibility}" data-toggle="modal" data-target="#add">Add Milestone</button>
 
         </a>
+      <a id="completed-milestones">
+        <button type="button" class="btn" id="status" >Completed</button>
+      </a>
+<%--      <div class="btn-group-toggle" data-toggle="buttons">--%>
+  <%--      <label class="btn btn-secondary active">--%>
+  <%--        <input type="checkbox" checked autocomplete="off"> Checked--%>
+  <%--      </label>--%>
+<%--      </div>--%>
     </div>
 </div>
 <%@include file="add_milestone_form.jsp" %>

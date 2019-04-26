@@ -7,6 +7,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
+        <h3>Edit ${milestone.title}</h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -28,29 +29,49 @@
 
           <div class="form-group">
             <label for="start${milestone.id}">Start ${milestone.startDate}</label>
-            <input type="datetime-local" class="form-control" id="start${milestone.id}"
+            <input type="date" class="form-control" id="start${milestone.id}"
                    value="${milestone.startDate}" name="mlStartDate">
           </div>
 
           <div class="form-group">
-            <label for="due${milestone.id}">End</label>
-            <input type="datetime-local" class="form-control" id="due${milestone.id}"
+            <label for="due${milestone.id}">Due</label>
+            <input type="date" class="form-control" id="due${milestone.id}"
                    value="${milestone.dueDate}" name="mlDueDate">
           </div>
+          ${milestone.status}
 
           <div class="form-group">
-            <label for="end${milestone.id}">End</label>
-            <input type="datetime-local" class="form-control" id="end${milestone.id}"
-                   value="${milestone.endDate}" name="mlEndDate">
+<%--            <c:if test="${milestone.status=='on'}">--%>
+<%--              <i class="fas fa-circle ${milestone.status}"></i>--%>
+<%--            </c:if>--%>
+<%--            <c:if test="${milestone.status!='on'}">--%>
+<%--              <i class="fas fa-circle off"></i>--%>
+<%--            </c:if>--%>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input status" id="customCheck${milestone.id}"
+                     <c:if test="${milestone.status=='true'}"> checked</c:if> value="${milestone.status}"
+                    name="mlStatus">
+              <label class="custom-control-label" for="customCheck${milestone.id}">Completed</label>
+            </div>
+<%--            <div class="custom-control custom-radio custom-control-inline">--%>
+<%--              <input type="radio" name="customRadioInline1" class="custom-control-input">--%>
+<%--              <label class="custom-control-label" value="">Completed</label>--%>
+<%--            </div>--%>
+<%--            <div class="custom-control custom-radio custom-control-inline">--%>
+<%--              <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">--%>
+<%--              <label class="custom-control-label" for="customRadioInline2">Not Completed</label>--%>
+<%--            </div>--%>
           </div>
 
-          <div class="modal-footer">
+<%--          <div class="modal-footer">--%>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Save changes</button>
-          </div>
+            <button type="submit" class="btn btn-primary float-right">Save changes</button>
+<%--          </div>--%>
         </form>
 
       </div>
     </div>
   </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript" src="../../resources/js/project.js"></script>

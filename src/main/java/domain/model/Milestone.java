@@ -25,9 +25,6 @@ public class Milestone {
   private String dueDate;
   @SerializedName("end_date")
   @Expose
-  private String endDate;
-  @SerializedName("project_id")
-  @Expose
   private String projectTitle;
 
   /**
@@ -43,9 +40,8 @@ public class Milestone {
    * @param status
    * @param startDate
    * @param dueDate
-   * @param endDate
    */
-  public Milestone(String id, String title, String description, String status, String startDate, String dueDate, String endDate) {
+  public Milestone(String id, String title, String description, String status, String startDate, String dueDate) {
     super();
     this.id = id;
     this.title = title;
@@ -53,7 +49,6 @@ public class Milestone {
     this.status = status;
     this.startDate = startDate;
     this.dueDate = dueDate;
-    this.endDate = endDate;
   }
 
   /**
@@ -62,12 +57,11 @@ public class Milestone {
    * @param title
    * @param status
    * @param description
-   * @param endDate
    * @param projectTitle
    * @param dueDate
    */
   public Milestone(String id, String title, String description, String status, String startDate, String dueDate,
-                   String endDate, String projectTitle) {
+                   String projectTitle) {
     super();
     this.id = id;
     this.title = title;
@@ -75,18 +69,7 @@ public class Milestone {
     this.status = status;
     this.startDate = startDate;
     this.dueDate = dueDate;
-    this.endDate = endDate;
     this.projectTitle = projectTitle;
-  }
-
-  public Milestone(String title, String description, String status, String startDate, String dueDate, String endDate) {
-    super();
-    this.title = title;
-    this.description = description;
-    this.status = status;
-    this.startDate = startDate;
-    this.dueDate = dueDate;
-    this.endDate = endDate;
   }
 
   public Milestone(String title, String description, String projectTitle) {
@@ -143,14 +126,6 @@ public class Milestone {
 
   public void setDueDate(String dueDate) {
     this.dueDate = dueDate;
-  }
-
-  public String getEndDate() {
-    return endDate;
-  }
-
-  public void setEndDate(String endDate) {
-    this.endDate = endDate;
   }
 
   public String getProjectTitle() {

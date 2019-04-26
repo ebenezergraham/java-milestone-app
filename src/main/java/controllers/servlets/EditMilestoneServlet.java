@@ -4,7 +4,7 @@ import DAO.DAOFactory;
 import DAO.MilestoneDAO;
 import controllers.services.TimeService;
 import domain.model.Milestone;
-
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,31 +19,30 @@ public class EditMilestoneServlet extends HttpServlet {
   private MilestoneDAO dao = DAOFactory.getMilestoneDAO();
 
   @Override
-  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String pTitle = request.getParameter("title");
-    System.out.println("Editing Milestone from " + getFullURL(request));
+  protected void doPost(HttpServletRequest request,
+                        HttpServletResponse response) throws ServletException, IOException {
+    String ptitle = request.getParameter("title");
+    System.out.println("Editing Milestone from "+ getFullURL(request));
+    System.out.println(request.getParameter("mlStatus"));
     System.out.println("------------------------");
-    System.out.println(request.getParameter("mlID") +
-        request.getParameter("mlTitle") +
-        request.getParameter("mlDescription") +
-        request.getParameter("mlStatus") +
-        request.getParameter("mlStartDate") +
-        request.getParameter("mlDueDate") +
-        request.getParameter("mlEndDate"));
-    String startDate = request.getParameter("mlStartDate");
-    String dueDate = request.getParameter("mlDueDate");
-    String endDate = request.getParameter("mlEndDate");
+    System.out.println("Status is "+request.getParameter("mlStatus"));
+        System.out.println(request.getParameter("mlID")+
+        request.getParameter("mlTitle")+
+        request.getParameter("mlDescription")+
+        request.getParameter(request.getParameter("mlStatus"))+
+        request.getParameter("mlStartDate")+
+        request.getParameter("mlDueDate"));
+//        request.getParameter("mlEndDate"));
 
     Milestone newML = new Milestone(
         request.getParameter("mlID"),
         request.getParameter("mlTitle"),
         request.getParameter("mlDescription"),
         request.getParameter("mlStatus"),
-        startDate.isEmpty() ? "" : TimeService.getInstance().formatDate(startDate),
-        dueDate.isEmpty() ? "" : TimeService.getInstance().formatDate(dueDate),
-        endDate.isEmpty() ? "" : TimeService.getInstance().formatDate(endDate),
-        pTitle
-    );
+        request.getParameter("mlStartDate"),
+        request.getParameter("mlDueDate"),
+        ptitle
+        );
 //    System.out.println(dao.milestoneExists(newML.getId()));
     if (dao.milestoneExists(newML.getId())) {
       System.out.println("EXISTS " + newML.getTitle() + newML.getId());

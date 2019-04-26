@@ -55,7 +55,7 @@ public class DBUtil {
 					"id int AUTO_INCREMENT PRIMARY KEY," +
 					"title VARCHAR(255), " +
 					"description VARCHAR(255), "+
-					"status VARCHAR(255) ," +
+					"status VARCHAR(255) DEFAULT 'false'," +
 					"start_date VARCHAR(255) ," +
 					"due_date VARCHAR(255)," +
 					"end_date VARCHAR(255)," +

@@ -2,7 +2,6 @@ package controllers.servlets;
 
 import DAO.DAOFactory;
 import DAO.MilestoneDAO;
-import controllers.services.TimeService;
 import controllers.services.UserService;
 import domain.model.Milestone;
 import domain.model.Project;
@@ -29,6 +28,40 @@ public class MilestoneServlet extends HttpServlet {
     String title = request.getParameter("title");
     request.setAttribute("title", title);
 //        String pID = new H2Project().getProject();
+                
+                List<Milestone> allM = dao.findMilestones(title);
+                request.setAttribute("allMilestones",allM);
+                request.getRequestDispatcher("/WEB-INF/views/project.jsp").forward(request,response);
+                
+        }
+        
+        
+        @Override
+        protected void doPost(HttpServletRequest request,
+                              HttpServletResponse response) throws ServletException, IOException {
+                String ptitle = request.getParameter("title");
+                System.out.println("Adding Milestone");
+                System.out.println("------------------------");
+//                String status;
+//                if (request.getParameter("mlStatus")==null){
+//                        status = "false";
+//                }else{
+//                        status="true";
+//                }
+                Milestone newML = new Milestone(
+                    request.getParameter("mlID"),
+                    request.getParameter("mlTitle"),
+                    request.getParameter("mlDescription"),
+                    request.getParameter("mlStatus"),
+                    request.getParameter("mlStartDate"),
+                    request.getParameter("mlDueDate"),
+                    ptitle
+                );
+                System.out.println("the new milestone is "+ newML.getTitle());
+                dao.addMilestone(newML);
+                response.sendRedirect(getFullURL(request));
+                
+        }
 
     List<Milestone> allM = dao.findMilestones(title);
     request.setAttribute("allMilestones", allM);
