@@ -50,8 +50,8 @@ public class DashboardServlet extends HttpServlet {
                           HttpServletResponse response) throws ServletException, IOException {
     LOGGER.info("deleting project");
     if(request.getSession(false)!= null){
-    //String projectId = request.getParameter("projectId");
-    String projectId = request.getReader().readLine().split("=")[1];
+    String projectId = request.getParameter("projectId");
+    //String projectId = request.getReader().readLine().split("=")[1];
     projectId = projectId.replaceAll("%20"," ");
       System.out.println(projectId);
     User name = (User)request.getSession().getAttribute("userobj");
