@@ -9,19 +9,19 @@ import java.io.IOException;
 
 @WebServlet(urlPatterns = "/logout", name = "LogoutServlet")
 public class LogoutServlet extends HttpServlet {
-
-  @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    HttpSession session = request.getSession(false);
-    if (session != null) {
-      session.invalidate();
-    }
-    response.sendRedirect(request.getContextPath() + "/login");
-  }
-
-  @Override
-  protected void doPost(HttpServletRequest request, HttpServletResponse response)
-      throws IOException {
-    this.doGet(request, response);
-  }
+	
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		HttpSession session = request.getSession(false);
+		if (session != null) {
+			session.invalidate();
+		}
+		response.sendRedirect(request.getContextPath() + "/login");
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws IOException {
+		this.doGet(request, response);
+	}
 }
