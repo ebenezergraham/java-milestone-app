@@ -16,23 +16,21 @@ public class DAOFactory implements AutoCloseable{
 	private Connection connection;
 	private static final String db = "jdbc:h2:~/mp";
 	
-	DBUtil dbUtil = new DBUtil();;
-	
+	DBUtil dbUtil = new DBUtil();
+
 	public DAOFactory() {
 		this.connection = getConnection();
 	}
 	
-	public static Connection getConnection() {
+	static Connection getConnection() {
 		Connection conn = null;
 		try {
 			Class.forName("org.h2.Driver");
 			conn = DriverManager.getConnection(db, "", "");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
+		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return conn;
 	}
 	
@@ -41,7 +39,7 @@ public class DAOFactory implements AutoCloseable{
 	}
 	
 	public void setUserDAO(UserDAO userDAO) {
-		this.userDAO = userDAO;
+		DAOFactory.userDAO = userDAO;
 	}
 	
 	public static MilestoneDAO getMilestoneDAO() {
@@ -49,7 +47,7 @@ public class DAOFactory implements AutoCloseable{
 	}
 	
 	public void setMilestoneDAO(MilestoneDAO milestoneDAO) {
-		this.milestoneDAO = milestoneDAO;
+		DAOFactory.milestoneDAO = milestoneDAO;
 	}
 	
 	public static ProjectDAO getProjectDAO() {
@@ -57,7 +55,7 @@ public class DAOFactory implements AutoCloseable{
 	}
 	
 	public void setProjectDAO(ProjectDAO projectDAO) {
-		this.projectDAO = projectDAO;
+		DAOFactory.projectDAO = projectDAO;
 	}
 	
 	public void setConnection(Connection connection) {
