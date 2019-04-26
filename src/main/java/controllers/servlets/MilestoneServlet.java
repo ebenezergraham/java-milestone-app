@@ -2,6 +2,7 @@ package controllers.servlets;
 
 import DAO.DAOFactory;
 import DAO.MilestoneDAO;
+import DAO.ProjectDAO;
 import controllers.services.UserService;
 import domain.model.Milestone;
 import domain.model.Project;
@@ -17,21 +18,23 @@ import java.util.List;
 @SuppressWarnings("Duplicates")
 @WebServlet(urlPatterns = "/project/*")
 public class MilestoneServlet extends HttpServlet {
-        MilestoneDAO dao = DAOFactory.getMilestoneDAO();
+        private MilestoneDAO dao = DAOFactory.getMilestoneDAO();
+        private ProjectDAO daoProject = DAOFactory.getProjectDAO();
+
         @Override
         protected void doGet(HttpServletRequest request,
                              HttpServletResponse response) throws ServletException, IOException {
-
-//        String action = request.getServletPath();
-//        listMilestones(request, response);
                 String title = request.getParameter("title");
-                request.setAttribute("title",title);
-//        String pID = new H2Project().getProject();
-                
-                List<Milestone> allM = dao.findMilestones(title);
-                request.setAttribute("allMilestones",allM);
-                request.getRequestDispatcher("/WEB-INF/views/project.jsp").forward(request,response);
-                
+                Project pr = daoProject.getProject(title);
+                if(pr!=null && pr.getUserId().equals(request.getSession().getAttribute("userID"))) {
+                        request.setAttribute("title", title);
+
+                        List<Milestone> allM = dao.findMilestones(pr.getId());
+                        request.setAttribute("allMilestones", allM);
+                        request.getRequestDispatcher("/WEB-INF/views/project.jsp").forward(request, response);
+                }else{
+                        response.sendRedirect("/dashboard");
+                }
         }
         
         
@@ -41,26 +44,28 @@ public class MilestoneServlet extends HttpServlet {
                 String ptitle = request.getParameter("title");
                 System.out.println("Adding Milestone");
                 System.out.println("------------------------");
-//                String status;
-//                if (request.getParameter("mlStatus")==null){
-//                        status = "false";
-//                }else{
-//                        status="true";
-//                }
-                Milestone newML = new Milestone(
-                    request.getParameter("mlID"),
-                    request.getParameter("mlTitle"),
-                    request.getParameter("mlDescription"),
-                    request.getParameter("mlStatus"),
-                    request.getParameter("mlStartDate"),
-                    request.getParameter("mlDueDate"),
-                    ptitle
-                );
-                System.out.println("the new milestone is "+ newML.getTitle());
-                dao.addMilestone(newML);
-                response.sendRedirect(getFullURL(request));
-                
+
+                Project pr = daoProject.getProject(ptitle);
+                if(pr!=null && pr.getUserId().equals(request.getSession().getAttribute("userID"))) {
+                        request.setAttribute("title", ptitle);
+                        Milestone newML = new Milestone(
+                            request.getParameter("mlID"),
+                            request.getParameter("mlTitle"),
+                            request.getParameter("mlDescription"),
+                            request.getParameter("mlStatus"),
+                            request.getParameter("mlStartDate"),
+                            request.getParameter("mlDueDate"),
+                            pr.getId()
+                        );
+                        System.out.println("the new milestone is " + newML.getTitle());
+                        dao.addMilestone(newML);
+                        response.sendRedirect(getFullURL(request));
+                }else{
+                        response.sendRedirect("/dashboard");
+                }
         }
+
+
 
 //    @Override
 //    protected void doPut(HttpServletRequest request,

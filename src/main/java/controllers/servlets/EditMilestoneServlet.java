@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 import static controllers.servlets.MilestoneServlet.getFullURL;
 
@@ -29,7 +30,6 @@ public class EditMilestoneServlet extends HttpServlet {
         request.getParameter(request.getParameter("mlStatus"))+
         request.getParameter("mlStartDate")+
         request.getParameter("mlDueDate"));
-//        request.getParameter("mlEndDate"));
 
         Milestone newML = new Milestone(
         request.getParameter("mlID"),
@@ -48,9 +48,6 @@ public class EditMilestoneServlet extends HttpServlet {
     System.out.println("project title"+ptitle);
     request.removeAttribute("mlID");
     response.sendRedirect("/project/?title="+ptitle);
-//    System.out.println("--put--");
-    System.out.println(request.getPathTranslated());
-//    request.getRequestDispatcher("/WEB-INF/views/project.jsp").forward(request, response);
 
 
   }

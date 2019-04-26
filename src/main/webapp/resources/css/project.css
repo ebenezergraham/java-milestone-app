@@ -10,3 +10,31 @@
     /*font-size: 50px;*/
     color: 	darkgreen;
 }
+
+#project-panel{
+    position: absolute;
+    float: left;
+
+}
+
+main{
+    /*float: right;*/
+    position: relative;
+    /*overflow: auto;*/
+    /*clear-side: both;*/
+}
+
+.control-pane{
+    /*background-color: #216558;*/
+    color: #216558;
+    /*padding: 5rem;*/
+    position: fixed;
+    height: 100px;
+    /*bottom: 0;*/
+    /*-webkit-clip-path: polygon(50% 0%, 100% 25%, 100% 100%, 0 100%, 0% 25%);*/
+    /*clip-path: polygon(50% 0%, 100% 25%, 100% 100%, 0 100%, 0% 25%);*/
+}
+
+.control-pane button{
+    width: 150px;
+}

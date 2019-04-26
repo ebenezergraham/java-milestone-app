@@ -1,5 +1,6 @@
 <!-- Modal -->
 <%@ page contentType="text/html;charset=UTF-8" %>
+<link rel="stylesheet" href="../../resources/css/project.css">
 
 <div class="modal fade" id="editForm${milestone.id}" tabindex="-1" role="dialog"
      aria-labelledby="exampleModalCenterTitle"
@@ -41,32 +42,16 @@
           ${milestone.status}
 
           <div class="form-group">
-<%--            <c:if test="${milestone.status=='on'}">--%>
-<%--              <i class="fas fa-circle ${milestone.status}"></i>--%>
-<%--            </c:if>--%>
-<%--            <c:if test="${milestone.status!='on'}">--%>
-<%--              <i class="fas fa-circle off"></i>--%>
-<%--            </c:if>--%>
             <div class="custom-control custom-checkbox">
               <input type="checkbox" class="custom-control-input status" id="customCheck${milestone.id}"
                      <c:if test="${milestone.status=='true'}"> checked</c:if> value="${milestone.status}"
                     name="mlStatus">
               <label class="custom-control-label" for="customCheck${milestone.id}">Completed</label>
             </div>
-<%--            <div class="custom-control custom-radio custom-control-inline">--%>
-<%--              <input type="radio" name="customRadioInline1" class="custom-control-input">--%>
-<%--              <label class="custom-control-label" value="">Completed</label>--%>
-<%--            </div>--%>
-<%--            <div class="custom-control custom-radio custom-control-inline">--%>
-<%--              <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">--%>
-<%--              <label class="custom-control-label" for="customRadioInline2">Not Completed</label>--%>
-<%--            </div>--%>
           </div>
 
-<%--          <div class="modal-footer">--%>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <button type="submit" class="btn btn-primary float-right">Save changes</button>
-<%--          </div>--%>
         </form>
 
       </div>
