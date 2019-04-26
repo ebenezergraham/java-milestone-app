@@ -1,7 +1,29 @@
-$("#loginbg").ripples({
-	resolution: 800,
-	dropRadius: 10,
-	perturbance: 0.002,
-	interactive: true,
-	crossOrigin: true
+$("#nameInput").on('keypress', function (e) {
+	if (e.which === 13) {
+		document.getElementById("add-new-project").style.display = "none";
+	}
+});
+
+$(".btn-add-project").on('click', function (e) {
+		document.getElementById("add-new-project").style.display = "block";
+});
+
+$(".btn-delete-project").on('click', function (e) {
+	var params = {
+		projectId: e.target.id,
+	};
+	console.log($.param(params));
+	$.ajax({
+		url: window.location.href,
+		type: 'DELETE',
+		contentType: 'application/json; charset=utf-8',
+		data: $.param(params),
+		//data: $('#myForm').serialize(),
+		success: function (result) {
+			console.log('working');
+			console.log(e)
+			id='#'+e.currentTarget.parentNode.id;
+			$(document).remove(id);
+		}
+	});
 });

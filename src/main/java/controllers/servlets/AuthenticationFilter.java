@@ -1,6 +1,6 @@
 package controllers.servlets;
 
-		import javax.servlet.*;
+import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,8 +33,8 @@ public class AuthenticationFilter implements Filter {
 			System.out.println("About to leave!");
 			return;
 		}
-
-		else if(session ==null){
+		
+		if(uri.equals("/") || session ==null){
 			res.sendRedirect("/login");
 		}
 		else{
