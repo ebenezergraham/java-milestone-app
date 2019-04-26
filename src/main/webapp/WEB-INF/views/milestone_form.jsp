@@ -1,7 +1,6 @@
-<!-- Modal -->
 <%@ page contentType="text/html;charset=UTF-8" %>
-<link rel="stylesheet" href="../../resources/css/project.css">
-
+<%--<link rel="stylesheet" href="../../resources/css/project.css">--%>
+<!-- Modal -->
 <div class="modal fade" id="editForm${milestone.id}" tabindex="-1" role="dialog"
      aria-labelledby="exampleModalCenterTitle"
      aria-hidden="true">
@@ -18,7 +17,7 @@
         <form action="/project/edit/?title=${title}&mlID=${milestone.id}" id="edit${milestone.id}"
               METHOD="post">
           <div class="form-group">
-            <label for="t${milestone.title}">Title</label><br>
+            <label for="t${milestone.title}" maxlength="50>Title</label><br>
             <h3><input type="text" class="form-control modal-title" id="t${milestone.title}" value="${milestone.title}" name="mlTitle"></h3>
           </div>
 
@@ -58,5 +57,5 @@
     </div>
   </div>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script type="text/javascript" src="../../resources/js/project.js"></script>
+<%--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>--%>
+<%--<script type="text/javascript" src="../../resources/js/project.js"></script>--%>

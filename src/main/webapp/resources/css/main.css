@@ -157,15 +157,13 @@ h1{
 /*	transition: 0.5ms;*/
 /*}*/
 
-.control-pane{
-	background-color: #216558;
-	padding: 5rem;
-	position: fixed;
-	height: 100px;
-	bottom: 0;
-	-webkit-clip-path: polygon(50% 0%, 100% 25%, 100% 100%, 0 100%, 0% 25%);
-	clip-path: polygon(50% 0%, 100% 25%, 100% 100%, 0 100%, 0% 25%);
-}
+/*.control-pane{*/
+/*	background-color: #216558;*/
+/*	padding: 5rem;*/
+/*	position: fixed;*/
+/*	height: 100px;*/
+/*	bottom: 0;*/
+/*}*/
 
 .african{
 	background: url(img/africa.svg) no-repeat;
