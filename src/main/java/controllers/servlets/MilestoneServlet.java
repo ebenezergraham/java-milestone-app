@@ -2,6 +2,7 @@ package controllers.servlets;
 
 import DAO.DAOFactory;
 import DAO.MilestoneDAO;
+import controllers.services.TimeService;
 import controllers.services.UserService;
 import domain.model.Milestone;
 import domain.model.Project;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @SuppressWarnings("Duplicates")
 @WebServlet(urlPatterns = "/project/*")
@@ -23,52 +25,21 @@ public class MilestoneServlet extends HttpServlet {
   protected void doGet(HttpServletRequest request,
                        HttpServletResponse response) throws ServletException, IOException {
 
-//        String action = request.getServletPath();
-//        listMilestones(request, response);
     String title = request.getParameter("title");
+    String query = request.getParameter("completed");
     request.setAttribute("title", title);
-//        String pID = new H2Project().getProject();
-                
-                List<Milestone> allM = dao.findMilestones(title);
-                request.setAttribute("allMilestones",allM);
-                request.getRequestDispatcher("/WEB-INF/views/project.jsp").forward(request,response);
-                
-        }
-        
-        
-        @Override
-        protected void doPost(HttpServletRequest request,
-                              HttpServletResponse response) throws ServletException, IOException {
-                String ptitle = request.getParameter("title");
-                System.out.println("Adding Milestone");
-                System.out.println("------------------------");
-//                String status;
-//                if (request.getParameter("mlStatus")==null){
-//                        status = "false";
-//                }else{
-//                        status="true";
-//                }
-                Milestone newML = new Milestone(
-                    request.getParameter("mlID"),
-                    request.getParameter("mlTitle"),
-                    request.getParameter("mlDescription"),
-                    request.getParameter("mlStatus"),
-                    request.getParameter("mlStartDate"),
-                    request.getParameter("mlDueDate"),
-                    ptitle
-                );
-                System.out.println("the new milestone is "+ newML.getTitle());
-                dao.addMilestone(newML);
-                response.sendRedirect(getFullURL(request));
-                
-        }
 
     List<Milestone> allM = dao.findMilestones(title);
-    request.setAttribute("allMilestones", allM);
+
+    if (query.equals("0")) {
+      request.setAttribute("allMilestone", getNullMilestone(allM));
+    } else if (query.equals("1")) {
+      request.setAttribute("allMilestones", getMilestoneBy(allM));
+    } else request.setAttribute("allMilestones", allM);
+
     request.getRequestDispatcher("/WEB-INF/views/project.jsp").forward(request, response);
 
   }
-
 
   @Override
   protected void doPost(HttpServletRequest request,
@@ -76,17 +47,16 @@ public class MilestoneServlet extends HttpServlet {
     String pTitle = request.getParameter("title");
     System.out.println("Adding Milestone");
     System.out.println("------------------------");
-    String startDate = request.getParameter("mlStartDate");
-    String dueDate = request.getParameter("mlDueDate");
-    String endDate = request.getParameter("mlEndDate");
+
+    String mlStartDate = request.getParameter("mlStartDate");
+    String mlDueDate = request.getParameter("mlDueDate");
     Milestone newML = new Milestone(
         request.getParameter("mlID"),
         request.getParameter("mlTitle"),
         request.getParameter("mlDescription"),
         request.getParameter("mlStatus"),
-        startDate.isEmpty() ? "" : TimeService.getInstance().formatDate(startDate),
-        dueDate.isEmpty() ? "" : TimeService.getInstance().formatDate(dueDate),
-        endDate.isEmpty() ? "" : TimeService.getInstance().formatDate(endDate),
+        mlStartDate.isEmpty() ? "" : TimeService.getInstance().formatDate(mlStartDate),
+        mlDueDate.isEmpty() ? "" : TimeService.getInstance().formatDate(mlDueDate),
         pTitle
     );
     System.out.println("the new milestone is " + newML.getTitle());
@@ -94,29 +64,7 @@ public class MilestoneServlet extends HttpServlet {
     response.sendRedirect(getFullURL(request));
 
   }
-
-//    @Override
-//    protected void doPut(HttpServletRequest request,
-//                         HttpServletResponse response) throws ServletException, IOException {
-//
-//        System.out.println("--put--");
-////        int userId = retrieveUserid(req);
-//        System.out.println(request.getPathTranslated());
-////        String body = inputStreamToString(req.getInputStream());
-////        System.out.println("body: " + body);
-////        UserDataService.Instance.saveUserById(userId, body);
-//
-//        String ptitle = request.getParameter("title");
-//        System.out.println("Editing Milestone");
-//        System.out.println("------------------------");
-////        H2Milestone dao = new H2Milestone();
-////        Milestone newML = new Milestone(request.getParameter(ptitle),request.getParameter(ptitle), ptitle);
-////        dao.addMilestone(newML);
-////        response.sendRedirect(getFullURL(request));
-
-//    }
-
-
+  
   @Override
   protected void doDelete(HttpServletRequest request,
                           HttpServletResponse response) throws IOException {
@@ -186,7 +134,7 @@ public class MilestoneServlet extends HttpServlet {
 
   }
 
-  public static String getFullURL(HttpServletRequest request) {
+  static String getFullURL(HttpServletRequest request) {
     StringBuilder requestURL = new StringBuilder(request.getRequestURL().toString());
     String queryString = request.getQueryString();
 
@@ -197,4 +145,11 @@ public class MilestoneServlet extends HttpServlet {
     }
   }
 
+  private List<Milestone> getMilestoneBy(List<Milestone> milestones) {
+    return milestones.stream().filter(milestone -> milestone.getStatus().equals("true")).collect(Collectors.toList());
+  }
+
+  private List<Milestone> getNullMilestone(List<Milestone> milestones) {
+    return milestones.stream().filter(milestone -> milestone.getStatus() == null).collect(Collectors.toList());
+  }
 }

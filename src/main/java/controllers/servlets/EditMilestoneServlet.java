@@ -4,6 +4,7 @@ import DAO.DAOFactory;
 import DAO.MilestoneDAO;
 import controllers.services.TimeService;
 import domain.model.Milestone;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,7 +22,7 @@ public class EditMilestoneServlet extends HttpServlet {
   @Override
   protected void doPost(HttpServletRequest request,
                         HttpServletResponse response) throws ServletException, IOException {
-    String ptitle = request.getParameter("title");
+    String pTitle = request.getParameter("title");
     System.out.println("Editing Milestone from "+ getFullURL(request));
     System.out.println(request.getParameter("mlStatus"));
     System.out.println("------------------------");
@@ -33,15 +34,16 @@ public class EditMilestoneServlet extends HttpServlet {
         request.getParameter("mlStartDate")+
         request.getParameter("mlDueDate"));
 //        request.getParameter("mlEndDate"));
-
+    String mlStartDate = request.getParameter("mlStartDate");
+    String mlDueDate = request.getParameter("mlDueDate");
     Milestone newML = new Milestone(
         request.getParameter("mlID"),
         request.getParameter("mlTitle"),
         request.getParameter("mlDescription"),
         request.getParameter("mlStatus"),
-        request.getParameter("mlStartDate"),
-        request.getParameter("mlDueDate"),
-        ptitle
+        mlStartDate.isEmpty() ? "" : TimeService.getInstance().formatDate(mlStartDate),
+        mlDueDate.isEmpty() ? "" : TimeService.getInstance().formatDate(mlDueDate),
+        pTitle
         );
 //    System.out.println(dao.milestoneExists(newML.getId()));
     if (dao.milestoneExists(newML.getId())) {

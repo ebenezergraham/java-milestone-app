@@ -1,6 +1,6 @@
 package controllers.services;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class TimeService {
@@ -17,7 +17,7 @@ public class TimeService {
   }
 
   public String formatDate(String date) {
-    LocalDateTime localDateTime = LocalDateTime.parse(date);
-    return localDateTime.format(formatter);
+    LocalDate localDate = LocalDate.parse(date);
+    return localDate.format(formatter);
   }
 }
