@@ -23,10 +23,7 @@
     </div>
   </div>
     <%@include file="milestone_card.jsp" %>
-
-    <%--  </c:if>--%>
   </c:when>
-
 
   <c:otherwise>
     <%@include file="milestone_card.jsp" %>

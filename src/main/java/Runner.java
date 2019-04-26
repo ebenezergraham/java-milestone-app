@@ -38,7 +38,7 @@ public class Runner {
 
     try {
       tomcat.start();
-      daoFactory = new DAOFactory();
+     // daoFactory = new DAOFactory();
     } catch (LifecycleException e) {
       LOGGER.warning(e.getMessage());
       e.printStackTrace();
