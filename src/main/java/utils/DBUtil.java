@@ -22,7 +22,7 @@ public class DBUtil {
 		}
 	}
 	
-	public static Connection getConnection() throws SQLException, ClassNotFoundException {
+	private static Connection getConnection() throws SQLException, ClassNotFoundException {
 		Class.forName("org.h2.Driver");
 		return DriverManager.getConnection(db, "", "");
 	}
@@ -34,19 +34,19 @@ public class DBUtil {
 			PreparedStatement ps = connection.prepareStatement(cmd);
 			ps.execute();
 		} catch (SQLException e) {
-			System.out.println(e);
+			System.out.println(e.getMessage());
 //				throw new RuntimeException(e);
 		}
 		try {
 			String cmd = "CREATE TABLE IF NOT EXISTS projects (" +
 					"id int AUTO_INCREMENT PRIMARY KEY, " +
 					"title VARCHAR(255), " +
-					"user_id VARCHAR(255)," +
+					"user_id int," +
 					"foreign key (user_id) references users(id)) ";
 			PreparedStatement ps = connection.prepareStatement(cmd);
 			ps.execute();
 		} catch (SQLException e) {
-			System.out.println(e);
+			System.out.println(e.getMessage());
 //				throw new RuntimeException(e);
 		}
 		
@@ -64,7 +64,7 @@ public class DBUtil {
 			PreparedStatement ps = connection.prepareStatement(cmd);
 			ps.execute();
 		} catch (SQLException e) {
-			System.out.println(e);
+			System.out.println(e.getMessage());
 //				throw new RuntimeException(e);
 		}
 	}

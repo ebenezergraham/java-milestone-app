@@ -1,7 +1,4 @@
 import DAO.DAOFactory;
-import DAO.MilestoneDAO;
-import DAO.ProjectDAO;
-import DAO.UserDAO;
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.WebResourceRoot;
 import org.apache.catalina.core.StandardContext;
@@ -17,7 +14,7 @@ public class Runner {
   private static final String WEBAPP_DIR_LOCATION = "src/main/webapp/";
   private static final Logger LOGGER = Logger.getLogger(Runner.class.getName());
   private static DAOFactory daoFactory;
-  
+
   public static void main(String[] args) throws ServletException {
 
     Tomcat tomcat = new Tomcat();
