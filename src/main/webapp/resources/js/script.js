@@ -14,7 +14,7 @@ $(".btn-delete-project").on('click', function (e) {
 	};
 	console.log($.param(params));
 	$.ajax({
-		url: window.location.href,
+		url: window.location.href+'?projectId='+e.target.id,
 		type: 'DELETE',
 		contentType: 'application/json; charset=utf-8',
 		data: $.param(params),
@@ -22,9 +22,18 @@ $(".btn-delete-project").on('click', function (e) {
 			console.log('working');
 			console.log(e)
 			id='#'+e.currentTarget.parentNode.id;
+			document.getElementById(e.currentTarget.parentNode.id).style.visibility ="hidden";
 
-			$(document).remove(id);
-			document.getElementById(id).remove
 		}
+	});
+});
+
+$(".share-project").on('click', function (e) {
+	$.post( "/view?projectId="+e.target.parentNode.id, function( data ) {
+		$( "#shareable-link" ).parent().parent().css("visibility","visible");
+		$( "#shareable-link" ).val( window.location.host+'/view/'+data );
+		setTimeout(function(){
+			$( "#shareable-link" ).parent().parent().css("visibility","hidden")
+		}, 10000);
 	});
 });

@@ -166,3 +166,31 @@ h1{
 	-webkit-clip-path: polygon(50% 0%, 100% 25%, 100% 100%, 0 100%, 0% 25%);
 	clip-path: polygon(50% 0%, 100% 25%, 100% 100%, 0 100%, 0% 25%);
 }
+
+.african{
+	background: url(img/africa.svg) no-repeat;
+	padding: 20px 0;
+}
+
+.african-flip{
+	-webkit-transform: rotate(180deg);
+	-moz-transform: rotate(180deg);
+	-o-transform: rotate(180deg);
+	-ms-transform: rotate(180deg);
+	transform: rotate(180deg);
+	position: fixed;
+	width: 100%;
+	bottom: 0;
+}
+
+.hidden{
+	visibility: hidden;
+}
+.text-green{
+	color: #216558;
+}
+
+.bg-green{
+	background-color: #216558;
+
+}
