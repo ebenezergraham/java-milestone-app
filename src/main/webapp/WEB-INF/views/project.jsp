@@ -75,5 +75,7 @@
         crossorigin="anonymous"></script>
 <script type="text/javascript" src="../../resources/js/project.js"></script>
 <script src="../../resources/js/bootbox.min.js"></script>
+
+</main>
 </body>
 </html>

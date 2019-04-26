@@ -1,7 +1,4 @@
 import DAO.DAOFactory;
-import DAO.MilestoneDAO;
-import DAO.ProjectDAO;
-import DAO.UserDAO;
 import org.apache.catalina.LifecycleException;
 import org.apache.catalina.WebResourceRoot;
 import org.apache.catalina.core.StandardContext;

@@ -13,26 +13,25 @@ public class DAOFactory implements AutoCloseable{
 	private static UserDAO userDAO = new UserDAO();
 	private static MilestoneDAO milestoneDAO = new MilestoneDAO();
 	private static ProjectDAO projectDAO = new ProjectDAO();
+	private static ShareableLinkDAO shareableLinkDAO = new ShareableLinkDAO();
 	private Connection connection;
-	private static final String db = "jdbc:h2:~/mp";
+	private static final String db = "jdbc:h2:~/mp;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE";
 	
-	DBUtil dbUtil = new DBUtil();;
-	
+	DBUtil dbUtil = new DBUtil();
+
 	public DAOFactory() {
 		this.connection = getConnection();
 	}
 	
-	public static Connection getConnection() {
+	static Connection getConnection() {
 		Connection conn = null;
 		try {
 			Class.forName("org.h2.Driver");
 			conn = DriverManager.getConnection(db, "", "");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
+		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return conn;
 	}
 	
@@ -41,7 +40,7 @@ public class DAOFactory implements AutoCloseable{
 	}
 	
 	public void setUserDAO(UserDAO userDAO) {
-		this.userDAO = userDAO;
+		DAOFactory.userDAO = userDAO;
 	}
 	
 	public static MilestoneDAO getMilestoneDAO() {
@@ -49,7 +48,7 @@ public class DAOFactory implements AutoCloseable{
 	}
 	
 	public void setMilestoneDAO(MilestoneDAO milestoneDAO) {
-		this.milestoneDAO = milestoneDAO;
+		DAOFactory.milestoneDAO = milestoneDAO;
 	}
 	
 	public static ProjectDAO getProjectDAO() {
@@ -57,11 +56,19 @@ public class DAOFactory implements AutoCloseable{
 	}
 	
 	public void setProjectDAO(ProjectDAO projectDAO) {
-		this.projectDAO = projectDAO;
+		DAOFactory.projectDAO = projectDAO;
 	}
 	
 	public void setConnection(Connection connection) {
 		this.connection = connection;
+	}
+	
+	public static ShareableLinkDAO getShareableLinkDAO() {
+		return shareableLinkDAO;
+	}
+	
+	public static void setShareableLinkDAO(ShareableLinkDAO shareableLinkDAO) {
+		DAOFactory.shareableLinkDAO = shareableLinkDAO;
 	}
 	
 	@Override
