@@ -39,9 +39,9 @@ public class EditMilestoneServlet extends HttpServlet {
         request.getParameter("mlTitle"),
         request.getParameter("mlDescription"),
         request.getParameter("mlStatus"),
-        TimeService.getInstance().formatDate(startDate),
-        TimeService.getInstance().formatDate(dueDate),
-        TimeService.getInstance().formatDate(endDate),
+        startDate.isEmpty() ? "" : TimeService.getInstance().formatDate(startDate),
+        dueDate.isEmpty() ? "" : TimeService.getInstance().formatDate(dueDate),
+        endDate.isEmpty() ? "" : TimeService.getInstance().formatDate(endDate),
         pTitle
     );
 //    System.out.println(dao.milestoneExists(newML.getId()));

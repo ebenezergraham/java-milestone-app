@@ -78,6 +78,7 @@ public class Milestone {
     this.endDate = endDate;
     this.projectTitle = projectTitle;
   }
+
   public Milestone(String title, String description, String status, String startDate, String dueDate, String endDate) {
     super();
     this.title = title;
@@ -87,6 +88,7 @@ public class Milestone {
     this.dueDate = dueDate;
     this.endDate = endDate;
   }
+
   public Milestone(String title, String description, String projectTitle) {
     super();
     this.title = title;

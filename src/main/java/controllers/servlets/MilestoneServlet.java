@@ -46,18 +46,16 @@ public class MilestoneServlet extends HttpServlet {
     String startDate = request.getParameter("mlStartDate");
     String dueDate = request.getParameter("mlDueDate");
     String endDate = request.getParameter("mlEndDate");
-    System.out.printf("%s current format for date\n", startDate);
     Milestone newML = new Milestone(
         request.getParameter("mlID"),
         request.getParameter("mlTitle"),
         request.getParameter("mlDescription"),
         request.getParameter("mlStatus"),
-        TimeService.getInstance().formatDate(startDate),
-        TimeService.getInstance().formatDate(dueDate),
-        TimeService.getInstance().formatDate(endDate),
+        startDate.isEmpty() ? "" : TimeService.getInstance().formatDate(startDate),
+        dueDate.isEmpty() ? "" : TimeService.getInstance().formatDate(dueDate),
+        endDate.isEmpty() ? "" : TimeService.getInstance().formatDate(endDate),
         pTitle
     );
-    System.out.printf("%s date format after edit\n", TimeService.getInstance().formatDate(startDate));
     System.out.println("the new milestone is " + newML.getTitle());
     dao.addMilestone(newML);
     response.sendRedirect(getFullURL(request));
