@@ -18,12 +18,13 @@ $(".btn-delete-project").on('click', function (e) {
 		type: 'DELETE',
 		contentType: 'application/json; charset=utf-8',
 		data: $.param(params),
-		//data: $('#myForm').serialize(),
 		success: function (result) {
 			console.log('working');
 			console.log(e)
 			id='#'+e.currentTarget.parentNode.id;
+
 			$(document).remove(id);
+			document.getElementById(id).remove
 		}
 	});
 });

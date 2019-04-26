@@ -20,14 +20,11 @@
 <%@include file="menu.jsp" %>
 <%--<div class="container">--%>
   <h1>Project ${title}</h1>
-<%--  <button>Add Milestone</button>--%>
   <div class="container py-2">
-<%--  <c:set var = "right" value = "${true}"/>--%>
     <c:set var = "count" value = "0" scope="request"/>
     <c:forEach items="${allMilestones}" var="milestone">
       <%@ include file="milestone.jsp" %>
       <c:set var = "count" value = "${count+1}" scope="page"/>
-
     </c:forEach>
   </div>
 <div class="d-flex justify-content-center">
