@@ -99,19 +99,37 @@ public class MilestoneServlet extends HttpServlet {
 	@Override
 	protected void doDelete(HttpServletRequest request,
 	                        HttpServletResponse response) throws IOException {
-		System.out.println(request.getServletPath());
-		String projectTitle = request.getParameter("title");
-		String milestoneT = request.getParameter("ml");
-		String milestoneID = request.getParameter("id");
-		String name = request.getSession().getAttribute("username").toString();
-		Project project = UserService.getInstance().getUser(name).getProject(projectTitle);
-		Milestone ml = project.getMilestone(milestoneT);
-		project.deleteMilestone(ml);
-		System.out.println(milestoneID);
-		System.out.println(project.getMilestones().size());
+		System.out.println("Deleting Milestone");
+		System.out.println("------------------------");
+//		System.out.println(request.getServletPath());
+		String projectId = request.getParameter("id");
+		String ml = request.getParameter("ml");
+		System.out.println("do delete milestone param "+ml);
+//		String milestoneID = request.getParameter("id");
+//		String username = request.getSession().getAttribute("username").toString();
+//		Project project = UserService.getInstance().getUser(name).getProject(projectTitle);
+//		Milestone ml = project.getMilestone(milestoneT);
+		Project pr = daoProject.getProject(projectId);
+		if (pr != null && pr.getUserId().equals(request.getSession().getAttribute("userID"))) {
+			System.out.println("deleeting");
+			System.out.println();
+			if (dao.deleteMilestone(ml,projectId)==0) {
+//				response.setStatus(200);
+//			}		else {
+////			response.setStatus(403);
+		}
+
+		}
+		response.sendRedirect("/project/?id=" + projectId);
+
+//		project.deleteMilestone(ml);
+//		System.out.println(milestoneID);
+//		System.out.println(project.getMilestones().size());
 		
 		System.out.println("AM I deleting stuff??");
-		response.sendRedirect("/WEB-INF/views/dashboard.jsp");
+		response.sendRedirect(getFullURL(request));
+
+//		response.sendRedirect("/WEB-INF/views/dashboard.jsp");
 	}
 	
 	private void listMilestones(HttpServletRequest request,

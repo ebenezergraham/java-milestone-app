@@ -3,16 +3,19 @@
 <div class="col-sm py-2">
   <div class="card border-success shadow">
     <div class="card-body">
-      <i class=" ${visibility} fas fa-trash" onmouseover="console.log('${milestone.id}')"></i>
+      <i class=" ${visibility} fas fa-trash"
+<%--      <i class="fas fa-trash btn-delete-milestone"--%>
+         onclick="delMilestone('${id}','${milestone.id}')"
+         onmouseover="console.log('${milestone.id}')"></i>
 
       <div class="float-right text-muted small">Start Date: ${milestone.startDate}</div>
       <br><br>
       <button class="btn btn-lg btn-outline-info btn-block card-title" type="button"
-              data-target="#${milestone.id}"
+              data-target="#_${milestone.id}"
               data-toggle="collapse">
         &emsp;${milestone.title}&emsp;&emsp;▼
       </button>
-      <div class="collapse " id="${milestone.id}">
+      <div class="collapse " id="_${milestone.id}">
         <div class="p-2 text-monospace">
           ${milestone.description}
         </div>
@@ -30,3 +33,4 @@
     </div>
   </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
