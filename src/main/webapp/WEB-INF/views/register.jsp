@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%--<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>--%>
-<%@ page isELIgnored="false"%>
+<%@ page isELIgnored="false" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 
 
@@ -27,17 +27,20 @@
           <h5 class="card-title text-center">Register</h5>
           <form action="/register" method="post" class="form-signin">
             <div class="form-label-group">
-              <input type="text" id="inputEmail" class="form-control" name="name" placeholder="User Name" required autofocus>
+              <input type="text" id="inputEmail" class="form-control" name="name" placeholder="User Name"
+                     required autofocus>
               <label for="inputEmail">Username</label>
             </div>
 
             <div class="form-label-group">
-              <input type="password" id="inputPassword" class="form-control" name="password" placeholder="Password" required>
+              <input type="password" id="inputPassword" class="form-control" name="password"
+                     placeholder="Password" required>
               <label for="inputPassword">Password</label>
             </div>
-            <button class="btn btn-lg btn-login btn-block text-uppercase" type="submit" value="register">Register</button>
+            <button class="btn btn-lg btn-login btn-block text-uppercase" type="submit" value="register">
+              Register
+            </button>
             <hr class="my-4">
-<%--            <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i class="fab fa-google mr-2"></i> Sign in with Google</button>--%>
           </form>
         </div>
       </div>
@@ -45,9 +48,9 @@
   </div>
 </div>
 
-<script defer src="resources/js/jquery-3.3.1.js"></script>
-<script defer src="resources/js/jquery.ripples.js"></script>
-<script defer src="resources/js/script.js"></script>
+<script defer src="../../resources/js/jquery-3.3.1.js"></script>
+<script defer src="../../resources/js/jquery.ripples.js"></script>
+<script defer src="../../resources/js/script.js"></script>
 </body>
 
 

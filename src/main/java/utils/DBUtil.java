@@ -10,8 +10,8 @@ import java.sql.SQLException;
 
 public class DBUtil {
 	
-	private static Connection connection;
 	private static final String db = "jdbc:h2:~/mp;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE";
+	private static Connection connection;
 	
 	public DBUtil() {
 		try {
@@ -54,7 +54,7 @@ public class DBUtil {
 			String cmd = "CREATE TABLE IF NOT EXISTS milestones (" +
 					"id int AUTO_INCREMENT PRIMARY KEY," +
 					"title VARCHAR(255), " +
-					"description VARCHAR(255), "+
+					"description VARCHAR(255), " +
 					"status VARCHAR(255) DEFAULT false," +
 					"start_date VARCHAR(255) ," +
 					"due_date VARCHAR(255)," +

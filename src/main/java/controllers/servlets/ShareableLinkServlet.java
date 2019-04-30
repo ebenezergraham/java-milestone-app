@@ -30,7 +30,8 @@ public class ShareableLinkServlet extends HttpServlet {
 		String id = request.getRequestURL().toString().split("/")[4];
 		if (!id.equalsIgnoreCase("project.jsp")) {
 			Map<String, Object> result = shareableLinkService.getMilestones(id);
-			request.setAttribute("title", result.get("title"));
+			request.setAttribute("title", dao.getProject(result.get("id").toString()).getTitle());
+			request.setAttribute("id", result.get("id"));
 			request.setAttribute("visibility", "hidden");
 			request.setAttribute("allMilestones", result.get("milestones"));
 			

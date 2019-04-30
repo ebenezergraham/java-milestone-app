@@ -2,22 +2,33 @@
 /*    background-color: #216558;*/
 /*}*/
 .fa-circle {
-    /*font-size: 50px;*/
-    color: 	#8B0000;
+	/*font-size: 50px;*/
+	color: #8B0000;
 }
 
 .true {
-    /*font-size: 50px;*/
-    color: 	darkgreen;
+	/*font-size: 50px;*/
+	color: darkgreen;
 }
 
-.control-pane{
-    color: #216558;
-    position: fixed;
-    height: 100px;
-
+.control-pane {
+	color: #216558;
+	position: fixed;
+	height: 100%;
 }
 
-.control-pane button{
-    /*width: 150px;*/
+.control-pane button {
+	/*width: 150px;*/
+}
+
+.hidden {
+	visibility: hidden;
+}
+
+.text-green {
+	color: #216558;
+}
+
+.bg-green {
+	background-color: #216558;
 }

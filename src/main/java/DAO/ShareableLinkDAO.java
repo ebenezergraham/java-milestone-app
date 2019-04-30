@@ -20,7 +20,7 @@ public class ShareableLinkDAO implements AutoCloseable {
 		connection = DAOFactory.getConnection();
 	}
 	
-	public boolean store(String projectId,String link) {
+	public boolean store(String projectId, String link) {
 		final String QUERY = "INSERT INTO links (link,project_id) VALUES (?,?)";
 		try (PreparedStatement ps = connection.prepareStatement(QUERY)) {
 			ps.setString(1, link);
@@ -32,7 +32,7 @@ public class ShareableLinkDAO implements AutoCloseable {
 	}
 	
 	public LinkDetails load(String id) {
-		System.out.println("To db: "+id);
+		System.out.println("To db: " + id);
 		final String QUERY = "SELECT  link, project_id  FROM links WHERE link='" + id + "';";
 		LinkDetails linkDetails = null;
 		try (PreparedStatement ps = connection.prepareStatement(QUERY)) {
@@ -40,7 +40,7 @@ public class ShareableLinkDAO implements AutoCloseable {
 			System.out.println(rs);
 			
 			if (rs.next()) {
-				linkDetails = new LinkDetails(rs.getString("link"),rs.getString("project_id"));
+				linkDetails = new LinkDetails(rs.getString("link"), rs.getString("project_id"));
 			}
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -49,13 +49,13 @@ public class ShareableLinkDAO implements AutoCloseable {
 	}
 	
 	public LinkDetails loadByProjectId(String id) {
-		System.out.println("To db: "+id);
+		System.out.println("To db: " + id);
 		final String QUERY = "SELECT  link, project_id  FROM links WHERE project_id='" + id + "';";
 		LinkDetails linkDetails = null;
 		try (PreparedStatement ps = connection.prepareStatement(QUERY)) {
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
-				linkDetails = new LinkDetails(rs.getString("link"),rs.getString("project_id"));
+				linkDetails = new LinkDetails(rs.getString("link"), rs.getString("project_id"));
 				System.out.println(linkDetails.toString());
 			}
 		} catch (SQLException e) {

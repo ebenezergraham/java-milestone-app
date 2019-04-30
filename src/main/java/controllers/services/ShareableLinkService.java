@@ -42,7 +42,7 @@ public class ShareableLinkService {
 		List<Milestone> milestones = milestoneDAO.findMilestones(details.getProjectId());
 		System.out.println("milestone list: " + milestones.size());
 		System.out.println(details.toString());
-		items.put("title", details.getProjectId());
+		items.put("id", details.getProjectId());
 		items.put("milestones", milestones);
 		return items;
 	}
