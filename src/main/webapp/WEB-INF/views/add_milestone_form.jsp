@@ -13,35 +13,35 @@
 
         <form action="/project?id=${id}" METHOD="post">
           <div class="form-group">
-            <label for="title${milestone.title}">Title</label><br>
-            <h3><input type="text" class="form-control modal-title" id="title${milestone.id}" name="mlTitle"
+            <label for="title">Title</label><br>
+            <h3><input type="text" class="form-control modal-title" id="title" name="mlTitle"
                        maxlength="30"></h3>
           </div>
 
           <div class="form-group">
-            <label for="description${milestone.id}">Description</label>
-            <textarea rows="5" cols="50" id="description${milestone.id}" maxlength="250"
+            <label for="description">Description</label>
+            <textarea rows="5" cols="50" id="description" maxlength="250"
                       class="form-control" name="mlDescription"></textarea>
           </div>
 
           <div class="form-group">
-            <label for="start${milestone.id}">Start ${milestone.startDate}</label>
-            <input type="date" class="form-control" id="start${milestone.id}"
+            <label for="start">Start</label>
+            <input type="date" class="form-control" id="start"
                    name="mlStartDate">
           </div>
 
           <div class="form-group">
-            <label for="due${milestone.id}">Due</label>
-            <input type="date" class="form-control" id="due${milestone.id}"
+            <label for="due">Due</label>
+            <input type="date" class="form-control" id="due"
                    name="mlDueDate">
           </div>
 
           <div class="form-group">
             <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input status" id="customCheck${milestone.id}"
+              <input type="checkbox" class="custom-control-input status" id="customCheck"
                      value="false" name="mlStatus">
 
-              <label class="custom-control-label" for="customCheck${milestone.id}">Completed</label>
+              <label class="custom-control-label" for="customCheck">Completed</label>
             </div>
           </div>
 
