@@ -21,87 +21,88 @@ import java.util.stream.Collectors;
 @WebServlet(urlPatterns = "/project/*")
 
 public class MilestoneServlet extends HttpServlet {
-
-  private MilestoneDAO dao = DAOFactory.getMilestoneDAO();
-  private ProjectDAO daoProject = DAOFactory.getProjectDAO();
-
-  static String getFullURL(HttpServletRequest request) {
-    StringBuilder requestURL = new StringBuilder(request.getRequestURL().toString());
-    String queryString = request.getQueryString();
-
-    if (queryString == null) {
-      return requestURL.toString();
-    } else {
-      return requestURL.append('?').append(queryString).toString();
-    }
-  }
-
-  @Override
-  protected void doGet(HttpServletRequest request,
-                       HttpServletResponse response) throws ServletException, IOException {
-    String id = request.getParameter("id");
-    String status = request.getParameter("completed");
-
-    Project pr = daoProject.getProject(id);
-
-    if (pr != null && pr.getUserId().equals(request.getSession().getAttribute("userID"))) {
-      request.setAttribute("title", pr.getTitle());
-      request.setAttribute("id", pr.getId());
-
-      List<Milestone> allM = dao.findMilestones(pr.getId());
-      System.out.println(status);
-      if (status == null) {
-        request.setAttribute("allMilestones", allM);
-      } else if (status.equals("0")) {
-        request.setAttribute("allMilestone", getPendingMilestones(allM));
-      } else if (status.equals("1")) {
-        request.setAttribute("allMilestones", getCompletedMilestones(allM));
-      }
-      request.getRequestDispatcher("/WEB-INF/views/project.jsp").forward(request, response);
-    } else {
-      response.sendRedirect("/dashboard");
-    }
-
-  }
-
-  @Override
-  protected void doPost(HttpServletRequest request,
-                        HttpServletResponse response) throws ServletException, IOException {
-    String id = request.getParameter("id");
-    System.out.println("id: " + id);
-    System.out.println("Adding Milestone");
-    System.out.println("------------------------");
-
-    Project pr = daoProject.getProject(id);
-    String status = request.getParameter("mlStatus");
-    if (pr != null && pr.getUserId().equals(request.getSession().getAttribute("userID"))) {
-      request.setAttribute("id", pr.getId());
-      request.setAttribute("title", pr.getTitle());
-      String mlStartDate = request.getParameter("mlStartDate");
-      String mlDueDate = request.getParameter("mlDueDate");
-      Milestone newML = new Milestone(
-          request.getParameter("mlID"),
-          request.getParameter("mlTitle"),
-          request.getParameter("mlDescription"),
-          status == null ? "false":"true",
-          mlStartDate.isEmpty() ? "" : TimeService.getInstance().formatDate(mlStartDate),
-          mlDueDate.isEmpty() ? "" : TimeService.getInstance().formatDate(mlDueDate),
-          pr.getId()
-      );
-
-      System.out.println("the new milestone is " + newML.getTitle());
-      dao.addMilestone(newML);
-      response.sendRedirect(getFullURL(request));
-    } else {
-      response.sendRedirect("/dashboard");
-    }
-  }
-
-  @Override
-  protected void doDelete(HttpServletRequest request,
-                          HttpServletResponse response) throws IOException {
-    System.out.println("Deleting Milestone");
-    System.out.println("------------------------");
+	
+	private MilestoneDAO dao = DAOFactory.getMilestoneDAO();
+	private ProjectDAO daoProject = DAOFactory.getProjectDAO();
+	
+	static String getFullURL(HttpServletRequest request) {
+		StringBuilder requestURL = new StringBuilder(request.getRequestURL().toString());
+		String queryString = request.getQueryString();
+		
+		if (queryString == null) {
+			return requestURL.toString();
+		} else {
+			return requestURL.append('?').append(queryString).toString();
+		}
+	}
+	
+	@Override
+	protected void doGet(HttpServletRequest request,
+	                     HttpServletResponse response) throws ServletException, IOException {
+		String id = request.getParameter("id");
+		String status = request.getParameter("completed");
+    System.out.println("completed "+status);
+		Project pr = daoProject.getProject(id);
+		
+		if (pr != null && pr.getUserId().equals(request.getSession().getAttribute("userID"))) {
+			request.setAttribute("title", pr.getTitle());
+			request.setAttribute("id", pr.getId());
+			
+			List<Milestone> allM = dao.findMilestones(pr.getId());
+			System.out.println(status);
+			if (status == null) {
+				request.setAttribute("allMilestones", allM);
+			} else if (status.equals("0")) {
+			  List<Milestone> tr = getPendingMilestones(allM);
+				request.setAttribute("allMilestones", tr);
+        System.out.println(tr.get(0).getStatus());
+			} else if (status.equals("1")) {
+				request.setAttribute("allMilestones", getCompletedMilestones(allM));
+			}
+			request.getRequestDispatcher("/WEB-INF/views/project.jsp").forward(request, response);
+		} else {
+			response.sendRedirect("/dashboard");
+		}
+		
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest request,
+	                      HttpServletResponse response) throws ServletException, IOException {
+		String id = request.getParameter("id");
+		System.out.println("id: " + id);
+		System.out.println("Adding Milestone");
+		System.out.println("------------------------");
+		
+		Project pr = daoProject.getProject(id);
+		if (pr != null && pr.getUserId().equals(request.getSession().getAttribute("userID"))) {
+			request.setAttribute("id", pr.getId());
+			request.setAttribute("title", pr.getTitle());
+			String mlStartDate = request.getParameter("mlStartDate");
+			String mlDueDate = request.getParameter("mlDueDate");
+			Milestone newML = new Milestone(
+					request.getParameter("mlID"),
+					request.getParameter("mlTitle"),
+					request.getParameter("mlDescription"),
+					request.getParameter("mlStatus") == null ? "false" : request.getParameter("mlStatus"),
+					mlStartDate.isEmpty() ? "" : TimeService.getInstance().formatDate(mlStartDate),
+					mlDueDate.isEmpty() ? "" : TimeService.getInstance().formatDate(mlDueDate),
+					pr.getId()
+			);
+			
+			System.out.println("the new milestone is " + newML.getTitle());
+			dao.addMilestone(newML);
+			response.sendRedirect(getFullURL(request));
+		} else {
+			response.sendRedirect("/dashboard");
+		}
+	}
+	
+	@Override
+	protected void doDelete(HttpServletRequest request,
+	                        HttpServletResponse response) throws IOException {
+		System.out.println("Deleting Milestone");
+		System.out.println("------------------------");
 //		System.out.println(request.getServletPath());
     String projectId = request.getParameter("id");
     String ml = request.getParameter("ml");
