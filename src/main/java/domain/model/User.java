@@ -2,6 +2,8 @@ package domain.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import java.util.List;
+
 
 public class User {
 
@@ -42,11 +44,11 @@ public class User {
   public User(String hash, String username) {
     super();
     this.hash = hash;
-    this.username = username;
+    this.userName = username;
   }
 
   public User(String username) {
-    this.username = username;
+    this.userName = username;
   }
 
 

@@ -54,7 +54,7 @@ public class H2User  implements AutoCloseable {
     public void addUser(User user) {
         final String ADD_USER_QUERY = "INSERT INTO user (username, hash) VALUES (?,?)";
         try (PreparedStatement ps = connection.prepareStatement(ADD_USER_QUERY)) {
-            ps.setString(1, user.getUsername());
+            ps.setString(1, user.getUserName());
             ps.setString(2, user.getHash());
             ps.execute();
         } catch (SQLException e) {
