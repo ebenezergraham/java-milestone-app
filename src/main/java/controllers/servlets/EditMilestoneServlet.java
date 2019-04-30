@@ -23,7 +23,7 @@ public class EditMilestoneServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request,
 	                      HttpServletResponse response) throws ServletException, IOException {
-		String pTitle = request.getParameter("title");
+		String pTitle = request.getParameter("id");
 		String mlStartDate = request.getParameter("mlStartDate");
 		String mlDueDate = request.getParameter("mlDueDate");
 		System.out.println("Editing Milestone from " + getFullURL(request));
@@ -41,11 +41,12 @@ public class EditMilestoneServlet extends HttpServlet {
 		if (dao.milestoneExists(newML.getId())) {
 			System.out.println("EXISTS " + newML.getTitle() + newML.getId());
 			System.out.println(dao.editMilestone(newML));
+
 		} else {
 			System.out.println("ACTION NOT ALLOWED");
 			request.removeAttribute("mlID");
-			response.sendRedirect("/project/?title=" + pTitle);
 		}
-		
+		response.sendRedirect("/project/?id=" + pTitle);
+
 	}
 }
