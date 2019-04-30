@@ -8,7 +8,7 @@
 
       <div class="float-right text-muted small">Start Date: ${milestone.startDate}</div>
       <br><br>
-      <button class="btn btn-lg btn-outline-info btn-block card-title" type="button"
+      <button class="btn btn-lg btn-outline-info btn-block card-title text-truncate" type="button"
               data-target="#${milestone.id}"
               data-toggle="collapse">
         &emsp;${milestone.title}&emsp;&emsp;▼

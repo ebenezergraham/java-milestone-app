@@ -14,8 +14,8 @@
         <form action="project/?title=${title}" METHOD="post">
           <div class="form-group">
             <label for="title${milestone.title}">Title</label><br>
-            <h3><input type="text" class="form-control modal-title" id="title${milestone.id}"
-                        name="mlTitle"></h3>
+            <h3><input type="text" class="form-control modal-title" id="title${milestone.id}" name="mlTitle"
+                       maxlength="30"></h3>
           </div>
 
           <div class="form-group">

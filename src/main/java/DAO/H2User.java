@@ -62,21 +62,21 @@ public class H2User  implements AutoCloseable {
         }
     }
 
-    public List<User> findUsers() {
-        final String LIST_USERS_QUERY = "SELECT username FROM user";
-        List<User> out = new ArrayList<>();
-        try (PreparedStatement ps = connection.prepareStatement(LIST_USERS_QUERY)) {
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                out.add(new User(rs.getString(1),
-                    rs.getString(2),
-                    rs.getString(3)));
-             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return out;
-    }
+//    public List<User> findUsers() {
+//        final String LIST_USERS_QUERY = "SELECT username FROM user";
+//        List<User> out = new ArrayList<>();
+//        try (PreparedStatement ps = connection.prepareStatement(LIST_USERS_QUERY)) {
+//            ResultSet rs = ps.executeQuery();
+//            while (rs.next()) {
+//                out.add(new User(rs.getString(1),
+//                    rs.getString(2),
+//                    rs.getString(3)));
+//             }
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
+//        return out;
+//    }
 
     private void loadResource(String name) {
         try {

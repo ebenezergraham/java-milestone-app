@@ -7,7 +7,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h3>Edit ${milestone.title}</h3>
+        <h3>Edit Milestone</h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -17,7 +17,7 @@
         <form action="/project/edit/?title=${title}&mlID=${milestone.id}" id="edit${milestone.id}"
               METHOD="post">
           <div class="form-group">
-            <label for="t${milestone.title}" maxlength="50>Title</label><br>
+            <label for="t${milestone.title}" maxlength="30">Title</label><br>
             <h3><input type="text" class="form-control modal-title" id="t${milestone.title}" value="${milestone.title}" name="mlTitle"></h3>
           </div>
 

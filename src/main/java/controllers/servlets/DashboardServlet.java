@@ -2,7 +2,7 @@ package controllers.servlets;
 
 import DAO.DAOFactory;
 import DAO.ProjectDAO;
-import com.google.gson.Gson;
+import java.util.List;
 import domain.model.Project;
 import domain.model.User;
 import org.slf4j.Logger;
