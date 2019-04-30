@@ -41,7 +41,7 @@ public class MilestoneServlet extends HttpServlet {
 	                     HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("id");
 		String status = request.getParameter("completed");
-		
+    System.out.println("completed "+status);
 		Project pr = daoProject.getProject(id);
 		
 		if (pr != null && pr.getUserId().equals(request.getSession().getAttribute("userID"))) {
@@ -53,7 +53,9 @@ public class MilestoneServlet extends HttpServlet {
 			if (status == null) {
 				request.setAttribute("allMilestones", allM);
 			} else if (status.equals("0")) {
-				request.setAttribute("allMilestone", getPendingMilestones(allM));
+			  List<Milestone> tr = getPendingMilestones(allM);
+				request.setAttribute("allMilestone", tr);
+        System.out.println(tr.get(0).getStatus());
 			} else if (status.equals("1")) {
 				request.setAttribute("allMilestones", getCompletedMilestones(allM));
 			}
