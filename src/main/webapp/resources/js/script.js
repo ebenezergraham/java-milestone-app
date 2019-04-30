@@ -5,7 +5,7 @@ $("#nameInput").on('keypress', function (e) {
 });
 
 $(".btn-add-project").on('click', function (e) {
-		document.getElementById("add-new-project").style.display = "block";
+	document.getElementById("add-new-project").style.display = "block";
 });
 
 $(".btn-delete-project").on('click', function (e) {
@@ -14,16 +14,26 @@ $(".btn-delete-project").on('click', function (e) {
 	};
 	console.log($.param(params));
 	$.ajax({
-		url: window.location.href,
+		url: window.location.href + '?projectId=' + e.target.id,
 		type: 'DELETE',
 		contentType: 'application/json; charset=utf-8',
 		data: $.param(params),
-		//data: $('#myForm').serialize(),
 		success: function (result) {
 			console.log('working');
 			console.log(e)
-			id='#'+e.currentTarget.parentNode.id;
-			$(document).remove(id);
+			id = '#' + e.currentTarget.parentNode.id;
+			document.getElementById(e.currentTarget.parentNode.id).style.visibility = "hidden";
+
 		}
+	});
+});
+
+$(".share-project").on('click', function (e) {
+	$.post("/view?projectId=" + e.target.parentNode.id, function (data) {
+		$("#shareable-link").parent().parent().css("display", "block");
+		$("#shareable-link").val(window.location.host + '/view/' + data);
+		setTimeout(function () {
+			$("#shareable-link").parent().parent().css("display", "none")
+		}, 10000);
 	});
 });

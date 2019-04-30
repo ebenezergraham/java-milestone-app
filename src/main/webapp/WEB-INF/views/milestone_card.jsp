@@ -3,7 +3,7 @@
 <div class="col-sm py-2">
   <div class="card border-success shadow">
     <div class="card-body">
-      <i class="fas fa-trash" onmouseover="console.log('${milestone.id}')"></i>
+      <i class=" ${visibility} fas fa-trash" onmouseover="console.log('${milestone.id}')"></i>
 
       <div class="float-right text-muted small">Start Date: ${milestone.startDate}</div>
       <br><br>
@@ -19,12 +19,12 @@
       </div>
     </div>
     <div class="card-footer">Due: ${milestone.dueDate}
-      <span class="float-right">&emsp;&emsp;
-              <i class="fas fa-circle"></i>
-              &emsp;&emsp;
-              <button type="button" class="btn btn-primary" data-toggle="modal"
-                      data-target="#editForm${milestone.id}"><i class="fas fa-pen"></i></button>
-          </span>
+      <span class="float-right">
+
+<i class="fas fa-circle ${milestone.status}"></i>
+  <button type="button" class="btn btn-primary ${visibility} " data-toggle="modal"
+          data-target="#editForm${milestone.id}"><i class="fas fa-pen"></i></button>
+  </span>
       <%@include file="milestone_form.jsp" %>
 
     </div>
