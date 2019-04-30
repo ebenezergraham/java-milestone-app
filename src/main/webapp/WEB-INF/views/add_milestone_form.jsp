@@ -35,16 +35,6 @@
             <input type="date" class="form-control" id="due"
                    name="mlDueDate">
           </div>
-
-          <div class="form-group">
-            <div class="custom-control custom-checkbox">
-              <input type="checkbox" class="custom-control-input status" id="customCheck"
-                     value="false" name="mlStatus">
-
-              <label class="custom-control-label" for="customCheck">Completed</label>
-            </div>
-          </div>
-
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <button type="submit" class="btn text-white bg-green">Save changes</button>

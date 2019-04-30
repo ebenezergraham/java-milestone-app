@@ -3,13 +3,25 @@ package utils;
 ebenezergraham created on 4/25/19
 */
 
+import DAO.*;
+import controllers.services.AuthenticationService;
+import controllers.services.TimeService;
+import controllers.servlets.ShareableLinkServlet;
+import domain.model.Milestone;
+import domain.model.Project;
+import domain.model.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DBUtil {
-	
+	private static final Logger LOGGER = LoggerFactory.getLogger(DBUtil.class.getName());
 	private static final String db = "jdbc:h2:~/mp;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE";
 	private static Connection connection;
 	
@@ -17,6 +29,7 @@ public class DBUtil {
 		try {
 			connection = getConnection();
 			loadResource();
+			// createTestData();
 		} catch (ClassNotFoundException | SQLException e) {
 			throw new RuntimeException(e);
 		}
@@ -29,7 +42,7 @@ public class DBUtil {
 	
 	private void loadResource() {
 		try {
-			String cmd = "CREATE TABLE IF NOT EXISTS users (id int AUTO_INCREMENT PRIMARY KEY, user_name VARCHAR(255) NOT NULL UNIQUE," +
+			String cmd = "CREATE TABLE IF NOT EXISTS users (id int AUTO_INCREMENT PRIMARY KEY, user_name VARCHAR(255) NOT NULL," +
 					"  hash VARCHAR(255))";
 			PreparedStatement ps = connection.prepareStatement(cmd);
 			ps.execute();
@@ -79,4 +92,24 @@ public class DBUtil {
 //				throw new RuntimeException(e);
 		}
 	}
+	
+	public void createTestData(){
+		UserDAO dao  = (UserDAO) DAOFactory.getDAO("userdao");
+		List<Project> projects = new ArrayList<>();
+		new AuthenticationService().register("hermes","hermes123");
+		User user = dao.getUser("hermes");
+		LOGGER.info("User Created: \n{}",user.toString());
+		ProjectDAO pdao  = (ProjectDAO)DAOFactory.getDAO("projectdao");
+		Project p = new Project("Web Dev Group 3",user.getId());
+		pdao.addProject(p);
+		p = pdao.getProject(user.getId(),"Web Dev Group 3");
+		LOGGER.info("Project Created \n{}",p.toString());
+	/*	Milestone m = new Milestone("Group Report"," Description of Group Report","false", "","",p.getId());
+		MilestoneDAO mdao = (MilestoneDAO) DAOFactory.getDAO("milestonedao");
+		mdao.addMilestone(m);
+		m.setTitle("Implement Report");
+		m.setStatus("true");
+		mdao.addMilestone(m);*/
+	}
+	
 }

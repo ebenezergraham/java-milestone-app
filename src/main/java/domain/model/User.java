@@ -40,6 +40,11 @@ public class User {
 		this.projects = projects;
 	}
 	
+	public User(String userName, String hash) {
+		this.hash = hash;
+		this.userName = userName;
+	}
+	
 	public String getId() {
 		return id;
 	}

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings("ALL")
-public class ProjectDAO implements AutoCloseable {
+public class ProjectDAO implements AutoCloseable ,DAO{
 	@SuppressWarnings("unused")
 	static final Logger LOG = LoggerFactory.getLogger(ProjectDAO.class);
 	private Connection connection;

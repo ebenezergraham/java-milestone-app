@@ -9,12 +9,12 @@
 
 <%
   String state = "logout";
-  if (request.getRequestedSessionId() == null
+  if (request.getParameter("userobj") == null
       && !request.isRequestedSessionIdValid()) {
     state = "login";
   }
 %>
-<nav style="background-color: #216558;padding: 1rem 6rem ;" class="navbar navbar-expand-lg shadow-sm">
+<nav style="background-color: #216558;padding: 1rem 6rem;" class="navbar navbar-expand-lg shadow-sm">
   <a href="/dashboard" class="navbar-brand text-white">Milestone</a>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="nav navbar-nav">

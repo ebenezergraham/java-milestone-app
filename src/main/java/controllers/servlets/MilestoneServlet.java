@@ -4,7 +4,6 @@ import DAO.DAOFactory;
 import DAO.MilestoneDAO;
 import controllers.services.TimeService;
 import DAO.ProjectDAO;
-import controllers.services.UserService;
 import domain.model.Milestone;
 import domain.model.Project;
 
@@ -41,7 +40,6 @@ public class MilestoneServlet extends HttpServlet {
 	                     HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("id");
 		String status = request.getParameter("completed");
-    System.out.println("completed "+status);
 		Project pr = daoProject.getProject(id);
 		
 		if (pr != null && pr.getUserId().equals(request.getSession().getAttribute("userID"))) {
@@ -53,9 +51,7 @@ public class MilestoneServlet extends HttpServlet {
 			if (status == null) {
 				request.setAttribute("allMilestones", allM);
 			} else if (status.equals("0")) {
-			  List<Milestone> tr = getPendingMilestones(allM);
-				request.setAttribute("allMilestones", tr);
-        System.out.println(tr.get(0).getStatus());
+				request.setAttribute("allMilestones", getPendingMilestones(allM));
 			} else if (status.equals("1")) {
 				request.setAttribute("allMilestones", getCompletedMilestones(allM));
 			}
@@ -104,38 +100,35 @@ public class MilestoneServlet extends HttpServlet {
 		System.out.println("Deleting Milestone");
 		System.out.println("------------------------");
 //		System.out.println(request.getServletPath());
-    String projectId = request.getParameter("id");
-    String ml = request.getParameter("ml");
-    System.out.println("do delete milestone param " + ml);
-    Project pr = daoProject.getProject(projectId);
-    if (pr != null && pr.getUserId().equals(request.getSession().getAttribute("userID"))) {
-      System.out.println("deleeting");
-      System.out.println();
-      if (dao.deleteMilestone(ml, projectId) == 0) {
-//				response.setStatus(200);
-//			}		else {
-////			response.setStatus(403);
-      }
-
-    }
-    response.sendRedirect("/project/?id=" + projectId);
-  }
-
-  private void listMilestones(HttpServletRequest request,
-                              HttpServletResponse response) throws ServletException, IOException {
-    String ptitle = request.getParameter("title");
-    request.setAttribute("title", ptitle);
-    List<Milestone> allM = dao.findMilestones(ptitle);
-    request.setAttribute("allMilestones", allM);
-    request.getRequestDispatcher("/WEB-INF/views/project.jsp").forward(request, response);
-
-  }
-
-  private List<Milestone> getCompletedMilestones(List<Milestone> milestones) {
-    return milestones.stream().filter(milestone -> milestone.getStatus().equals("true")).collect(Collectors.toList());
-  }
-
-  private List<Milestone> getPendingMilestones(List<Milestone> milestones) {
-    return milestones.stream().filter(milestone -> milestone.getStatus().equals("false")).collect(Collectors.toList());
-  }
+		String projectId = request.getParameter("id");
+		String ml = request.getParameter("ml");
+		System.out.println("do delete milestone param " + ml);
+		Project pr = daoProject.getProject(projectId);
+		if (pr != null && pr.getUserId().equals(request.getSession().getAttribute("userID"))) {
+			if (dao.deleteMilestone(ml, projectId) == 0) {
+				response.setStatus(200);
+			}		else {
+			response.setStatus(403);
+			}
+			
+		}
+		response.sendRedirect("/project/?id=" + projectId);
+	}
+	
+	private void listMilestones(HttpServletRequest request,
+	                            HttpServletResponse response) throws ServletException, IOException {
+		String ptitle = request.getParameter("title");
+		request.setAttribute("title", ptitle);
+		List<Milestone> allM = dao.findMilestones(ptitle);
+		request.setAttribute("allMilestones", allM);
+		request.getRequestDispatcher("/WEB-INF/views/project.jsp").forward(request, response);
+	}
+	
+	private List<Milestone> getCompletedMilestones(List<Milestone> milestones) {
+		return milestones.stream().filter(milestone -> milestone.getStatus().equals("true")).collect(Collectors.toList());
+	}
+	
+	private List<Milestone> getPendingMilestones(List<Milestone> milestones) {
+		return milestones.stream().filter(milestone -> milestone.getStatus().equals("false")).collect(Collectors.toList());
+	}
 }

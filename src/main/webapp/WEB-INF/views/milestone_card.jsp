@@ -23,7 +23,6 @@
     </div>
     <div class="card-footer">Due: ${milestone.dueDate}
       <span class="float-right">
-${milestone.status}
 <i class="fas fa-circle ${milestone.status}"></i>
   <button type="button" class="btn bg-green ${visibility} text-white" data-toggle="modal"
           data-target="#editForm${milestone.id}"><i class="fas fa-pen"></i></button>
@@ -33,4 +32,4 @@ ${milestone.status}
     </div>
   </div>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="../../resources/js/jquery-3.3.1.min.js"></script>

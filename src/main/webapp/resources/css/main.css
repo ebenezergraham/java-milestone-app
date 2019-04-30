@@ -193,23 +193,31 @@ h1 {
 	padding: 7px
 }
 
-
-div#b {
-	display: none;
-	width: 20px;
-	height: 20px;
-	border-radius: 10px;
-	background-color: #216558;
-}
-
-div#a:hover div#b {
-	display: block;
-	width: 20px;
-	height: 20px;
-	background-color: #216558;
-}
-
 .copy-link{
 	opacity: 1;
 	position: sticky;
+}
+
+.project{
+	background-color: #ffffff;
+	color: #216558;
+	width: 100%;
+	text-decoration: none;
+	text-transform: capitalize;
+	display: inline-block;
+}
+
+.project:hover{
+	color: #216558;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.option-box {
+	display: none;
+}
+
+.project-box:hover .option-box {
+	display: block;
+	transition:  2s;
 }

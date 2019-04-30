@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings("SqlDialectInspection")
-public class MilestoneDAO implements AutoCloseable {
+public class MilestoneDAO implements AutoCloseable  ,DAO{
 	static final Logger LOG = LoggerFactory.getLogger(MilestoneDAO.class);
 	
 	private Connection connection;

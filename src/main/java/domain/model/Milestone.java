@@ -35,24 +35,6 @@ public class Milestone {
 	
 	/**
 	 * @param id
-	 * @param title
-	 * @param description
-	 * @param status
-	 * @param startDate
-	 * @param dueDate
-	 */
-	public Milestone(String id, String title, String description, String status, String startDate, String dueDate) {
-		super();
-		this.id = id;
-		this.title = title;
-		this.description = description;
-		this.status = status;
-		this.startDate = startDate;
-		this.dueDate = dueDate;
-	}
-	
-	/**
-	 * @param id
 	 * @param startDate
 	 * @param title
 	 * @param status
@@ -64,6 +46,15 @@ public class Milestone {
 	                 String projectId) {
 		super();
 		this.id = id;
+		this.title = title;
+		this.description = description;
+		this.status = status;
+		this.startDate = startDate;
+		this.dueDate = dueDate;
+		this.projectId = projectId;
+	}
+	
+	public Milestone(String title, String description, String status, String startDate, String dueDate, String projectId) {
 		this.title = title;
 		this.description = description;
 		this.status = status;

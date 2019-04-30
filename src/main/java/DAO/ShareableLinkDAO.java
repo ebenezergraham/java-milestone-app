@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 @SuppressWarnings("Duplicates")
-public class ShareableLinkDAO implements AutoCloseable {
+public class ShareableLinkDAO implements AutoCloseable  ,DAO{
 	@SuppressWarnings("unused")
 	static final Logger LOG = LoggerFactory.getLogger(ShareableLinkDAO.class);
 	private Connection connection;

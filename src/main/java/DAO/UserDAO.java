@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import java.sql.*;
 
 @SuppressWarnings("Duplicates")
-public class UserDAO implements AutoCloseable {
+public class UserDAO implements AutoCloseable, DAO {
 	@SuppressWarnings("unused")
 	static final Logger LOG = LoggerFactory.getLogger(UserDAO.class);
 	private Connection connection;

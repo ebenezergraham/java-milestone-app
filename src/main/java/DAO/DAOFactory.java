@@ -1,12 +1,17 @@
 package DAO;
 
+import controllers.services.AuthenticationService;
+import domain.model.Project;
+import domain.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import utils.DBUtil;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public class DAOFactory implements AutoCloseable {
+public class DAOFactory implements AutoCloseable, Factory {
 	@SuppressWarnings("unused")
 	static final Logger LOG = LoggerFactory.getLogger(DAOFactory.class);
 	private static final String db = "jdbc:h2:~/mp;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE";
@@ -19,6 +24,20 @@ public class DAOFactory implements AutoCloseable {
 	
 	public DAOFactory() {
 		this.connection = getConnection();
+	}
+	
+	public static DAO getDAO(String daoName){
+		switch (daoName){
+			case "userdao":
+				return getUserDAO();
+			case "linkdao":
+				return getShareableLinkDAO();
+			case "projectdao":
+				return getProjectDAO();
+			case "milestonedao":
+				return getMilestoneDAO();
+		}
+		return null;
 	}
 	
 	static Connection getConnection() {
@@ -80,4 +99,6 @@ public class DAOFactory implements AutoCloseable {
 			throw new RuntimeException(e);
 		}
 	}
+	
+
 }

@@ -36,11 +36,11 @@ public class AuthenticationFilter implements Filter {
 		}
 		
 		if (uri.equals("/") || session == null) {
-			res.sendRedirect("/login");
+			request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
 		} else {
 			if (session.getAttribute("username") == null) {
 				this.context.log("Unauthorized");
-				res.sendRedirect("/login");
+				request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
 			} else {
 				chain.doFilter(request, response);
 			}

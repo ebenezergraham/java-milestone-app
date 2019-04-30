@@ -12,13 +12,11 @@
 
 <html>
 <head>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" href="resources/css/main.css">
+  <link rel="stylesheet" href="../../resources/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../../resources/css/main.css">
   <title>Milestone Planner</title>
 </head>
 <body id="loginbg">
-
 <div class="container">
   <div class="row">
     <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
@@ -48,8 +46,8 @@
   </div>
 </div>
 
-<script defer src="../../resources/js/jquery-3.3.1.js"></script>
-<script defer src="../../resources/js/jquery.ripples.js"></script>
+<script defer src="../../resources/js/jquery-3.3.1.min.js"></script>
+<script defer src="../../resources/js/jquery.ripples-min.js"></script>
 <script defer src="../../resources/js/script.js"></script>
 </body>
 

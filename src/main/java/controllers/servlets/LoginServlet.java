@@ -3,15 +3,17 @@ package controllers.servlets;
 import DAO.UserDAO;
 import controllers.services.AuthenticationService;
 import domain.model.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = "/login", name = "RegisterServlet")
+@WebServlet(urlPatterns = "/login", name = "LoginServlet")
 public class LoginServlet extends HttpServlet {
-	
+	private static final Logger LOGGER = LoggerFactory.getLogger(DashboardServlet.class.getName());
 	private AuthenticationService authenticationService = new AuthenticationService();
 	
 	@Override
@@ -35,17 +37,16 @@ public class LoginServlet extends HttpServlet {
 			//generate a new session
 			HttpSession newSession = request.getSession(true);
 			UserDAO userDB = new UserDAO();
+			
 			User user = userDB.getUser(username);
 			newSession.setAttribute("userobj", user);
-//      User usr =
-//      System.out.println("Login USER: ");
 			newSession.setAttribute("userID", user.getId());
 			newSession.setMaxInactiveInterval(10 * 60);
 			
 			Cookie cookie = new Cookie("username", username);
 			response.addCookie(cookie);
 			newSession.setAttribute("username", username);
-			System.out.println("Login Servlet : " + request.getSession().getAttribute("userobj"));
+			LOGGER.info("Login Servlet : " + request.getSession().getAttribute("userobj"));
 			response.sendRedirect("/dashboard");
 		} else {
 			System.out.println("Invalid credentials");
