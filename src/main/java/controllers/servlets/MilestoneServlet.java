@@ -54,7 +54,7 @@ public class MilestoneServlet extends HttpServlet {
 				request.setAttribute("allMilestones", allM);
 			} else if (status.equals("0")) {
 			  List<Milestone> tr = getPendingMilestones(allM);
-				request.setAttribute("allMilestone", tr);
+				request.setAttribute("allMilestones", tr);
         System.out.println(tr.get(0).getStatus());
 			} else if (status.equals("1")) {
 				request.setAttribute("allMilestones", getCompletedMilestones(allM));

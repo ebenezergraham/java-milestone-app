@@ -25,7 +25,7 @@
       <span class="float-right">
 
 <i class="fas fa-circle ${milestone.status}"></i>
-  <button type="button" class="btn btn-primary ${visibility} " data-toggle="modal"
+  <button type="button" class="btn bg-green ${visibility} text-white" data-toggle="modal"
           data-target="#editForm${milestone.id}"><i class="fas fa-pen"></i></button>
   </span>
       <%@include file="milestone_form.jsp" %>
