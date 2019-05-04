@@ -33,14 +33,10 @@
       </div>
 
     </aside>
-    <c:if test="${projectList.size()>0}">
     <main class="col-9">
       <%@include file="WEB-INF/views/copy-link.jsp" %>
       <div class="row">
         <section class="col-6">
-          <div id="a">
-            <div id="b"></div>
-          </div>
           <a id="add-new-project" class="card m-3">
             <form action="/projects" method="post">
               <input id="nameInput" autofocus name="project" type="text" class="form-control"
@@ -84,7 +80,6 @@
           </c:forEach>
         </section>
       </div>
-      </c:if>
 
     </main>
   </div>
