@@ -1,6 +1,10 @@
 /*input[type=submit]{*/
 /*    background-color: #216558;*/
 /*}*/
+.card{
+	word-wrap: anywhere;
+}
+
 .fa-circle {
 	/*font-size: 50px;*/
 	color: #8B0000;

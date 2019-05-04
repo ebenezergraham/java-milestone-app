@@ -25,21 +25,21 @@
         <h1><br><span style="text-transform: capitalize">${title}<br> Milestones<p></p></h1>
         <div class="${visibility}">
           <a id="add-new-milestone">
-            <button class="btn text-white bg-green" data-toggle="modal" data-target="#add">
+            <button class="btn btn-block text-white bg-green" data-toggle="modal" data-target="#add">
               Add Milestone
             </button>
             <br><br>
           </a>
           <a href="/project?id=${id}&completed=1">
-            <button type="button" class="btn text-white bg-green" id="status">Completed</button>
+            <button type="button" class="btn btn-block text-white bg-green" id="status">Completed</button>
           </a>
           <br><br>
           <a href="/project?id=${id}&completed=0">
-            <button type="button" class="btn text-white bg-green">Ongoing</button>
+            <button type="button" class="btn btn-block text-white bg-green">Ongoing</button>
           </a>
           <br><br>
           <a href="/project?id=${id}">
-            <button type="button" class="btn text-white bg-green">All</button>
+            <button type="button" class="btn btn-block text-white bg-green">All</button>
             <br><br>
           </a>
         </div>
