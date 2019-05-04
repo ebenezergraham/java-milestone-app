@@ -22,7 +22,7 @@
 
           <div class="form-group">
             <label for="desc${milestone.title}">Description</label>
-            <textarea rows="4" cols="50" id="desc${milestone.title}" maxlength="250"
+            <textarea rows="2" cols="50" id="desc${milestone.title}" maxlength="250"
                       class="form-control" name="mlDescription">${milestone.description}</textarea>
           </div>
 
@@ -46,7 +46,7 @@
               <label class="custom-control-label" for="customCheck${milestone.id}">Completed</label>
             </div>
           </div>
-
+          <br>
           <button type="button" class="btn btn-secondary " data-dismiss="modal">Close</button>
           <button type="submit" class="btn bg-green text-white float-right">Save changes</button>
         </form>
