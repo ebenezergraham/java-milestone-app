@@ -10,10 +10,10 @@ $(".btn-add-project").on('click', function (e) {
 
 $(".btn-delete-project").on('click', function (e) {
 	var params = {
-		projectId: e.target.id,
+		projectId: e.target.parentNode.parentNode.id,
 	};
 	$.ajax({
-		url: window.location.href + '?projectId=' + e.target.id,
+		url: window.location.href + '?projectId=' + e.target.parentNode.parentNode.id,
 		type: 'DELETE',
 		contentType: 'application/json; charset=utf-8',
 		data: $.param(params),

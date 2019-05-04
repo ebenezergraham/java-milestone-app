@@ -46,14 +46,10 @@ public class DashboardServlet extends HttpServlet {
 	@Override
 	protected void doDelete(HttpServletRequest request,
 	                        HttpServletResponse response) throws ServletException, IOException {
-		LOGGER.info("deleting project");
+		LOGGER.info("Deleting project ...");
 		if (request.getSession(false) != null) {
 			String projectId = request.getParameter("projectId");
-			System.out.println("get param " + projectId);
-			projectId = request.getReader().readLine().split("=")[1];
-			projectId = projectId.replaceAll("%20", " ");
-			System.out.println(projectId);
-			User name = (User) request.getSession().getAttribute("userobj");
+			LOGGER.info("Project Id: {}",projectId);
 			if (dao.deleteProject(projectId)) {
 				response.setStatus(200);
 			}
