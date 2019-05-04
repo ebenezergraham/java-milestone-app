@@ -69,7 +69,7 @@ public class MilestoneServlet extends HttpServlet {
 		System.out.println("id: " + id);
 		System.out.println("Adding Milestone");
 		System.out.println("------------------------");
-		
+		String status = request.getParameter("mlStatus");
 		Project pr = daoProject.getProject(id);
 		if (pr != null && pr.getUserId().equals(request.getSession().getAttribute("userID"))) {
 			request.setAttribute("id", pr.getId());
@@ -80,7 +80,8 @@ public class MilestoneServlet extends HttpServlet {
 					request.getParameter("mlID"),
 					request.getParameter("mlTitle"),
 					request.getParameter("mlDescription"),
-					request.getParameter("mlStatus") == null ? "false" : request.getParameter("mlStatus"),
+					((status == null) || (status.equals("false"))) ? "false":"true",
+//					request.getParameter("mlStatus") == null ? "false" : request.getParameter("mlStatus"),
 					mlStartDate.isEmpty() ? "" : TimeService.getInstance().formatDate(mlStartDate),
 					mlDueDate.isEmpty() ? "" : TimeService.getInstance().formatDate(mlDueDate),
 					pr.getId()
