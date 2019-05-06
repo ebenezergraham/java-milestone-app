@@ -71,3 +71,10 @@ empty-div{
 .bg-green {
 	background-color: #216558;
 }
+
+.bg-completed{
+	background-color: darkgreen;
+}
+.bg-yellow{
+	background-color: #ba8b00;
+}

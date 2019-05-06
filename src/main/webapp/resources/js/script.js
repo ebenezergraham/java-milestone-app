@@ -1,14 +1,17 @@
 $("#nameInput").on('keypress', function (e) {
 	if (e.which === 13) {
-		document.getElementById("add-new-project").style.display = "none";
+		hide();
 	}
 });
-
+function hide(){
+	document.getElementById("add-new-project").style.display = "none";
+}
 $(".btn-add-project").on('click', function (e) {
 	document.getElementById("add-new-project").style.display = "block";
 });
 
 $(".btn-delete-project").on('click', function (e) {
+	console.log(window.location.href + '?projectId=' + e.target.parentNode.parentNode.id);
 	var params = {
 		projectId: e.target.parentNode.parentNode.id,
 	};

@@ -25,21 +25,21 @@
         <div class="">
           <a id="add-new-milestone">
             <button class="btn btn-block text-white bg-green" data-toggle="modal" data-target="#add">
-              Add Milestone
+              <i class="fa fa-plus" aria-hidden="true"></i>
             </button>
             <br><br>
           </a>
           <a href="/project?id=${id}&completed=1">
-            <button type="button" class="btn btn-block text-white bg-green" id="status">Completed</button>
+            <button type="button" class="btn btn-block text-white bg-completed" id="status"><i class="fa fa-check" aria-hidden="true"></i></button>
           </a>
-          <br><br>
+          <br>
           <a href="/project?id=${id}&completed=0">
-            <button type="button" class="btn btn-block text-white bg-green">Ongoing</button>
+            <button type="button" class="btn btn-block text-white bg-yellow"><i class="fa fa-spinner" aria-hidden="true"></i></button>
           </a>
-          <br><br>
+          <br>
           <a href="/project?id=${id}">
             <button type="button" class="btn btn-block text-white bg-green">All</button>
-            <br><br>
+            <br>
           </a>
         </div>
         </div>

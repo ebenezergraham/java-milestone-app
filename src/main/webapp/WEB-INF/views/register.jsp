@@ -39,6 +39,8 @@
             <button class="btn btn-lg btn-login btn-block text-uppercase" type="submit" value="register">
               Register
             </button>
+            <a class="btn btn-lg btn-login btn-block text-uppercase" href="/login"
+            >login</a>
             <hr class="my-4">
           </form>
         </div>

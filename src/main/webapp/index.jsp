@@ -42,6 +42,8 @@
             <form action="/projects" method="post">
               <input id="nameInput" autofocus name="project" type="text" class="form-control"
                      placeholder="enter project name ">
+
+              <button type="submit" onclick="hide()" class="mt-2 btn btn-login text-white">Add project</button>
             </form>
             <p id="project"></p>
           </a>
