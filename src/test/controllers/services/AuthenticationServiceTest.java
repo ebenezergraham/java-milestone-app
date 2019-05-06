@@ -1,7 +1,6 @@
-/*
 package controllers.services;
 
-import DAO.DAOFactory;
+import Suite.TestEnvironment;
 import domain.model.User;
 import org.junit.After;
 import org.junit.Before;
@@ -9,7 +8,9 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class AuthenticationServiceTest {
+public class AuthenticationServiceTest extends TestEnvironment {
+	
+	AuthenticationService auth = new AuthenticationService();
 	
 	@Before
 	public void setUp() throws Exception {
@@ -22,19 +23,15 @@ public class AuthenticationServiceTest {
 	@Test
 	public void login() {
 		AuthenticationService auth = new AuthenticationService();
-		User user = new User();
-		user.setUserName("testuser");
-		user.setHash("password");
-		DAOFactory.getUserDAO().addUser(user);
-		boolean result = auth.login("testuser","password");
+		auth.register("newuser","password");
+		boolean result = auth.login("newuser","password");
 		assertTrue(result);
 	}
 	
 	@Test
 	public void register() {
-		AuthenticationService auth = new AuthenticationService();
 		boolean result = auth.register("testuser","testuser");
 		assertTrue(result);
 	}
 }
-*/
+

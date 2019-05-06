@@ -27,7 +27,7 @@ public class DBUtil {
 	
 	public DBUtil() {
 		try {
-			connection = getConnection();
+			connection = getConnection(db);
 			loadResource();
 			// createTestData();
 		} catch (ClassNotFoundException | SQLException e) {
@@ -35,7 +35,7 @@ public class DBUtil {
 		}
 	}
 	
-	private static Connection getConnection() throws SQLException, ClassNotFoundException {
+	private static Connection getConnection(String db) throws SQLException, ClassNotFoundException {
 		Class.forName("org.h2.Driver");
 		return DriverManager.getConnection(db, "", "");
 	}
@@ -110,6 +110,10 @@ public class DBUtil {
 		m.setTitle("Implement Report");
 		m.setStatus("true");
 		mdao.addMilestone(m);*/
+	}
+	
+	public static String dburl(){
+		return db;
 	}
 	
 }
