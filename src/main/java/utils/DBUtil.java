@@ -42,7 +42,8 @@ public class DBUtil {
 	
 	private void loadResource() {
 		try {
-			String cmd = "CREATE TABLE IF NOT EXISTS users (id int AUTO_INCREMENT PRIMARY KEY, user_name VARCHAR(255) NOT NULL," +
+			String cmd = "CREATE TABLE IF NOT EXISTS users (id int AUTO_INCREMENT PRIMARY KEY, user_name VARCHAR(255) NOT " +
+					"NULL UNIQUE ," +
 					"  hash VARCHAR(255))";
 			PreparedStatement ps = connection.prepareStatement(cmd);
 			ps.execute();

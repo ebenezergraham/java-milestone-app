@@ -3,6 +3,17 @@
 * {
 	font-family: 'Nunito Sans', sans-serif;
 }
+
+.left-p a{
+	text-underline: none;
+	text-decoration: none;
+	text-decoration-line: none;
+}
+.nav li a{
+	text-underline: none !important;
+	text-decoration: none;
+	text-decoration-line: none;
+}
 empty-div{
 	/*height: 0;*/
 }
@@ -30,15 +41,6 @@ empty-div{
 	color: #216558;
 	position: fixed;
 	height: 100%;
-	/*top: 1em;*/
-	/*bottom: 1em;*/
-	/*left: 1em;*/
-	/*right: 1em;*/
-	/*border: 10px solid #216558;*/
-	/*padding: 10px;*/
-	/*border-image: url(img/africa.svg) 80 round;*/
-	/*-webkit-border-image: url(img/africa.svg) 80 round; !* Safari 3.1-5 *!*/
-	/*-o-border-image: url(img/africa.svg) 30 round; !* Opera 11-12.1 *!*/
 }
 .left-p {
 	color: #216558;
@@ -46,20 +48,35 @@ empty-div{
 	top: 5em;
 	bottom: 1em;
 	left: 1em;
-	/*right: 1em;*/
 	border: 10px solid #216558;
 	padding: 10px;
 	border-image: url(img/africa.svg) 80;
 	-moz-border-image: url(img/africa.svg) 80;
 	-webkit-border-image: url(img/africa.svg) 80; /* Safari 3.1-5 */
 	-o-border-image: url(img/africa.svg) 30 round; /* Opera 11-12.1 */
-	-ms-bo
 }
 
-.control-pane button {
-	/*width: 150px;*/
+
+.pannel-btn button{
+	text-align: left;
+	text-decoration: none;
+	/*display: flex;*/
+	/*justify-content: center;*/
+	/*flex-direction: column;*/
+	/*text-align: center;*/
+}
+.pannel-btn i{
+	float: right;
+	margin: 5%  0 0 5%;
+}
+.red{
+	color:#bc313e;
 }
 
+.red:hover{
+	/*color:#dc3545;*/
+	filter: brightness(130%);
+}
 .hidden {
 	visibility: hidden;
 }
@@ -73,8 +90,8 @@ empty-div{
 }
 
 .bg-completed{
-	background-color: darkgreen;
+	background-color: #45b7a4;
 }
 .bg-yellow{
-	background-color: #ba8b00;
+	background-color: #f6a02e;
 }

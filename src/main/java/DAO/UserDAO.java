@@ -17,15 +17,18 @@ public class UserDAO implements AutoCloseable, DAO {
 		connection = DAOFactory.getConnection(DBUtil.dburl());
 	}
 	
-	public void addUser(User user) {
-		final String ADD_USER_QUERY = "INSERT INTO users (user_name,hash) VALUES (?,?)";
+	public boolean addUser(User user){
+		final String ADD_USER_QUERY = "INSERT INTO users(user_name,hash) VALUES (?,?)";
 		try (PreparedStatement ps = connection.prepareStatement(ADD_USER_QUERY)) {
 			ps.setString(1, user.getUserName());
 			ps.setString(2, user.getHash());
 			ps.execute();
-		} catch (SQLException e) {
+		}catch(SQLIntegrityConstraintViolationException e){
+			return false;
+		}catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
+		return true;
 	}
 	
 	public User getUser(String username) {

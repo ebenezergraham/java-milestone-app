@@ -22,23 +22,28 @@
       <div class="mx-4 control-pane">
         <div class="left-p">
         <h1><br><span style="text-transform: capitalize">${title}<br> Milestones<p></p></h1>
-        <div class="">
+        <div class="pannel-btn m-0">
           <a id="add-new-milestone">
-            <button class="btn btn-block text-white bg-green" data-toggle="modal" data-target="#add">
-              <i class="fa fa-plus" aria-hidden="true"></i>
+            <button class="btn btn-block text-white bg-green m-0" data-toggle="modal" data-target="#add">
+             <p>Add milestone
+              <i class="fa fa-plus" aria-hidden="true"></i></p>
             </button>
             <br><br>
           </a>
           <a href="/project?id=${id}&completed=1">
-            <button type="button" class="btn btn-block text-white bg-completed" id="status"><i class="fa fa-check" aria-hidden="true"></i></button>
+            <button type="button" class="btn btn-block text-white bg-completed"
+                    id="status">
+              <p>Completed<i class="fa fa-check" aria-hidden="true"></i></p>
+            </button>
           </a>
           <br>
           <a href="/project?id=${id}&completed=0">
-            <button type="button" class="btn btn-block text-white bg-yellow"><i class="fa fa-spinner" aria-hidden="true"></i></button>
+            <button type="button" class="btn btn-block text-white bg-yellow">
+              <p>Incomplete<i class="fa fa-spinner" aria-hidden="true"></i></p></button>
           </a>
           <br>
           <a href="/project?id=${id}">
-            <button type="button" class="btn btn-block text-white bg-green">All</button>
+            <button type="button" class="btn btn-block text-white bg-green">All&nbsp;&nbsp;&nbsp;</button>
             <br>
           </a>
         </div>

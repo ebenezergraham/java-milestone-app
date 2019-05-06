@@ -26,13 +26,26 @@ public class RegisterServlet extends HttpServlet {
 	                      HttpServletResponse response) throws ServletException, IOException {
 		String username = request.getParameter("name");
 		String password = request.getParameter("password");
-		if (authenticationService.register(username, password)) {
-			response.sendRedirect("/login");
-		} else {
+		String errorMessage = null;
+		if(!authenticationService.validateUsernamePassword(username, password)) {
 			System.out.println("Invalid credentials");
-			String errorMessage = "Password must be more than 8 characters and username must be only alphanumeric";
+			errorMessage = "Password must be more than 8 characters and username must be only alphanumeric";
 			request.setAttribute("errorMessage", errorMessage);
 			request.getRequestDispatcher("/WEB-INF/views/register.jsp").forward(request, response);
+//			request.setAttribute("errorMessage", errorMessage);
+//			request
+
+		}else{
+			if (authenticationService.register(username, password)) {
+				response.sendRedirect("/login");
+
+			} else{
+				System.out.println("Invalid credentials");
+				errorMessage = "This username already exists!";
+				request.setAttribute("errorMessage", errorMessage);
+				request.getRequestDispatcher("/WEB-INF/views/register.jsp").forward(request, response);
+			}
 		}
+
 	}
 }

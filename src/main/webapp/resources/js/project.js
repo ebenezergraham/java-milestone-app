@@ -11,7 +11,7 @@ $(".status").on("click", function () {
 });
 
 
-function delMilestone(prID, id) {
+function delMilestone(prID, id, title) {
   bootbox.confirm({
     message: "Are you sure you want to delete milestone ".concat(title),
     buttons: {

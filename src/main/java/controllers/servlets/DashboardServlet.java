@@ -33,7 +33,18 @@ public class DashboardServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request,
 	                      HttpServletResponse response) throws ServletException, IOException {
-		/*Todo: Edit Project Name*/
+		String ptitle = request.getParameter("project");
+		System.out.println("title: " + ptitle);
+		String userId = (String) request.getSession().getAttribute("userID");
+		if (ptitle != null) {
+			if (dao.getProject(userId, ptitle) == null) {
+				dao.addProject(new Project(ptitle, userId));
+				System.out.println("Project added !");
+			} else {
+				System.out.println("project exists already!");
+			}
+		}
+		response.sendRedirect("/dashboard");
 	}
 	
 	@Override

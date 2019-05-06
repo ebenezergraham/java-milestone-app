@@ -39,7 +39,7 @@
       <div class="row">
         <section class="col-6">
           <a id="add-new-project" class="card m-3">
-            <form action="/projects" method="post">
+            <form action="/dashboard" method="post">
               <input id="nameInput" autofocus name="project" type="text" class="form-control"
                      placeholder="enter project name ">
 

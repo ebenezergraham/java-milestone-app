@@ -27,7 +27,7 @@
           </div>
 
           <div class="form-group">
-            <label for="start${milestone.id}">Start ${milestone.startDate}</label>
+            <label for="start${milestone.id}">Start</label>
             <input type="date" class="form-control" id="start${milestone.id}"
                    value="${milestone.startDate}" name="mlStartDate">
           </div>

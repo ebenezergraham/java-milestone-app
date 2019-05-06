@@ -3,9 +3,8 @@
 <div class="col-sm py-2">
   <div class="card border-success shadow">
     <div class="card-body">
-      <i class=" ${visibility} fas fa-trash"
-<%--      <i class="fas fa-trash btn-delete-milestone"--%>
-         onclick="delMilestone('${id}','${milestone.id}')"
+      <i class="fas fa-trash red"
+         onclick="delMilestone('${id}','${milestone.id}','${milestone.title}')"
          onmouseover="console.log('${milestone.id}')"></i>
 
       <div class="float-right text-muted small">Start Date: ${milestone.startDate}</div>
@@ -22,8 +21,8 @@
     </div>
     <div class="card-footer">Due: ${milestone.dueDate}
       <span class="float-right">
-<i class="fas fa-circle ${milestone.status}"></i>
-  <button type="button" class="btn bg-green ${visibility} text-white" data-toggle="modal"
+<i class="fas fa-circle ${milestone.status}"></i>&nbsp;&nbsp;
+  <button type="button" class="btn bg-green text-white" data-toggle="modal"
           data-target="#editForm${milestone.id}"><i class="fas fa-pen"></i></button>
   </span>
       <%@include file="milestone_form.jsp" %>

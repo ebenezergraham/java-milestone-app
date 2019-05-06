@@ -42,9 +42,9 @@
               <label class="custom-control-label" for="customCheck">Completed</label>
             </div>
           </div>
-
+          <br>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn text-white bg-green">Save changes</button>
+          <button type="submit" class="btn text-white bg-green float-right">Save changes</button>
 
         </form>
       </div>

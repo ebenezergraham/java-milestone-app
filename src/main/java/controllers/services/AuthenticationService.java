@@ -10,6 +10,7 @@ import utils.PasswordHash;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.sql.SQLIntegrityConstraintViolationException;
 
 public class AuthenticationService {
   private static final Logger LOGGER = LoggerFactory.getLogger(AuthenticationService.class.getName());
@@ -28,7 +29,6 @@ public class AuthenticationService {
   }
 
   public synchronized boolean register(@NonNull String username, @NonNull String password) {
-    if(!validateUsernamePassword(username, password)) return false;
     String hash;
     if (mUser == null) {
       try {
@@ -36,11 +36,14 @@ public class AuthenticationService {
         User user = new User();
         user.setUserName(username);
         user.setHash(hash);
-        dao.addUser(user);
+        return dao.addUser(user);
+//        if(dao.addUser(user).getClass().equals(SQLIntegrityConstraintViolationException.class)){
+//          return false;
+//        }
       } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
         e.printStackTrace();
+        return false;
       }
-      return true;
     } else {
       hash = this.mUser.getHash();
       try {
@@ -53,6 +56,6 @@ public class AuthenticationService {
   }
   
   public boolean validateUsernamePassword(String username, String password){
-    return username.matches("^[a-zA-Z0-9]+$") && password.length()>8;
+    return username.matches("^[a-zA-Z0-9]+$") && password.length()>=8;
   }
 }
