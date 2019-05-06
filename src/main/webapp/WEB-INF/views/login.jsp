@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>--%>
 <%@ page isELIgnored="false" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
@@ -6,6 +7,7 @@
   <link rel="stylesheet" href="../../resources/css/bootstrap.min.css">
   <link rel="stylesheet" href="../../resources/css/main.css">
   <link rel="shortcut icon" type="image/png" href="../../resources/favicon.ico"/>
+
   <title>Milestone Planner</title>
 </head>
 <body id="loginbg">
@@ -16,6 +18,9 @@
       <div class="card signin-card my-5">
         <div class="card-body">
           <h5 class="card-title text-center">Sign In</h5>
+          <c:if test="${errorMessage.length()>0}">
+            <p class="text-center alert-danger p-2">${errorMessage}</p>
+          </c:if>
           <form action="/login" method="post" class="form-signin">
             <div class="form-label-group">
               <input type="text" id="inputEmail" class="form-control" name="name"

@@ -1,6 +1,8 @@
-/*input[type=submit]{*/
-/*    background-color: #216558;*/
-/*}*/
+@import url('https://fonts.googleapis.com/css?family=Nunito+Sans');
+
+*{
+	font-family: 'Nunito Sans', sans-serif;
+}
 .card{
 	word-wrap: anywhere;
 }
