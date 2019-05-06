@@ -5,6 +5,7 @@
 <head>
   <link rel="stylesheet" href="../../resources/css/bootstrap.min.css">
   <link rel="stylesheet" href="../../resources/css/main.css">
+  <link rel="shortcut icon" type="image/png" href="../../resources/favicon.ico"/>
   <title>Milestone Planner</title>
 </head>
 <body id="loginbg">
@@ -37,10 +38,6 @@
             </button>
             <a class="btn btn-lg btn-login btn-block text-uppercase" href="/register"
             >Register</a>
-            <hr class="my-4">
-            <button class="btn btn-lg btn-google btn-block text-uppercase" type="submit"><i
-                class="fab fa-google mr-2"></i> Sign in with Google
-            </button>
           </form>
         </div>
       </div>

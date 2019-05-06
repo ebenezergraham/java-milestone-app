@@ -9,19 +9,22 @@
 
 <%
   String state = "logout";
-  if (request.getParameter("userobj") == null
-      && !request.isRequestedSessionIdValid()) {
+  String visibility = "";
+  if (request.getSession(false).getAttribute("username") == null) {
     state = "login";
+    visibility = "display:none;";
+
   }
 %>
-<nav style="background-color: #216558;padding: 1rem 6rem;" class="navbar navbar-expand-lg shadow-sm">
-  <a href="/dashboard" class="navbar-brand text-white">Milestone</a>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="nav navbar-nav">
-      <li class="nav-item m-2"><a class="text-white" href="/dashboard">Dashboard</a></li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <li class="nav-item"><a class="text-white" href="/<%=state%>"><span
+
+<nav style="background-color: #216558;padding: 1rem 6rem;" class="shadow-sm navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a href="/dashboard" class="font-weight-bolder navbar-brand text-white">Milestone</a>
+    </div>
+    <ul class="nav navbar-right">
+      <li style="<%=visibility%>"><a class="px-2 text-white" href="/dashboard">Dashboard</a></li>
+      <li><a class="text-white px-2 btn-login" href="/<%=state%>"><span
           style="text-transform: capitalize"><%=state%></span></a></li>
     </ul>
   </div>

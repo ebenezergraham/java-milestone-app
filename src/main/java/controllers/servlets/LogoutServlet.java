@@ -15,6 +15,7 @@ public class LogoutServlet extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		if (session != null) {
 			session.invalidate();
+			session.setMaxInactiveInterval(1);
 		}
 		response.sendRedirect(request.getContextPath() + "/login");
 	}

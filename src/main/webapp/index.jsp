@@ -13,6 +13,7 @@
 <html>
 <head>
   <title>Dashboard</title>
+  <link rel="shortcut icon" type="image/png" href="resources/favicon.ico"/>
   <link rel="stylesheet" type="text/css" href="resources/css/main.css">
   <link rel="stylesheet" type="text/css" href="resources/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
