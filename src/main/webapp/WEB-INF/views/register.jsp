@@ -9,7 +9,6 @@
 <%@ page isELIgnored="false" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 
-
 <html>
 <head>
   <link rel="stylesheet" href="../../resources/css/bootstrap.min.css">
@@ -24,6 +23,7 @@
       <div class="card signin-card my-5">
         <div class="card-body">
           <h5 class="card-title text-center">Register</h5>
+            <p class="${displayError} text-center alert-danger p-2">${errorMessage}</p>
           <form action="/register" method="post" class="form-signin">
             <div class="form-label-group">
               <input type="text" id="inputEmail" class="form-control" name="name" placeholder="User Name"
@@ -40,7 +40,7 @@
               Register
             </button>
             <a class="btn btn-lg btn-login btn-block text-uppercase" href="/login"
-            >login</a>
+            >Back to login</a>
             <hr class="my-4">
           </form>
         </div>

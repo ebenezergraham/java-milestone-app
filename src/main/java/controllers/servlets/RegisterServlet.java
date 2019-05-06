@@ -17,6 +17,7 @@ public class RegisterServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request,
 	                     HttpServletResponse response) throws ServletException, IOException {
+		request.setAttribute("displayError", "hidden");
 		request.getRequestDispatcher("/WEB-INF/views/register.jsp").forward(request, response);
 	}
 	
@@ -25,13 +26,12 @@ public class RegisterServlet extends HttpServlet {
 	                      HttpServletResponse response) throws ServletException, IOException {
 		String username = request.getParameter("name");
 		String password = request.getParameter("password");
-		
 		if (authenticationService.register(username, password)) {
 			response.sendRedirect("/login");
 		} else {
 			System.out.println("Invalid credentials");
-			String errorMessage = "Invalid credentials";
-			request.setAttribute("Invalid credentials", errorMessage);
+			String errorMessage = "Password must be more than 8 characters and username must be only alphanumeric";
+			request.setAttribute("errorMessage", errorMessage);
 			request.getRequestDispatcher("/WEB-INF/views/register.jsp").forward(request, response);
 		}
 	}

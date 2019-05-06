@@ -31,7 +31,7 @@ public class AuthenticationFilter implements Filter {
 		HttpSession session = req.getSession(false);
 		this.context.log("Requested Resource::" + uri);
 		
-		if (req.getRequestURL().toString().matches(".*(css|jpg|png|jpeg|js)")) {
+			if (req.getRequestURL().toString().matches(".*(css|jpg|png|jpeg|js)")) {
 			chain.doFilter(request, response);
 		} else if (uri.equals("/login") || uri.equals("/register") || uri.equals("/view") || uri.equals("/readonly")) {
 			chain.doFilter(request, response);

@@ -28,7 +28,7 @@ public class AuthenticationService {
   }
 
   public synchronized boolean register(@NonNull String username, @NonNull String password) {
-    System.out.println(username);
+    if(!validateUsernamePassword(username, password)) return false;
     String hash;
     if (mUser == null) {
       try {
@@ -50,5 +50,9 @@ public class AuthenticationService {
       }
     }
     return false;
+  }
+  
+  public boolean validateUsernamePassword(String username, String password){
+    return username.matches("^[a-zA-Z0-9]+$") && password.length()>8;
   }
 }
