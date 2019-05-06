@@ -1,14 +1,9 @@
-<<<<<<< Updated upstream
 @import url('https://fonts.googleapis.com/css?family=Nunito+Sans');
 
-*{
+* {
 	font-family: 'Nunito Sans', sans-serif;
 }
-=======
-/*input[type=submit]{*/
-/*    background-color: #216558;*/
-/*}*/
-.empty-div{
+empty-div{
 	/*height: 0;*/
 }
 .african {
@@ -16,22 +11,18 @@
 	-moz-background-image: url(img/africa.svg);
 	--o-background-image: url(img/africa.svg) #216558 ;
 	-webkit-background-image: url(img/africa.svg);
-
 	/*padding: 20px 0;*/
 }
 
->>>>>>> Stashed changes
 .card{
 	word-wrap: anywhere;
 }
 
 .fa-circle {
-	/*font-size: 50px;*/
 	color: #8B0000;
 }
 
 .true {
-	/*font-size: 50px;*/
 	color: darkgreen;
 }
 
@@ -60,8 +51,9 @@
 	padding: 10px;
 	border-image: url(img/africa.svg) 80;
 	-moz-border-image: url(img/africa.svg) 80;
-	/*-webkit-border-image: url(img/africa.svg) 80; !* Safari 3.1-5 *!*/
-	/*-o-border-image: url(img/africa.svg) 30 round; !* Opera 11-12.1 *!*/
+	-webkit-border-image: url(img/africa.svg) 80; /* Safari 3.1-5 */
+	-o-border-image: url(img/africa.svg) 30 round; /* Opera 11-12.1 */
+	-ms-bo
 }
 
 .control-pane button {

@@ -22,7 +22,7 @@
       <div class="mx-4 control-pane">
         <div class="left-p">
         <h1><br><span style="text-transform: capitalize">${title}<br> Milestones<p></p></h1>
-        <div class="${visibility}">
+        <div class="">
           <a id="add-new-milestone">
             <button class="btn btn-block text-white bg-green" data-toggle="modal" data-target="#add">
               Add Milestone
