@@ -4,6 +4,7 @@ import domain.model.LinkDetails;
 import domain.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import utils.DBUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,7 +18,7 @@ public class ShareableLinkDAO implements AutoCloseable  ,DAO{
 	private Connection connection;
 	
 	public ShareableLinkDAO() {
-		connection = DAOFactory.getConnection();
+		connection = DAOFactory.getConnection(DBUtil.dburl());
 	}
 	
 	public boolean store(String projectId, String link) {

@@ -47,46 +47,22 @@
           </a>
           <c:forEach begin="0" end="${projectList.size()}" items="${projectList}" varStatus="status" var="project">
             <c:if test="${status.index % 2 == 0}">
-              <div id="${project.getId()}" class="project-box m-3">
-                <a href="/project?id=${project.getId()}" class="project card">
-                  <c:out value="${project.getTitle()}"/>
-                </a>
-                <div class="option-box">
-                  <i
-                     class="options rounded-circle m-2 text-white fa fa-trash btn-delete-project"
-                     title="delete"></i>
-                  <i class="options rounded-circle m-2 text-white fa fa-share share-project"
-                     title="share"></i>
-                </div>
-              </div>
+              <%@include file="WEB-INF/views/project_card.jsp" %>
             </c:if>
           </c:forEach>
         </section>
         <section class="col-6">
           <c:forEach begin="0" items="${projectList}" varStatus="status" var="project">
             <c:if test="${status.index % 2 == 1}">
-              <div id="${project.getId()}" class="project-box m-3">
-                <a href="/project?id=${project.getId()}" class="project card">
-                  <c:out value="${project.getTitle()}"/>
-                </a>
-                <div class="option-box">
-                  <i
-                     class="options rounded-circle m-2 text-white fa fa-trash btn-delete-project"
-                     title="delete"></i>
-                  <i class="options rounded-circle m-2 text-white fa fa-share share-project"
-                     title="share"></i>
-                </div>
-              </div>
+              <%@include file="WEB-INF/views/project_card.jsp" %>
             </c:if>
           </c:forEach>
         </section>
       </div>
-
     </main>
   </div>
 </div>
 <script defer src="resources/js/jquery-3.3.1.min.js"></script>
 <script defer src="resources/js/script.js"></script>
-
 </body>
 </html>

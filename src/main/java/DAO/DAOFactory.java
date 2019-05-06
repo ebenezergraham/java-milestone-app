@@ -23,7 +23,11 @@ public class DAOFactory implements AutoCloseable, Factory {
 	private Connection connection;
 	
 	public DAOFactory() {
-		this.connection = getConnection();
+		this.connection = getConnection(db);
+	}
+	
+	public DAOFactory(String db) {
+		this.connection = getConnection(db);
 	}
 	
 	public static DAO getDAO(String daoName){
@@ -40,7 +44,7 @@ public class DAOFactory implements AutoCloseable, Factory {
 		return null;
 	}
 	
-	static Connection getConnection() {
+	static Connection getConnection(String db) {
 		Connection conn = null;
 		try {
 			Class.forName("org.h2.Driver");

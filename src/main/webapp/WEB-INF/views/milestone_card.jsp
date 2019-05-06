@@ -12,8 +12,7 @@
       <br><br>
       <button class="btn btn-lg btn-outline-info btn-block card-title" type="button"
               data-target="#_${milestone.id}"
-              data-toggle="collapse">
-        &emsp;${milestone.title}&emsp;&emsp;▼
+              data-toggle="collapse">${milestone.title} <span class="px-3">&#8675;</span>
       </button>
       <div class="collapse " id="_${milestone.id}">
         <div class="p-2 text-monospace">

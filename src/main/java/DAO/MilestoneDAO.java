@@ -4,6 +4,7 @@ import domain.model.Milestone;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import utils.DBUtil;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ public class MilestoneDAO implements AutoCloseable  ,DAO{
 	private Connection connection;
 	
 	public MilestoneDAO() {
-		connection = DAOFactory.getConnection();
+		connection = DAOFactory.getConnection(DBUtil.dburl());
 	}
 	
 	@Override

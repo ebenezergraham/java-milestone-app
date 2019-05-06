@@ -4,6 +4,8 @@ import DAO.DAOFactory;
 import DAO.MilestoneDAO;
 import controllers.services.TimeService;
 import domain.model.Milestone;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,6 +20,8 @@ import static controllers.servlets.MilestoneServlet.getFullURL;
 @SuppressWarnings("Duplicates")
 @WebServlet(urlPatterns = "/project/edit/*")
 public class EditMilestoneServlet extends HttpServlet {
+	private static final Logger LOGGER = LoggerFactory.getLogger(EditMilestoneServlet.class.getName());
+	
 	private MilestoneDAO dao = DAOFactory.getMilestoneDAO();
 	
 	@Override

@@ -4,6 +4,7 @@ import domain.model.Milestone;
 import domain.model.Project;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import utils.DBUtil;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ public class ProjectDAO implements AutoCloseable ,DAO{
 	private Connection connection;
 	
 	public ProjectDAO() {
-		connection = DAOFactory.getConnection();
+		connection = DAOFactory.getConnection(DBUtil.dburl());
 	}
 	
 	@Override
@@ -32,12 +33,12 @@ public class ProjectDAO implements AutoCloseable ,DAO{
 	}
 	
 	
-	public void addProject(Project project) {
+	public boolean addProject(Project project) {
 		final String ADD_PROJECT_QUERY = "INSERT INTO projects (title, user_id) VALUES (?, ?)";
 		try (PreparedStatement ps = connection.prepareStatement(ADD_PROJECT_QUERY)) {
 			ps.setString(1, project.getTitle());
 			ps.setString(2, project.getUserId());
-			ps.execute();
+			return ps.execute();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
@@ -49,7 +50,7 @@ public class ProjectDAO implements AutoCloseable ,DAO{
 		Project project = new Project();
 		try (PreparedStatement ps = connection.prepareStatement(GET_PROJECT_QUERY)) {
 			ResultSet rs = ps.executeQuery();
-			System.out.println("row " + rs.getRow());
+			LOG.info("Row  {}", rs.getRow());
 			if (rs.getRow() != 0) {
 				project.setTitle(rs.getString("title"));
 				project.setUserId(rs.getString("user_id"));
