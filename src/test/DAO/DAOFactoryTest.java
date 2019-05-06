@@ -1,29 +1,32 @@
-/*
+
 package DAO;
 
+import Suite.TestEnvironment;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class DAOFactoryTest {
-	DAOFactory df = new DAOFactory();
-	
+public class DAOFactoryTest extends TestEnvironment {
+
 	@Test
 	public void getUserDAO() {
-		UserDAO testDao = DAOFactory.getUserDAO();
-		assertNotNull(testDao);
+		assertNotNull(userDAO);
 	}
 	
 	@Test
 	public void getMilestoneDAO() {
-		MilestoneDAO testDao = DAOFactory.getMilestoneDAO();
-		assertNotNull(testDao);
+		assertNotNull(milestoneDAO);
 	}
 	
 	@Test
 	public void getProjectDAO() {
-		ProjectDAO testDao = DAOFactory.getProjectDAO();
-		assertNotNull(testDao);
+		assertNotNull(projectDAO);
 	}
+	
+	@Test
+	public void getShareableLink() {
+		assertNotNull(shareableLinkDAO);
+	}
+	
 }
-*/
+

@@ -11,8 +11,6 @@
   <link rel="stylesheet" href="../../resources/css/normalize.css">
   <link rel="stylesheet" href="../../resources/css/project.css">
   <title>Milestone Planner</title>
-
-  <title>Milestone Planner</title>
 </head>
 
 <body>

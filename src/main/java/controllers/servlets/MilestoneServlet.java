@@ -2,6 +2,7 @@ package controllers.servlets;
 
 import DAO.DAOFactory;
 import DAO.MilestoneDAO;
+import controllers.services.MilestoneService;
 import controllers.services.TimeService;
 import DAO.ProjectDAO;
 import domain.model.Milestone;
@@ -14,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @SuppressWarnings("Duplicates")
 @WebServlet(urlPatterns = "/project/*")
@@ -23,6 +23,7 @@ public class MilestoneServlet extends HttpServlet {
 	
 	private MilestoneDAO dao = DAOFactory.getMilestoneDAO();
 	private ProjectDAO daoProject = DAOFactory.getProjectDAO();
+	private MilestoneService milestoneService = new MilestoneService();
 	
 	static String getFullURL(HttpServletRequest request) {
 		StringBuilder requestURL = new StringBuilder(request.getRequestURL().toString());
@@ -51,9 +52,9 @@ public class MilestoneServlet extends HttpServlet {
 			if (status == null) {
 				request.setAttribute("allMilestones", allM);
 			} else if (status.equals("0")) {
-				request.setAttribute("allMilestones", getPendingMilestones(allM));
+				request.setAttribute("allMilestones", this.milestoneService.getPendingMilestones(allM));
 			} else if (status.equals("1")) {
-				request.setAttribute("allMilestones", getCompletedMilestones(allM));
+				request.setAttribute("allMilestones", this.milestoneService.getCompletedMilestones(allM));
 			}
 			request.getRequestDispatcher("/WEB-INF/views/project.jsp").forward(request, response);
 		} else {
@@ -81,7 +82,6 @@ public class MilestoneServlet extends HttpServlet {
 					request.getParameter("mlTitle"),
 					request.getParameter("mlDescription"),
 					((status == null) || (status.equals("false"))) ? "false":"true",
-//					request.getParameter("mlStatus") == null ? "false" : request.getParameter("mlStatus"),
 					mlStartDate.isEmpty() ? "" : TimeService.getInstance().formatDate(mlStartDate),
 					mlDueDate.isEmpty() ? "" : TimeService.getInstance().formatDate(mlDueDate),
 					pr.getId()
@@ -99,8 +99,7 @@ public class MilestoneServlet extends HttpServlet {
 	protected void doDelete(HttpServletRequest request,
 	                        HttpServletResponse response) throws IOException {
 		System.out.println("Deleting Milestone");
-		System.out.println("------------------------");
-//		System.out.println(request.getServletPath());
+		System.out.println("-------------------");
 		String projectId = request.getParameter("id");
 		String ml = request.getParameter("ml");
 		System.out.println("do delete milestone param " + ml);
@@ -114,22 +113,5 @@ public class MilestoneServlet extends HttpServlet {
 			
 		}
 		response.sendRedirect("/project/?id=" + projectId);
-	}
-	
-	private void listMilestones(HttpServletRequest request,
-	                            HttpServletResponse response) throws ServletException, IOException {
-		String ptitle = request.getParameter("title");
-		request.setAttribute("title", ptitle);
-		List<Milestone> allM = dao.findMilestones(ptitle);
-		request.setAttribute("allMilestones", allM);
-		request.getRequestDispatcher("/WEB-INF/views/project.jsp").forward(request, response);
-	}
-	
-	private List<Milestone> getCompletedMilestones(List<Milestone> milestones) {
-		return milestones.stream().filter(milestone -> milestone.getStatus().equals("true")).collect(Collectors.toList());
-	}
-	
-	private List<Milestone> getPendingMilestones(List<Milestone> milestones) {
-		return milestones.stream().filter(milestone -> milestone.getStatus().equals("false")).collect(Collectors.toList());
 	}
 }
