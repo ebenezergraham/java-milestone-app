@@ -18,9 +18,9 @@
 <div class="container m-5">
   <div class="row">
     <aside class="col-3">
-      <div class="d-flex justify-content-center">
-      </div>
+      <div class="d-flex justify-content-center empty-div "></div>
       <div class="mx-4 control-pane">
+        <div class="left-p">
         <h1><br><span style="text-transform: capitalize">${title}<br> Milestones<p></p></h1>
         <div class="${visibility}">
           <a id="add-new-milestone">
@@ -42,7 +42,7 @@
             <br><br>
           </a>
         </div>
-
+        </div>
       </div>
       <%@include file="add_milestone_form.jsp" %>
     </aside>

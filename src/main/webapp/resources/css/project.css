@@ -1,8 +1,26 @@
+<<<<<<< Updated upstream
 @import url('https://fonts.googleapis.com/css?family=Nunito+Sans');
 
 *{
 	font-family: 'Nunito Sans', sans-serif;
 }
+=======
+/*input[type=submit]{*/
+/*    background-color: #216558;*/
+/*}*/
+.empty-div{
+	/*height: 0;*/
+}
+.african {
+	background: url(img/africa.svg) #216558 ;
+	-moz-background-image: url(img/africa.svg);
+	--o-background-image: url(img/africa.svg) #216558 ;
+	-webkit-background-image: url(img/africa.svg);
+
+	/*padding: 20px 0;*/
+}
+
+>>>>>>> Stashed changes
 .card{
 	word-wrap: anywhere;
 }
@@ -21,6 +39,29 @@
 	color: #216558;
 	position: fixed;
 	height: 100%;
+	/*top: 1em;*/
+	/*bottom: 1em;*/
+	/*left: 1em;*/
+	/*right: 1em;*/
+	/*border: 10px solid #216558;*/
+	/*padding: 10px;*/
+	/*border-image: url(img/africa.svg) 80 round;*/
+	/*-webkit-border-image: url(img/africa.svg) 80 round; !* Safari 3.1-5 *!*/
+	/*-o-border-image: url(img/africa.svg) 30 round; !* Opera 11-12.1 *!*/
+}
+.left-p {
+	color: #216558;
+	position: fixed;
+	top: 5em;
+	bottom: 1em;
+	left: 1em;
+	/*right: 1em;*/
+	border: 10px solid #216558;
+	padding: 10px;
+	border-image: url(img/africa.svg) 80;
+	-moz-border-image: url(img/africa.svg) 80;
+	/*-webkit-border-image: url(img/africa.svg) 80; !* Safari 3.1-5 *!*/
+	/*-o-border-image: url(img/africa.svg) 30 round; !* Opera 11-12.1 *!*/
 }
 
 .control-pane button {
