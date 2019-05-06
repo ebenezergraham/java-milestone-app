@@ -28,22 +28,19 @@ public class AuthenticationFilter implements Filter {
 		HttpSession session = req.getSession(false);
 		this.context.log("Requested Resource::" + uri);
 		
-		if (uri.equals("/login") || uri.equals("/register") || uri.equals("/view") || uri.equals("/readonly")) {
-			System.out.println("register redirect ..");
+		if (req.getRequestURL().toString().matches(".*(css|jpg|png|gif|js)")) {
 			chain.doFilter(request, response);
-			System.out.println("About to leave!");
-			return;
+		} else if (uri.equals("/login") || uri.equals("/register") || uri.equals("/view") || uri.equals("/readonly")) {
+			chain.doFilter(request, response);
 		}
 		
 		if (uri.equals("/") || session == null) {
 			request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
+		} else if (session.getAttribute("username") == null) {
+			this.context.log("Unauthorized Access");
+			request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
 		} else {
-			if (session.getAttribute("username") == null) {
-				this.context.log("Unauthorized");
-				request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
-			} else {
-				chain.doFilter(request, response);
-			}
+			chain.doFilter(request, response);
 		}
 	}
 	

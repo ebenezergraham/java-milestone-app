@@ -13,6 +13,7 @@
 <html>
 <head>
   <link rel="stylesheet" href="../../resources/css/bootstrap.min.css">
+  <link rel="shortcut icon" type="image/png" href="../../resources/favicon.ico"/>
   <link rel="stylesheet" href="../../resources/css/main.css">
   <title>Milestone Planner</title>
 </head>

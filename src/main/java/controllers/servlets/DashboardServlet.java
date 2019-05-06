@@ -24,16 +24,10 @@ public class DashboardServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request,
 	                     HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession(false);
-		if (session != null) {
-			User usr = (User) session.getAttribute("userobj");
-			System.out.println("Dashboard Servlet - Session username: " + usr.getUserName());
+			User usr = (User) request.getSession(false).getAttribute("userobj");
 			List<Project> projectList = dao.findProjects(usr.getId());
 			request.setAttribute("projectList", projectList);
 			request.getRequestDispatcher("index.jsp").forward(request, response);
-		} else {
-			response.sendRedirect("/login");
-		}
 		
 	}
 	
