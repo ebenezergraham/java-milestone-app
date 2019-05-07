@@ -19,6 +19,9 @@ public class ProjectDAO implements AutoCloseable ,DAO{
 	public ProjectDAO() {
 		connection = DAOFactory.getConnection(DBUtil.dburl());
 	}
+	public ProjectDAO(String url) {
+		connection = DAOFactory.getConnection(url);
+	}
 	
 	@Override
 	public void close() {

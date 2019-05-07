@@ -12,25 +12,34 @@ public class AuthenticationServiceTest extends TestEnvironment {
 	
 	AuthenticationService auth = new AuthenticationService();
 	
-	@Before
-	public void setUp() throws Exception {
-	}
-	
 	@After
-	public void tearDown() throws Exception {
+	public void after(){
+		dbUtil.deleteTestData();
 	}
 	
 	@Test
 	public void login() {
 		AuthenticationService auth = new AuthenticationService();
-		auth.register("newuser","password");
-		boolean result = auth.login("newuser","password");
+		auth.register("newuser","password1");
+		boolean result = auth.login("newuser","password1");
 		assertTrue(result);
 	}
 	
 	@Test
 	public void register() {
 		boolean result = auth.register("testuser","testuser");
+		assertTrue(result);
+	}
+	
+	@Test
+	public void shouldFailInvalidPassword() {
+		boolean result = auth.validateUsernamePassword("-- --","a");
+		assertFalse(result);
+	}
+	
+	@Test
+	public void shouldPassValidPassword() {
+		boolean result = auth.validateUsernamePassword("hermes","12345678");
 		assertTrue(result);
 	}
 }

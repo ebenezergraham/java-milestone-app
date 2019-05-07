@@ -20,6 +20,10 @@ public class MilestoneDAO implements AutoCloseable  ,DAO{
 		connection = DAOFactory.getConnection(DBUtil.dburl());
 	}
 	
+	public MilestoneDAO(String url) {
+		connection = DAOFactory.getConnection(url);
+	}
+	
 	@Override
 	public void close() {
 		try {
@@ -146,46 +150,4 @@ public class MilestoneDAO implements AutoCloseable  ,DAO{
 		}
 		return out;
 	}
-	
-	public void updateMilestone(String projectID, Milestone ml) {
-		final String UPDATE_MILESTONE_QUERY = "UPDATE milestone SET title = ?, description = ?, status = ?, start_date = " +
-				"?, due_date = ? WHERE project_id = ?";
-		try (PreparedStatement ps = connection.prepareStatement(UPDATE_MILESTONE_QUERY)) {
-			ps.setString(1, ml.getTitle());
-			ps.setString(2, ml.getDescription());
-			ps.setString(3, ml.getStatus());
-			ps.setString(4, ml.getStartDate());
-			ps.setString(5, ml.getDueDate());
-			ps.setString(6, ml.getProjectId());
-			ps.execute();
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
-	}
-	
-	@SuppressWarnings("Duplicates")
-	public List<Milestone> completedMilestones(String projectID) {
-		final String LIST_MILESTONE_QUERY = "SELECT id, title,description,status, start_date, due_date, project_id FROM " +
-				"milestones WHERE project_id='" + projectID + "' AND status is not true";
-		List<Milestone> out = new ArrayList<>();
-		try (PreparedStatement ps = connection.prepareStatement(LIST_MILESTONE_QUERY)) {
-			ResultSet rs = ps.executeQuery();
-			while (rs.next()) {
-				out.add(new Milestone(
-						rs.getString(1),
-						rs.getString(2),
-						rs.getString(3),
-						rs.getString(4),
-						rs.getString(5),
-						rs.getString(6),
-						rs.getString(7)
-				));
-			}
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		}
-		return out;
-	}
-	
-	
 }

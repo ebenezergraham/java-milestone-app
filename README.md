@@ -11,7 +11,8 @@ Working as a group, we have successfully produced a milestone tracking applicati
 
 ## Running Project with Maven to TinyCodes  :seedling: :seedling:
 ```
-mvn clean package
+mvn clean install
+mvn tomcat:run
 ```
 
 ## Project Structure :+1:

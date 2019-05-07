@@ -22,10 +22,21 @@ import java.util.List;
 
 public class DBUtil {
 	private static final Logger LOGGER = LoggerFactory.getLogger(DBUtil.class.getName());
-	private static final String db = "jdbc:h2:~/mp;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE";
+	private static String db = "jdbc:h2:~/mp;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE";
 	private static Connection connection;
 	
 	public DBUtil() {
+		try {
+			connection = getConnection(db);
+			loadResource();
+			// createTestData();
+		} catch (ClassNotFoundException | SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	public DBUtil(String db) {
+		this.db = db;
 		try {
 			connection = getConnection(db);
 			loadResource();
@@ -40,7 +51,7 @@ public class DBUtil {
 		return DriverManager.getConnection(db, "", "");
 	}
 	
-	private void loadResource() {
+	public void loadResource() {
 		try {
 			String cmd = "CREATE TABLE IF NOT EXISTS users (id int AUTO_INCREMENT PRIMARY KEY, user_name VARCHAR(255) NOT " +
 					"NULL UNIQUE ," +
@@ -94,17 +105,17 @@ public class DBUtil {
 		}
 	}
 	
-	public void createTestData(){
-		UserDAO dao  = (UserDAO) DAOFactory.getDAO("userdao");
+	public void createTestData() {
+		UserDAO dao = (UserDAO) DAOFactory.getDAO("userdao");
 		List<Project> projects = new ArrayList<>();
-		new AuthenticationService().register("hermes","hermes123");
+		new AuthenticationService().register("hermes", "hermes123");
 		User user = dao.getUser("hermes");
-		LOGGER.info("User Created: \n{}",user.toString());
-		ProjectDAO pdao  = (ProjectDAO)DAOFactory.getDAO("projectdao");
-		Project p = new Project("Web Dev Group 3",user.getId());
+		LOGGER.info("User Created: \n{}", user.toString());
+		ProjectDAO pdao = (ProjectDAO) DAOFactory.getDAO("projectdao");
+		Project p = new Project("Web Dev Group 3", user.getId());
 		pdao.addProject(p);
-		p = pdao.getProject(user.getId(),"Web Dev Group 3");
-		LOGGER.info("Project Created \n{}",p.toString());
+		p = pdao.getProject(user.getId(), "Web Dev Group 3");
+		LOGGER.info("Project Created \n{}", p.toString());
 	/*	Milestone m = new Milestone("Group Report"," Description of Group Report","false", "","",p.getId());
 		MilestoneDAO mdao = (MilestoneDAO) DAOFactory.getDAO("milestonedao");
 		mdao.addMilestone(m);
@@ -113,8 +124,17 @@ public class DBUtil {
 		mdao.addMilestone(m);*/
 	}
 	
-	public static String dburl(){
+	public static String dburl() {
 		return db;
 	}
 	
+	public void deleteTestData() {
+		try {
+			String cmd = "DELETE FROM MILESTONES;DELETE FROM LINKS;DELETE FROM PROJECTS;DELETE FROM Users where user_name <> 'cleopatra'; ";
+			PreparedStatement ps = connection.prepareStatement(cmd);
+			ps.execute();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+	}
 }

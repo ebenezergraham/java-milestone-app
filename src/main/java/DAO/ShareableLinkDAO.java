@@ -21,6 +21,10 @@ public class ShareableLinkDAO implements AutoCloseable  ,DAO{
 		connection = DAOFactory.getConnection(DBUtil.dburl());
 	}
 	
+	public ShareableLinkDAO(String url) {
+		connection = DAOFactory.getConnection(url);
+	}
+	
 	public boolean store(String projectId, String link) {
 		final String QUERY = "INSERT INTO links (link,project_id) VALUES (?,?)";
 		try (PreparedStatement ps = connection.prepareStatement(QUERY)) {

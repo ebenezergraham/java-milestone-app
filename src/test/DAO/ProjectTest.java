@@ -7,9 +7,12 @@ import domain.model.User;
 import org.junit.After;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import java.util.List;
 
-public class DAOFactoryTest extends TestEnvironment {
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+public class ProjectTest extends TestEnvironment {
 	
 	@After
 	public void after(){
@@ -21,8 +24,17 @@ public class DAOFactoryTest extends TestEnvironment {
 		User testuser = userDAO.getUser("cleopatra");
 		Project p = new Project("Test",testuser.getId());
 		projectDAO.addProject(p);
-		Project res = projectDAO.getProject(testuser.getId());
-		assertNotNull(res);
+		p = projectDAO.getProject(testuser.getId());
+		assertNotNull(p);
+	}
+	
+	@Test
+	public void shouldFindProject() {
+		User testuser = userDAO.getUser("cleopatra");
+		Project p = new Project("Test",testuser.getId());
+		projectDAO.addProject(p);
+		List<Project> projects = projectDAO.findProjects(testuser.getId());
+		assertEquals(projects.size(),1);
 	}
 	
 	@Test
@@ -32,8 +44,10 @@ public class DAOFactoryTest extends TestEnvironment {
 		projectDAO.addProject(p);
 		p = projectDAO.getProject(testuser.getId());
 		projectDAO.deleteProject(p.getId());
+		
 		p = projectDAO.getProject(testuser.getId());
-		assertNull(p.getId());
+		assertNotNull(p);
 	}
+	
 }
 

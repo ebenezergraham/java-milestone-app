@@ -17,6 +17,10 @@ public class UserDAO implements AutoCloseable, DAO {
 		connection = DAOFactory.getConnection(DBUtil.dburl());
 	}
 	
+	public UserDAO(String url) {
+		connection = DAOFactory.getConnection(url);
+	}
+	
 	public boolean addUser(User user){
 		final String ADD_USER_QUERY = "INSERT INTO users(user_name,hash) VALUES (?,?)";
 		try (PreparedStatement ps = connection.prepareStatement(ADD_USER_QUERY)) {
