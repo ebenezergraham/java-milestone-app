@@ -17,15 +17,27 @@ mvn tomcat:run
 
 ## Project Structure :+1:
 ```aidl
-uk.ac.gcal.groupthree.java/
+milestone-planner
+
 ├── pom.xml
 └── src
     ├── main
     │   └── java
-    │       └── Runner.java
+    │       └── uk
+    │           └── ac
+    │               └── gcal
+    │                   └── groupthree
+    │                       └── * 
+    │                       └── Runner.java
     │           
     └── test
-        └── dir/*.java
+        └── uk
+            └── ac
+                └── gcal
+                    └── groupthree
+                        └── * 
+                        └── Suite
+                            └── TestSuite.java
 ```
 
 ## Author Declaration:
